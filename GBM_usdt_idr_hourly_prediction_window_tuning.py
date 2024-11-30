@@ -260,14 +260,13 @@ for window_size in window_sizes:
         y_pred_train = model.predict(X_train_normalized)
 
         # Denormalize y_val, y_pred_train, and y_pred_val using the mean and std of weekly_volatility
-        y_train_denorm = y_train * close_std + close_mean
         y_pred_train_denorm = y_pred_train * close_std + close_mean
         y_pred_val_denorm = y_pred_val * close_std + close_mean
 
         # Calculate RMSE and RMSE percentage for validation
         mse_val = np.mean((y_val - y_pred_val_denorm) ** 2)
         rmse_val = np.sqrt(mse_val)
-        rmse_val_perc = (rmse_val / y_val)[0] * 100  # Convert to percentage
+        rmse_val_perc = (rmse_val / y_val).mean() * 100  # Convert to percentage
 
         # Log validation RMSE
         logging.info(f"Window {window_number}: Validation RMSE = {rmse_val:.4f}")
@@ -278,9 +277,9 @@ for window_size in window_sizes:
         all_val_rmse_perc.append(rmse_val_perc)
 
         # Calculate RMSE for training
-        mse_train = np.mean((y_train_denorm - y_pred_train_denorm) ** 2)
+        mse_train = np.mean((y_train - y_pred_train_denorm) ** 2)
         rmse_train = np.sqrt(mse_train)
-        rmse_train_perc = (rmse_train / y_train).mean() * 100  # Convert to percentage
+        rmse_train_perc = np.mean((y_train - y_pred_train_denorm) ** 2 / y_train) * 100 # Convert to percentage
 
         # Log training RMSE
         logging.info(f"Window {window_number}: Training RMSE = {rmse_train:.4f}")
