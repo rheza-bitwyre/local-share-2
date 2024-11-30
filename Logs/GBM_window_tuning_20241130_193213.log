@@ -1,0 +1,168 @@
+2024-11-30 11:32:13,746 - INFO - Analysis Start!
+2024-11-30 11:32:15,665 - INFO - Indodax DataFrame loaded successfully.
+2024-11-30 11:32:15,683 - INFO - Fetching data starting from: 2018-08-24 15:00:00 UTC
+2024-11-30 11:32:18,299 - INFO - Fetching data starting from: 2023-09-12 03:00:00 UTC
+2024-11-30 11:32:20,242 - INFO - Fetching data starting from: 2023-10-23 19:00:00 UTC
+2024-11-30 11:32:22,253 - INFO - Fetching data starting from: 2023-12-04 11:00:00 UTC
+2024-11-30 11:32:24,254 - INFO - Fetching data starting from: 2024-01-15 03:00:00 UTC
+2024-11-30 11:32:26,258 - INFO - Fetching data starting from: 2024-02-25 19:00:00 UTC
+2024-11-30 11:32:28,339 - INFO - Fetching data starting from: 2024-04-07 11:00:00 UTC
+2024-11-30 11:32:30,257 - INFO - Fetching data starting from: 2024-05-19 03:00:00 UTC
+2024-11-30 11:32:32,265 - INFO - Fetching data starting from: 2024-06-29 19:00:00 UTC
+2024-11-30 11:32:34,267 - INFO - Fetching data starting from: 2024-08-10 11:00:00 UTC
+2024-11-30 11:32:36,252 - INFO - Fetching data starting from: 2024-09-21 03:00:00 UTC
+2024-11-30 11:32:38,274 - INFO - Fetching data starting from: 2024-11-01 19:00:00 UTC
+2024-11-30 11:32:40,175 - INFO - Fetching data starting from: 2024-11-30 11:00:00 UTC
+2024-11-30 11:32:42,059 - INFO - No more data available.
+2024-11-30 11:32:42,104 - INFO - Tokocrypto DataFrame loaded successfully.
+2024-11-30 11:32:42,112 - INFO - Merged DataFrame created.
+2024-11-30 11:32:42,129 - INFO - Feature engineering completed.
+2024-11-30 11:32:42,585 - INFO - Processing Window 0/5667
+2024-11-30 11:32:47,079 - INFO - Window 0: Validation RMSE = 5.6919
+2024-11-30 11:32:47,079 - INFO - Window 0: Validation RMSE% = 0.0354
+2024-11-30 11:32:47,079 - INFO - Window 0: Training RMSE = 3214531.4109
+2024-11-30 11:32:47,079 - INFO - Window 0: Training RMSE% = 20591.4122
+2024-11-30 11:32:51,550 - INFO - Window 1: Validation RMSE = 32.3405
+2024-11-30 11:32:51,550 - INFO - Window 1: Validation RMSE% = 0.2017
+2024-11-30 11:32:51,550 - INFO - Window 1: Training RMSE = 3214531.7394
+2024-11-30 11:32:51,550 - INFO - Window 1: Training RMSE% = 20591.2123
+2024-11-30 11:32:56,019 - INFO - Window 2: Validation RMSE = 6.6962
+2024-11-30 11:32:56,019 - INFO - Window 2: Validation RMSE% = 0.0418
+2024-11-30 11:32:56,019 - INFO - Window 2: Training RMSE = 3214511.7696
+2024-11-30 11:32:56,019 - INFO - Window 2: Training RMSE% = 20590.8895
+2024-11-30 11:33:00,480 - INFO - Window 3: Validation RMSE = 23.1078
+2024-11-30 11:33:00,480 - INFO - Window 3: Validation RMSE% = 0.1444
+2024-11-30 11:33:00,481 - INFO - Window 3: Training RMSE = 3214299.1563
+2024-11-30 11:33:00,481 - INFO - Window 3: Training RMSE% = 20589.3337
+2024-11-30 11:33:04,967 - INFO - Window 4: Validation RMSE = 1.8520
+2024-11-30 11:33:04,967 - INFO - Window 4: Validation RMSE% = 0.0116
+2024-11-30 11:33:04,967 - INFO - Window 4: Training RMSE = 3214065.7271
+2024-11-30 11:33:04,967 - INFO - Window 4: Training RMSE% = 20587.6502
+2024-11-30 11:33:09,443 - INFO - Window 5: Validation RMSE = 12.3502
+2024-11-30 11:33:09,443 - INFO - Window 5: Validation RMSE% = 0.0772
+2024-11-30 11:33:09,443 - INFO - Window 5: Training RMSE = 3213693.3035
+2024-11-30 11:33:09,443 - INFO - Window 5: Training RMSE% = 20585.0765
+2024-11-30 11:33:13,916 - INFO - Window 6: Validation RMSE = 5.0462
+2024-11-30 11:33:13,916 - INFO - Window 6: Validation RMSE% = 0.0315
+2024-11-30 11:33:13,917 - INFO - Window 6: Training RMSE = 3213316.4522
+2024-11-30 11:33:13,917 - INFO - Window 6: Training RMSE% = 20582.4769
+2024-11-30 11:33:18,388 - INFO - Window 7: Validation RMSE = 9.6245
+2024-11-30 11:33:18,388 - INFO - Window 7: Validation RMSE% = 0.0602
+2024-11-30 11:33:18,388 - INFO - Window 7: Training RMSE = 3212885.1179
+2024-11-30 11:33:18,388 - INFO - Window 7: Training RMSE% = 20579.5264
+2024-11-30 11:33:22,864 - INFO - Window 8: Validation RMSE = 8.4090
+2024-11-30 11:33:22,864 - INFO - Window 8: Validation RMSE% = 0.0526
+2024-11-30 11:33:22,864 - INFO - Window 8: Training RMSE = 3212495.1602
+2024-11-30 11:33:22,864 - INFO - Window 8: Training RMSE% = 20576.8438
+2024-11-30 11:33:27,338 - INFO - Window 9: Validation RMSE = 1.2274
+2024-11-30 11:33:27,338 - INFO - Window 9: Validation RMSE% = 0.0077
+2024-11-30 11:33:27,338 - INFO - Window 9: Training RMSE = 3212039.1957
+2024-11-30 11:33:27,338 - INFO - Window 9: Training RMSE% = 20573.7367
+2024-11-30 11:33:31,814 - INFO - Window 10: Validation RMSE = 1.2289
+2024-11-30 11:33:31,814 - INFO - Window 10: Validation RMSE% = 0.0077
+2024-11-30 11:33:31,814 - INFO - Window 10: Training RMSE = 3211622.0773
+2024-11-30 11:33:31,814 - INFO - Window 10: Training RMSE% = 20570.8788
+2024-11-30 11:33:36,291 - INFO - Window 11: Validation RMSE = 0.2858
+2024-11-30 11:33:36,291 - INFO - Window 11: Validation RMSE% = 0.0018
+2024-11-30 11:33:36,291 - INFO - Window 11: Training RMSE = 3211193.9027
+2024-11-30 11:33:36,291 - INFO - Window 11: Training RMSE% = 20567.9495
+2024-11-30 11:33:40,764 - INFO - Window 12: Validation RMSE = 3.0272
+2024-11-30 11:33:40,765 - INFO - Window 12: Validation RMSE% = 0.0189
+2024-11-30 11:33:40,765 - INFO - Window 12: Training RMSE = 3210775.6356
+2024-11-30 11:33:40,765 - INFO - Window 12: Training RMSE% = 20565.0836
+2024-11-30 11:33:45,239 - INFO - Window 13: Validation RMSE = 6.8051
+2024-11-30 11:33:45,239 - INFO - Window 13: Validation RMSE% = 0.0426
+2024-11-30 11:33:45,239 - INFO - Window 13: Training RMSE = 3210355.5963
+2024-11-30 11:33:45,239 - INFO - Window 13: Training RMSE% = 20562.2077
+2024-11-30 11:33:49,718 - INFO - Window 14: Validation RMSE = 2.7500
+2024-11-30 11:33:49,718 - INFO - Window 14: Validation RMSE% = 0.0172
+2024-11-30 11:33:49,718 - INFO - Window 14: Training RMSE = 3209907.5506
+2024-11-30 11:33:49,718 - INFO - Window 14: Training RMSE% = 20559.1529
+2024-11-30 11:33:54,193 - INFO - Window 15: Validation RMSE = 25.9054
+2024-11-30 11:33:54,193 - INFO - Window 15: Validation RMSE% = 0.1617
+2024-11-30 11:33:54,193 - INFO - Window 15: Training RMSE = 3209451.4672
+2024-11-30 11:33:54,193 - INFO - Window 15: Training RMSE% = 20556.0462
+2024-11-30 11:33:58,670 - INFO - Window 16: Validation RMSE = 16.7268
+2024-11-30 11:33:58,670 - INFO - Window 16: Validation RMSE% = 0.1045
+2024-11-30 11:33:58,670 - INFO - Window 16: Training RMSE = 3208998.9907
+2024-11-30 11:33:58,670 - INFO - Window 16: Training RMSE% = 20552.9567
+2024-11-30 11:34:03,148 - INFO - Window 17: Validation RMSE = 7.6809
+2024-11-30 11:34:03,149 - INFO - Window 17: Validation RMSE% = 0.0480
+2024-11-30 11:34:03,150 - INFO - Window 17: Training RMSE = 3208692.7173
+2024-11-30 11:34:03,150 - INFO - Window 17: Training RMSE% = 20550.8075
+2024-11-30 11:34:07,620 - INFO - Window 18: Validation RMSE = 4.7768
+2024-11-30 11:34:07,620 - INFO - Window 18: Validation RMSE% = 0.0299
+2024-11-30 11:34:07,620 - INFO - Window 18: Training RMSE = 3208287.0381
+2024-11-30 11:34:07,620 - INFO - Window 18: Training RMSE% = 20548.0211
+2024-11-30 11:34:12,095 - INFO - Window 19: Validation RMSE = 20.7337
+2024-11-30 11:34:12,095 - INFO - Window 19: Validation RMSE% = 0.1295
+2024-11-30 11:34:12,095 - INFO - Window 19: Training RMSE = 3207942.7483
+2024-11-30 11:34:12,095 - INFO - Window 19: Training RMSE% = 20545.6301
+2024-11-30 11:34:16,581 - INFO - Window 20: Validation RMSE = 12.5841
+2024-11-30 11:34:16,581 - INFO - Window 20: Validation RMSE% = 0.0785
+2024-11-30 11:34:16,581 - INFO - Window 20: Training RMSE = 3207524.7396
+2024-11-30 11:34:16,581 - INFO - Window 20: Training RMSE% = 20542.7627
+2024-11-30 11:34:21,058 - INFO - Window 21: Validation RMSE = 9.5288
+2024-11-30 11:34:21,059 - INFO - Window 21: Validation RMSE% = 0.0595
+2024-11-30 11:34:21,059 - INFO - Window 21: Training RMSE = 3207200.2741
+2024-11-30 11:34:21,059 - INFO - Window 21: Training RMSE% = 20540.4996
+2024-11-30 11:34:25,544 - INFO - Window 22: Validation RMSE = 6.2162
+2024-11-30 11:34:25,544 - INFO - Window 22: Validation RMSE% = 0.0388
+2024-11-30 11:34:25,545 - INFO - Window 22: Training RMSE = 3207140.0083
+2024-11-30 11:34:25,545 - INFO - Window 22: Training RMSE% = 20539.9225
+2024-11-30 11:34:30,027 - INFO - Window 23: Validation RMSE = 1.1469
+2024-11-30 11:34:30,027 - INFO - Window 23: Validation RMSE% = 0.0072
+2024-11-30 11:34:30,027 - INFO - Window 23: Training RMSE = 3206861.1794
+2024-11-30 11:34:30,027 - INFO - Window 23: Training RMSE% = 20537.9422
+2024-11-30 11:34:34,508 - INFO - Window 24: Validation RMSE = 10.1568
+2024-11-30 11:34:34,508 - INFO - Window 24: Validation RMSE% = 0.0633
+2024-11-30 11:34:34,508 - INFO - Window 24: Training RMSE = 3206504.5467
+2024-11-30 11:34:34,508 - INFO - Window 24: Training RMSE% = 20535.4709
+2024-11-30 11:34:38,989 - INFO - Window 25: Validation RMSE = 1.1271
+2024-11-30 11:34:38,989 - INFO - Window 25: Validation RMSE% = 0.0070
+2024-11-30 11:34:38,989 - INFO - Window 25: Training RMSE = 3206351.7633
+2024-11-30 11:34:38,989 - INFO - Window 25: Training RMSE% = 20534.3035
+2024-11-30 11:34:43,471 - INFO - Window 26: Validation RMSE = 13.0454
+2024-11-30 11:34:43,471 - INFO - Window 26: Validation RMSE% = 0.0812
+2024-11-30 11:34:43,471 - INFO - Window 26: Training RMSE = 3206243.1311
+2024-11-30 11:34:43,471 - INFO - Window 26: Training RMSE% = 20533.4124
+2024-11-30 11:34:47,953 - INFO - Window 27: Validation RMSE = 15.2322
+2024-11-30 11:34:47,953 - INFO - Window 27: Validation RMSE% = 0.0949
+2024-11-30 11:34:47,953 - INFO - Window 27: Training RMSE = 3206061.1235
+2024-11-30 11:34:47,953 - INFO - Window 27: Training RMSE% = 20532.0477
+2024-11-30 11:34:52,429 - INFO - Window 28: Validation RMSE = 7.3420
+2024-11-30 11:34:52,429 - INFO - Window 28: Validation RMSE% = 0.0457
+2024-11-30 11:34:52,429 - INFO - Window 28: Training RMSE = 3205921.2511
+2024-11-30 11:34:52,429 - INFO - Window 28: Training RMSE% = 20530.9580
+2024-11-30 11:34:56,907 - INFO - Window 29: Validation RMSE = 3.1760
+2024-11-30 11:34:56,907 - INFO - Window 29: Validation RMSE% = 0.0198
+2024-11-30 11:34:56,907 - INFO - Window 29: Training RMSE = 3205792.6734
+2024-11-30 11:34:56,907 - INFO - Window 29: Training RMSE% = 20529.9395
+2024-11-30 11:35:01,385 - INFO - Window 30: Validation RMSE = 46.4850
+2024-11-30 11:35:01,385 - INFO - Window 30: Validation RMSE% = 0.2889
+2024-11-30 11:35:01,385 - INFO - Window 30: Training RMSE = 3205678.3080
+2024-11-30 11:35:01,385 - INFO - Window 30: Training RMSE% = 20529.0127
+2024-11-30 11:35:05,865 - INFO - Window 31: Validation RMSE = 22.2122
+2024-11-30 11:35:05,865 - INFO - Window 31: Validation RMSE% = 0.1383
+2024-11-30 11:35:05,865 - INFO - Window 31: Training RMSE = 3205519.3526
+2024-11-30 11:35:05,865 - INFO - Window 31: Training RMSE% = 20527.7916
+2024-11-30 11:35:10,343 - INFO - Window 32: Validation RMSE = 2.0891
+2024-11-30 11:35:10,343 - INFO - Window 32: Validation RMSE% = 0.0130
+2024-11-30 11:35:10,343 - INFO - Window 32: Training RMSE = 3205633.9250
+2024-11-30 11:35:10,343 - INFO - Window 32: Training RMSE% = 20528.3271
+2024-11-30 11:35:14,826 - INFO - Window 33: Validation RMSE = 3.0022
+2024-11-30 11:35:14,826 - INFO - Window 33: Validation RMSE% = 0.0187
+2024-11-30 11:35:14,827 - INFO - Window 33: Training RMSE = 3205590.6740
+2024-11-30 11:35:14,827 - INFO - Window 33: Training RMSE% = 20527.8470
+2024-11-30 11:35:19,318 - INFO - Window 34: Validation RMSE = 9.8555
+2024-11-30 11:35:19,318 - INFO - Window 34: Validation RMSE% = 0.0613
+2024-11-30 11:35:19,318 - INFO - Window 34: Training RMSE = 3205634.5600
+2024-11-30 11:35:19,318 - INFO - Window 34: Training RMSE% = 20527.9265
+2024-11-30 11:35:23,797 - INFO - Window 35: Validation RMSE = 9.6199
+2024-11-30 11:35:23,798 - INFO - Window 35: Validation RMSE% = 0.0598
+2024-11-30 11:35:23,798 - INFO - Window 35: Training RMSE = 3205679.9140
+2024-11-30 11:35:23,798 - INFO - Window 35: Training RMSE% = 20528.0126
+2024-11-30 11:35:28,282 - INFO - Window 36: Validation RMSE = 2.2346
+2024-11-30 11:35:28,283 - INFO - Window 36: Validation RMSE% = 0.0139
+2024-11-30 11:35:28,283 - INFO - Window 36: Training RMSE = 3205759.0061
+2024-11-30 11:35:28,283 - INFO - Window 36: Training RMSE% = 20528.3156

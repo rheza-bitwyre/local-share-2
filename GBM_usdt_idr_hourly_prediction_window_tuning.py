@@ -184,10 +184,7 @@ max_windows = 50      # Maximum number of windows to process
 set_limit = False     # Set this to False to process all windows
 
 # Define list of window sizes
-window_sizes = [2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000]
-
-# List to store results
-results = []
+window_sizes = list(range(6000, 11001, 1000))
 
 # Loop through each window size
 for window_size in window_sizes:
@@ -231,26 +228,46 @@ for window_size in window_sizes:
         X_train = X[start:end]
         y_train = y[start:end]
 
+        X_train_mean = np.mean(X_train, axis=0)
+        X_train_std = np.std(X_train, axis=0)
+        X_train_normalized = (X_train - X_train_mean) / X_train_std
+
+        # Get the column index for 'next_close' from features_df
+        close_index = features_df.columns.get_loc('close')
+
+        # Normalize y_train using the mean and std of close
+        close_mean = X_train[:, close_index].mean()
+        close_std = X_train[:, close_index].std()
+        y_train_normalized = (y_train - close_mean) / close_std
+
         # Prepare validation data for prediction
         X_val = X[end:end + num_predictions]
         y_val = y[end:end + num_predictions]
+
+        # Normalize validation data using the statistics from the training set
+        X_val_normalized = (X_val - X_train_mean) / X_train_std
 
         # Track the start time of the window processing
         start_time = time.time()
 
         # Initialize and fit the model
         model = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)
-        model.fit(X_train, y_train)
+        model.fit(X_train_normalized, y_train_normalized)
 
         # Predict on validation data
-        y_pred_val = model.predict(X_val)
+        y_pred_val = model.predict(X_val_normalized)
         # Predict on training data
-        y_pred_train = model.predict(X_train)
+        y_pred_train = model.predict(X_train_normalized)
 
-        # Calculate RMSE for training and validation
-        mse_val = np.mean((y_val - y_pred_val) ** 2)
+        # Denormalize y_val, y_pred_train, and y_pred_val using the mean and std of weekly_volatility
+        y_train_denorm = y_train * close_std + close_mean
+        y_pred_train_denorm = y_pred_train * close_std + close_mean
+        y_pred_val_denorm = y_pred_val * close_std + close_mean
+
+        # Calculate RMSE and RMSE percentage for validation
+        mse_val = np.mean((y_val - y_pred_val_denorm) ** 2)
         rmse_val = np.sqrt(mse_val)
-        rmse_val_perc = (rmse_val / y_val).mean()
+        rmse_val_perc = (rmse_val / y_val)[0] * 100  # Convert to percentage
 
         # Log validation RMSE
         logging.info(f"Window {window_number}: Validation RMSE = {rmse_val:.4f}")
@@ -260,10 +277,10 @@ for window_size in window_sizes:
         all_val_rmse.append(rmse_val)
         all_val_rmse_perc.append(rmse_val_perc)
 
-        # Calculate RMSE and RMSE percentage for training
-        mse_train = np.mean((y_train - y_pred_train) ** 2)
+        # Calculate RMSE for training
+        mse_train = np.mean((y_train_denorm - y_pred_train_denorm) ** 2)
         rmse_train = np.sqrt(mse_train)
-        rmse_train_perc = (rmse_train / y_train).mean()
+        rmse_train_perc = (rmse_train / y_train).mean() * 100  # Convert to percentage
 
         # Log training RMSE
         logging.info(f"Window {window_number}: Training RMSE = {rmse_train:.4f}")
@@ -273,6 +290,16 @@ for window_size in window_sizes:
         all_train_rmse.append(rmse_train)
         all_train_rmse_perc.append(rmse_train_perc)
 
+        # Count predictions relative to actual values and update max RMSE percentage
+        if y_pred_val_denorm < y_val:
+            lower_count += 1
+            lower_rmse_percs.append(rmse_val_perc)  # Store RMSE percentage for lower predictions
+            max_rmse_perc_lower = max(max_rmse_perc_lower, rmse_val_perc)
+        elif y_pred_val_denorm > y_val:
+            higher_count += 1
+            higher_rmse_percs.append(rmse_val_perc)  # Store RMSE percentage for higher predictions
+            max_rmse_perc_higher = max(max_rmse_perc_higher, rmse_val_perc)
+
         # Increment window number for the next window
         window_number += gap
 
@@ -280,17 +307,37 @@ for window_size in window_sizes:
         total_window_time = time.time() - start_time
         total_window_times += total_window_time
 
-    # Calculate average RMSE across all windows
+# Calculate percentage for lower and higher counts
+    lower_count_perc = (lower_count / num_windows) * 100
+    higher_count_perc = (higher_count / num_windows) * 100
+
+    # Calculate average RMSE percentage errors for lower and higher predictions
+    avg_rmse_perc_lower = np.mean(lower_rmse_percs) if lower_rmse_percs else 0
+    avg_rmse_perc_higher = np.mean(higher_rmse_percs) if higher_rmse_percs else 0
+
+    # Calculate average, max, min, and variance for validation and training RMSEs, percentages
     avg_val_rmse = np.mean(all_val_rmse)
-    avg_train_rmse = np.mean(all_train_rmse)
+    var_val_rmse = np.var(all_val_rmse)
+
     avg_val_rmse_perc = np.mean(all_val_rmse_perc)
+    var_val_rmse_perc = np.var(all_val_rmse_perc)
+    max_avg_val_rmse_perc = np.max(all_val_rmse_perc)
+
+    avg_train_rmse = np.mean(all_train_rmse)
+    var_train_rmse = np.var(all_train_rmse)
+
     avg_train_rmse_perc = np.mean(all_train_rmse_perc)
+    var_train_rmse_perc = np.var(all_train_rmse_perc)
+
+    # Calculate percentage of times prediction is lower or equal to average RMSE
+    percentage_lower_equal_avg_rmse = (np.sum(np.array(all_val_rmse) <= avg_val_rmse) / len(all_val_rmse)) * 100
 
     # Log the final average results
-    logging.info(f"Window Size: {window_size} - Average Validation RMSE: {avg_val_rmse:.4f}")
-    logging.info(f"Window Size: {window_size} - Average Training RMSE: {avg_train_rmse:.4f}")
-    logging.info(f"Window Size: {window_size} - Average Validation RMSE%: {avg_val_rmse_perc:.4f}")
-    logging.info(f"Window Size: {window_size} - Average Training RMSE%: {avg_train_rmse_perc:.4f}")
-    logging.info(f"Total Time to Process Windows: {total_window_times:.2f} seconds")
+    logging.info(f"Window size [{window_size}] | Time Elapsed: {total_window_times:.3f} seconds")
+    logging.info(f"Average Prediction Error: {avg_val_rmse:.3f} IDR | {avg_val_rmse_perc:.3f} % | Confidence Level: {percentage_lower_equal_avg_rmse:.3f} % ")
+    logging.info(f"Under Predict - Count: {lower_count_perc:.3f} % | Average: {avg_rmse_perc_lower:.3f} % | Max: {max_rmse_perc_lower:.3f} %")
+    logging.info(f"Over Predict - Count: {higher_count_perc:.3f} % | Average: {avg_rmse_perc_higher:.3f} % | Max: {max_rmse_perc_higher:.3f} %")
+    logging.info(f"Absolute Training Error Variance: {var_train_rmse:.3f} | Absolute Training Error Percentage Variance: {var_train_rmse_perc:.3f} %") 
+    logging.info(f"Absolute Validation Error Variance: {var_val_rmse:.3f} | Absolute Validation Error Percentage Variance: {var_val_rmse_perc:.3f} %")
 
 logging.info(f"Analysis Done!")
