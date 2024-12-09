@@ -1,0 +1,27 @@
+2024-12-06 09:48:45,433 - INFO - Window size [10000] | Time Elapsed: 803.944 seconds
+2024-12-06 09:48:45,433 - INFO - Average Prediction Error: 0.081 JPY | 0.073 % | Confidence Level: 67.059 % 
+2024-12-06 09:48:45,434 - INFO - Average Prediction Error that less than avg change: 65.512 %
+2024-12-06 10:17:57,860 - INFO - Window size [20000] | Time Elapsed: 1498.943 seconds
+2024-12-06 10:17:57,860 - INFO - Average Prediction Error: 0.083 JPY | 0.072 % | Confidence Level: 67.081 % 
+2024-12-06 10:17:57,860 - INFO - Average Prediction Error that less than avg change: 64.741 %
+2024-12-06 10:56:54,815 - INFO - Window size [30000] | Time Elapsed: 1990.122 seconds
+2024-12-06 10:56:54,815 - INFO - Average Prediction Error: 0.084 JPY | 0.070 % | Confidence Level: 67.045 % 
+2024-12-06 10:56:54,815 - INFO - Average Prediction Error that less than avg change: 64.262 %
+2024-12-06 11:38:12,917 - INFO - Window size [40000] | Time Elapsed: 2048.780 seconds
+2024-12-06 11:38:12,917 - INFO - Average Prediction Error: 0.086 JPY | 0.071 % | Confidence Level: 67.286 % 
+2024-12-06 11:38:12,917 - INFO - Average Prediction Error that less than avg change: 63.522 %
+2024-12-06 12:20:02,645 - INFO - Window size [50000] | Time Elapsed: 2061.890 seconds
+2024-12-06 12:20:02,645 - INFO - Average Prediction Error: 0.084 JPY | 0.068 % | Confidence Level: 67.552 % 
+2024-12-06 12:20:02,645 - INFO - Average Prediction Error that less than avg change: 64.671 %
+2024-12-06 12:58:30,361 - INFO - Window size [60000] | Time Elapsed: 1860.214 seconds
+2024-12-06 12:58:30,361 - INFO - Average Prediction Error: 0.084 JPY | 0.066 % | Confidence Level: 68.230 % 
+2024-12-06 12:58:30,361 - INFO - Average Prediction Error that less than avg change: 65.574 %
+2024-12-06 13:31:12,766 - INFO - Window size [70000] | Time Elapsed: 1563.762 seconds
+2024-12-06 13:31:12,766 - INFO - Average Prediction Error: 0.094 JPY | 0.072 % | Confidence Level: 67.923 % 
+2024-12-06 13:31:12,766 - INFO - Average Prediction Error that less than avg change: 61.413 %
+2024-12-06 13:54:44,752 - INFO - Window size [80000] | Time Elapsed: 1108.117 seconds
+2024-12-06 13:54:44,752 - INFO - Average Prediction Error: 0.110 JPY | 0.080 % | Confidence Level: 66.979 % 
+2024-12-06 13:54:44,752 - INFO - Average Prediction Error that less than avg change: 54.385 %
+2024-12-06 14:07:32,783 - INFO - Window size [90000] | Time Elapsed: 597.131 seconds
+2024-12-06 14:07:32,783 - INFO - Average Prediction Error: 0.111 JPY | 0.076 % | Confidence Level: 66.897 % 
+2024-12-06 14:07:32,783 - INFO - Average Prediction Error that less than avg change: 53.920 %

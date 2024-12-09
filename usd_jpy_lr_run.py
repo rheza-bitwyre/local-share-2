@@ -142,7 +142,7 @@ max_windows = 50      # Maximum number of windows to process
 set_limit = False     # Set this to False to process all windows
 
 # Define list of window sizes
-window_sizes = list(range(10000, 95001, 10000))
+window_sizes = list(range(500, 10000, 500))
 # window_sizes = [90000]
 
 # List to store results
