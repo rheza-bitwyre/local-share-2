@@ -1,0 +1,25 @@
+{
+    "api_key": "YOUR_BINANCE_API_KEY",
+    "api_secret": "YOUR_BINANCE_API_SECRET",
+    "window": 60,
+    "zscore_threshold": 1.5,
+    "prediction_length": 25,
+    "trade_amount_usdt": 1000,
+    "leverage": 1,
+    "testnet": false,
+    "pairs": [
+        ["LINAUSDT", "GTCUSDT"],
+        ["LITUSDT", "TLMUSDT"],
+        ["ONEUSDT", "DENTUSDT"],
+        ["QTUMUSDT", "STEEMUSDT"],
+        ["ICXUSDT", "NKNUSDT"],
+        ["SFPUSDT", "USDCUSDT"],
+        ["FLOWUSDT", "OXTUSDT"],
+        ["AXSUSDT", "DODOXUSDT"],
+        ["OGNUSDT", "LUNA2USDT"],
+        ["KAVAUSDT", "SKLUSDT"],
+        ["BCHUSDT", "JTOUSDT"],
+        ["SNXUSDT", "HFTUSDT"],
+        ["EOSUSDT", "ZILUSDT"]
+    ]
+}
