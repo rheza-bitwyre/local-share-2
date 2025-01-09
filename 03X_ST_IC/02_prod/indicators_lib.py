@@ -1,78 +1,118 @@
 import pandas as pd
 import numpy as np
+from pandas_ta.overlap import hl2
+from pandas_ta.volatility import atr
+from pandas_ta.utils import get_offset, verify_series
 
 class Indicators:
     @staticmethod
-    def super_trend(df, period=7, multiplier=3):
+    def calculate_supertrend(df, high_col='highprice', low_col='lowprice', close_col='closeprice', length=10, multiplier=3.0, offset=0, drop_columns=True, **kwargs):
         """
-        Calculates the Super Trend indicator.
+        Calculate the Supertrend indicator and merge it with the original DataFrame.
         
         Parameters:
-            df (pd.DataFrame): DataFrame with columns 'high', 'low', and 'close'.
-            period (int): ATR calculation period.
-            multiplier (int or float): ATR multiplier for calculating Super Trend bands.
+            df (DataFrame): Original DataFrame containing the OHLC data.
+            high_col (str): Name of the high price column. Default is 'highprice'.
+            low_col (str): Name of the low price column. Default is 'lowprice'.
+            close_col (str): Name of the close price column. Default is 'closeprice'.
+            length (int): Lookback period for ATR calculation. Default is 10.
+            multiplier (float): Multiplier for ATR. Default is 3.0.
+            offset (int): Number of periods to shift the result. Default is 0.
+            drop_columns (bool): Whether to drop intermediate columns. Default is True.
+            **kwargs: Additional arguments for handling NaN values (e.g., fillna).
         
         Returns:
-            pd.DataFrame: DataFrame with additional columns 'Supertrend' and 'Supertrend Direction'.
+            DataFrame: The original DataFrame with Supertrend columns merged.
         """
-        # Calculate ATR (Average True Range)
-        df['TR'] = np.maximum(df['high'] - df['low'], 
-                              np.maximum(abs(df['high'] - df['close'].shift(1)), 
-                                         abs(df['low'] - df['close'].shift(1))))
-        df['ATR'] = df['TR'].rolling(window=period).mean()
-        
-        # Calculate basic upper and lower bands
-        df['UpperBand'] = (df['high'] + df['low']) / 2 + multiplier * df['ATR']
-        df['LowerBand'] = (df['high'] + df['low']) / 2 - multiplier * df['ATR']
-        
-        # Initialize Supertrend and its direction
-        df['Supertrend'] = np.nan
-        df['Supertrend Direction'] = np.nan
-        
-        # Calculate Supertrend
-        for i in range(1, len(df)):
-            prev_supertrend = df['Supertrend'].iloc[i - 1] if i > 1 else df['LowerBand'].iloc[0]
-            if df['close'].iloc[i] > prev_supertrend:
-                df.at[i, 'Supertrend'] = max(df['LowerBand'].iloc[i], prev_supertrend)
-                df.at[i, 'Supertrend Direction'] = 'Bullish'
+        # Validate Arguments
+        high = verify_series(df[high_col], length)
+        low = verify_series(df[low_col], length)
+        close = verify_series(df[close_col], length)
+        offset = get_offset(offset)
+
+        if high is None or low is None or close is None:
+            return df
+
+        m = close.size
+        dir_, trend = [1] * m, [0] * m
+        long, short = [np.nan] * m, [np.nan] * m
+
+        hl2_ = hl2(high, low)
+        matr = multiplier * atr(high, low, close, length)
+        upperband = hl2_ + matr
+        lowerband = hl2_ - matr
+
+        for i in range(1, m):
+            if close.iloc[i] > upperband.iloc[i - 1]:
+                dir_[i] = 1
+            elif close.iloc[i] < lowerband.iloc[i - 1]:
+                dir_[i] = -1
             else:
-                df.at[i, 'Supertrend'] = min(df['UpperBand'].iloc[i], prev_supertrend)
-                df.at[i, 'Supertrend Direction'] = 'Bearish'
-        
-        return df
+                dir_[i] = dir_[i - 1]
+                if dir_[i] > 0 and lowerband.iloc[i] < lowerband.iloc[i - 1]:
+                    lowerband.iloc[i] = lowerband.iloc[i - 1]
+                if dir_[i] < 0 and upperband.iloc[i] > upperband.iloc[i - 1]:
+                    upperband.iloc[i] = upperband.iloc[i - 1]
+
+            if dir_[i] > 0:
+                trend[i] = long[i] = lowerband.iloc[i]
+            else:
+                trend[i] = short[i] = upperband.iloc[i]
+
+        _props = f"_{length}_{multiplier}"
+        supertrend_df = pd.DataFrame({
+            f"SUPERT{_props}": trend,
+            f"SUPERTd{_props}": dir_,
+            f"SUPERTl{_props}": long,
+            f"SUPERTs{_props}": short,
+        }, index=close.index)
+
+        # Apply offset if needed
+        if offset != 0:
+            supertrend_df = supertrend_df.shift(offset)
+
+        # Handle fills
+        if "fillna" in kwargs:
+            supertrend_df.fillna(kwargs["fillna"], inplace=True)
+        if "fill_method" in kwargs:
+            supertrend_df.fillna(method=kwargs["fill_method"], inplace=True)
+
+        # Merge with original DataFrame
+        result_df = df.join(supertrend_df)
+
+        # Drop unnecessary columns
+        if drop_columns:
+            result_df.drop(columns=[f"SUPERT{_props}", f"SUPERTd{_props}"], inplace=True)
+
+        return result_df
 
     @staticmethod
-    def ichimoku_cloud(df):
+    def compute_ichimoku_with_supertrend(df, conversion_periods=9, base_periods=26, span_b_periods=52, displacement=26):
         """
-        Calculates the Ichimoku Cloud indicator.
+        Compute Ichimoku Cloud components and join them with the original supertrend DataFrame.
         
         Parameters:
-            df (pd.DataFrame): DataFrame with columns 'high', 'low', and 'close'.
+        - supertrend_df (DataFrame): The input DataFrame with 'highprice', 'lowprice', and 'closeprice' columns.
+        - conversion_periods (int): Period for the Conversion Line (Tenkan-sen). Default is 9.
+        - base_periods (int): Period for the Base Line (Kijun-sen). Default is 26.
+        - span_b_periods (int): Period for Leading Span B (Senkou Span B). Default is 52.
+        - displacement (int): Displacement for Leading Spans. Default is 26.
         
         Returns:
-            pd.DataFrame: DataFrame with additional columns for Ichimoku Cloud components.
+        - DataFrame: A DataFrame that combines the original supertrend DataFrame with the computed Ichimoku Cloud components.
         """
-        # Conversion Line (Tenkan-sen)
-        high_9 = df['high'].rolling(window=9).max()
-        low_9 = df['low'].rolling(window=9).min()
-        df['Tenkan-sen'] = (high_9 + low_9) / 2
-        
-        # Base Line (Kijun-sen)
-        high_26 = df['high'].rolling(window=26).max()
-        low_26 = df['low'].rolling(window=26).min()
-        df['Kijun-sen'] = (high_26 + low_26) / 2
-        
-        # Leading Span A (Senkou Span A)
-        df['Senkou Span A'] = ((df['Tenkan-sen'] + df['Kijun-sen']) / 2).shift(26)
-        
-        # Leading Span B (Senkou Span B)
-        high_52 = df['high'].rolling(window=52).max()
-        low_52 = df['low'].rolling(window=52).min()
-        df['Senkou Span B'] = ((high_52 + low_52) / 2).shift(26)
-        
-        # Lagging Span (Chikou Span)
-        df['Chikou Span'] = df['close'].shift(-26)
+        # Helper to calculate the average of the highest high and lowest low
+        def donchian(data, period):
+            return (data['highprice'].rolling(window=period).max() + 
+                    data['lowprice'].rolling(window=period).min()) / 2
 
+        # Compute Ichimoku Cloud components
+        df['conversion_line'] = donchian(df, conversion_periods)
+        df['base_line'] = donchian(df, base_periods)
+        df['leading_span_a'] = ((df['conversion_line'] + df['base_line']) / 2).shift(displacement)
+        df['leading_span_b'] = donchian(df, span_b_periods).shift(displacement)
+        df['lagging_span'] = df['closeprice'].shift(-displacement)
+        
         # Drop unnecessary columns
         df.drop(columns=['conversion_line', 'base_line', 'lagging_span'], inplace=True)
         
