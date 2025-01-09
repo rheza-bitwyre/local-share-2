@@ -311,7 +311,7 @@ def determine_suggested_action(df):
 
 class BinanceAPI:
     def __init__(self, api_key: str, api_secret: str, testnet: bool = False):
-        self.api_key = api_key
+        self.api_key = api_key  
         self.api_secret = api_secret
         if testnet:
             self.base_url = "https://testnet.binancefuture.com"
@@ -438,34 +438,26 @@ def handle_trading_action(suggested_action, prev_action=None):
     else:
         if prev_action is None and suggested_action == 'Long':
             curr_action = 'Open Long'
-            # open_long = self.api.create_order("SOLUSDT", "BUY", "MARKET", 1)
             logging.info(curr_action)
             prev_action = 'Long'
         elif prev_action is None and suggested_action == 'Short':
             curr_action = 'Open Short'
-            # open_short = self.api.create_order("SOLUSDT", "SELL", "MARKET", 1)
             logging.info(curr_action)
             prev_action = 'Short'
         elif prev_action == 'Long' and suggested_action == 'Close':
             curr_action = 'Close Long'
-            # close_long = self.api.create_order("SOLUSDT", "SELL", "MARKET", 1)  # Close Long
             logging.info(curr_action)
             prev_action = None
         elif prev_action == 'Short' and suggested_action == 'Close':
             curr_action = 'Close Short'
-            # close_short = self.api.create_order("SOLUSDT", "BUY", "MARKET", 1)  # Close Short
             logging.info(curr_action)
             prev_action = None
         elif prev_action == 'Long' and suggested_action == 'Short':
             curr_action = 'Close Long & Open Short'
-            # close_long = self.api.create_order("SOLUSDT", "SELL", "MARKET", 1)  # Close Long
-            # open_short = self.api.create_order("SOLUSDT", "SELL", "MARKET", 1)  # Open Short
             logging.info(curr_action)
             prev_action = 'Short'
         elif prev_action == 'Short' and suggested_action == 'Long':
             curr_action = 'Close Short & Open Long'
-            # close_short = self.api.create_order("SOLUSDT", "BUY", "MARKET", 1)  # Close Short
-            # open_long = self.api.create_order("SOLUSDT", "BUY", "MARKET", 1)  # Open Long
             logging.info(curr_action)
             prev_action = 'Long'
 
