@@ -12,6 +12,17 @@ import urllib.parse
 import hmac
 import logging
 
+# Get today's date and time in 'yyyymmddhhmmss' format
+today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
+
+# Logging Setup
+logging.basicConfig(
+    filename=f'logs/binance_live_test_{today_datetime}.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
 def binance_recursive_fetch_2(coins, interval, starttime, endtime=None, data_type='futures'):
 
     # Define the column structure
@@ -59,14 +70,14 @@ def binance_recursive_fetch_2(coins, interval, starttime, endtime=None, data_typ
                 call += 1
 
                 if current_time >= endtime:
-                    print(f"Reached endtime at {datetime.fromtimestamp(current_time / 1000).strftime('%Y-%m-%d %H:%M:%S')}. Stopping fetch.")
+                    logging.info(f"Reached endtime at {datetime.fromtimestamp(current_time / 1000).strftime('%Y-%m-%d %H:%M:%S')}. Stopping fetch.")
                     break
 
-                print(f"{datetime.fromtimestamp(current_time / 1000).strftime('%Y-%m-%d %H:%M:%S')} "
+                logging.info(f"{datetime.fromtimestamp(current_time / 1000).strftime('%Y-%m-%d %H:%M:%S')} "
                       f"status: {current_time < endtime}, time: {current_time}, calls: {call}")
 
             if len(timestamps) > 1 and timestamps[-1] == timestamps[-2]:
-                print("Duplicate timestamp detected. Stopping fetch.")
+                logging.info("Duplicate timestamp detected. Stopping fetch.")
                 break
 
         current_df = pd.DataFrame(result_list, columns=BINANCE_CANDLE_COLUMNS)
@@ -84,9 +95,9 @@ def fetch_and_append_data():
     current_df = pd.read_csv('sol_usdt_data.csv')
     last_opentime = current_df['opentime'].iloc[-1]
 
-    # Print the last opentime and the length of the CSV before appending
-    print(f"Last opentime in CSV: {last_opentime}")
-    print(f"CSV length before appending: {len(current_df)}")
+    # logging.info the last opentime and the length of the CSV before appending
+    logging.info(f"Last opentime in CSV: {last_opentime}")
+    logging.info(f"CSV length before appending: {len(current_df)}")
 
     # Get the current Unix timestamp in seconds
     current_timestamp = int(time.time())
@@ -97,8 +108,8 @@ def fetch_and_append_data():
     # Convert the timestamp back to milliseconds
     rounded_timestamp_ms = rounded_timestamp * 1000
 
-    # Print the current nearest previous rounded timestamp in ms
-    print(f"Rounded timestamp (previous 30 minutes) in ms: {rounded_timestamp_ms}")
+    # logging.info the current nearest previous rounded timestamp in ms
+    logging.info(f"Rounded timestamp: {rounded_timestamp_ms}, Last open time in CSV: {last_opentime}")
 
     # Initialize new_row_count to 0 by default
     new_row_count = 0
@@ -134,15 +145,15 @@ def fetch_and_append_data():
             # Append the new data to the existing CSV
             new_data.to_csv('sol_usdt_data.csv', mode='a', header=False, index=False)
             
-            # Print the number of new rows appended
-            print(f"{new_row_count} new rows fetched and appended successfully.")
-            # Print the new CSV length after appending
+            # logging.info the number of new rows appended
+            logging.info(f"{new_row_count} new rows fetched and appended successfully.")
+            # logging.info the new CSV length after appending
             current_df = pd.read_csv('sol_usdt_data.csv')
-            print(f"New CSV length after appending: {len(current_df)}")
+            logging.info(f"New CSV length after appending: {len(current_df)}")
         else:
-            print("No new data to append.")
+            logging.info("No new data to append.")
     else:
-        print("No new data available. The current timestamp is not greater than the last opentime.")
+        logging.info("No new data available. The current timestamp is not greater than the last opentime.")
 
     return new_row_count
 
@@ -344,8 +355,8 @@ class BinanceAPI:
 
 def handle_trading_action(suggested_action, prev_action=prev_action):
 
-    print(f"Previous Action: {prev_action}")
-    print(f"Suggested Action: {suggested_action}")
+    logging.info(f"Previous Action: {prev_action}")
+    logging.info(f"Suggested Action: {suggested_action}")
     
     # Initialize current action
     curr_action = None
@@ -356,52 +367,74 @@ def handle_trading_action(suggested_action, prev_action=prev_action):
     else:
         if prev_action is None and suggested_action == 'Long':
             curr_action = 'Open Long'
-            # print(f'Open a Long Position: {curr_action}')
-            print(curr_action)
+            # logging.info(f'Open a Long Position: {curr_action}')
+            logging.info(curr_action)
             prev_action = 'Long'
         elif prev_action is None and suggested_action == 'Short':
             curr_action = 'Open Short'
-            # print(f'Open a Short Position: {curr_action}')
-            print(curr_action)
+            # logging.info(f'Open a Short Position: {curr_action}')
+            logging.info(curr_action)
             prev_action = 'Short'
         elif prev_action == 'Long' and suggested_action == 'Short':
             curr_action = 'Close Long & Open Short'
-            # print(f'Close all positions: {curr_action}')
-            print(curr_action)
+            # logging.info(f'Close all positions: {curr_action}')
+            logging.info(curr_action)
             prev_action = 'Short'
         elif prev_action == 'Long' and suggested_action is None:
             pass  # Do nothing
         elif prev_action == 'Short' and suggested_action == 'Long':
             curr_action = 'Close Short & Open Long'
-            # print(f'Close all positions: {curr_action}')
-            print(curr_action)
+            # logging.info(f'Close all positions: {curr_action}')
+            logging.info(curr_action)
             prev_action = 'Long'
         elif prev_action == 'Short' and suggested_action is None:
             pass  # Do nothing
 
-    # Print the result
-    print(f"Current Action: {curr_action if curr_action else 'No action taken'}")
-    print(f"New Previous Action: {prev_action}")
+    # logging.info the result
+    logging.info(f"Current Action: {curr_action if curr_action else 'No action taken'}")
+    logging.info(f"New Previous Action: {prev_action}")
     
     return curr_action, prev_action
 
-#Main
-while True:
+# Main Loop
+def main():
     prev_action = None
-    # Fetch new data continuously
     while True:
-        # Call the function to fetch and append the data
-        fetch_and_append_data()
-        if new_row_count >= 1:
-            # Get the latest 51 data as the Ichimoku Cloud need 50 data
-            df_sliced = pd.read_csv('sol_usdt_data.csv').tail(52)
-            # Apply super trend indicator
-            df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)
-            # Apply ichomoku cloud indicator
-            df_st_ic = compute_ichimoku_with_supertrend(df_st)
-            # Define action suggestion
-            suggested_action = determine_suggested_action(df_st_ic)
-            print(f"Suggested Action: {suggested_action}")
-            # Define real action
-            current_action, new_prev_action = handle_trading_action(suggested_action, prev_action)
-         
+        try:
+            # Fetch new data continuously
+            while True:
+                # Call the function to fetch and append the data
+                fetch_and_append_data()
+
+                if new_row_count >= 1:
+                    # Log the new data fetch
+                    logging.info('New data fetched, processing now.')
+
+                    # Get the latest 51 data as the Ichimoku Cloud needs 50 data
+                    df_sliced = pd.read_csv('sol_usdt_data.csv').tail(52)
+
+                    # Apply super trend indicator
+                    df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)
+                    logging.info('Supertrend indicator applied.')
+
+                    # Apply Ichimoku cloud indicator
+                    df_st_ic = compute_ichimoku_with_supertrend(df_st)
+                    logging.info('Ichimoku cloud indicator applied.')
+
+                    # Define action suggestion
+                    suggested_action = determine_suggested_action(df_st_ic)
+
+                    # Define real action and log it
+                    current_action, new_prev_action = handle_trading_action(suggested_action, prev_action)
+                    logging.info(f'Suggested Action: {suggested_action}, Real Action: {current_action}')
+
+                    # Update previous action
+                    prev_action = new_prev_action
+
+        except Exception as e:
+            logging.error(f"An error occurred: {e}")
+            break  # Exit on error for debugging; you can choose to continue or retry.
+
+# Run the main function
+if __name__ == "__main__":
+    main()      
