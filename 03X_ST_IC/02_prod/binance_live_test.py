@@ -1,9 +1,15 @@
+import numpy as np
+import sys
+
+# Temporarily monkey-patch numpy to make NaN import work
+sys.modules['numpy.NaN'] = np.nan
+
+# Now proceed with your imports
 import requests
 import time
 from tqdm import tqdm
 import pandas as pd
 from datetime import datetime
-import numpy as np
 from pandas_ta.overlap import hl2
 from pandas_ta.volatility import atr
 from pandas_ta.utils import get_offset, verify_series
@@ -17,7 +23,7 @@ today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
 
 # Logging Setup
 logging.basicConfig(
-    filename=f'logs/binance_live_test_{today_datetime}.log',
+    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs/binance_live_test_{today_datetime}.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -92,10 +98,17 @@ def binance_recursive_fetch_2(coins, interval, starttime, endtime=None, data_typ
 
 def fetch_and_append_data():
     # Get the latest opentime from the CSV file
-    current_df = pd.read_csv('sol_usdt_data.csv')
-    last_opentime = current_df['opentime'].iloc[-1]
+    try:
+        current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+        last_opentime = current_df['opentime'].iloc[-1]
+    except FileNotFoundError:
+        logging.error("CSV file not found. Ensure the path is correct.")
+        return 0
+    except Exception as e:
+        logging.error(f"Error reading CSV file: {e}")
+        return 0
 
-    # logging.info the last opentime and the length of the CSV before appending
+    # Log the last opentime and the length of the CSV before appending
     logging.info(f"Last opentime in CSV: {last_opentime}")
     logging.info(f"CSV length before appending: {len(current_df)}")
 
@@ -108,8 +121,8 @@ def fetch_and_append_data():
     # Convert the timestamp back to milliseconds
     rounded_timestamp_ms = rounded_timestamp * 1000
 
-    # logging.info the current nearest previous rounded timestamp in ms
-    logging.info(f"Rounded timestamp: {rounded_timestamp_ms}, Last open time in CSV: {last_opentime}")
+    # Log the rounded timestamp for comparison
+    logging.info(f"Rounded timestamp: {rounded_timestamp_ms}, Last opentime in CSV: {last_opentime}")
 
     # Initialize new_row_count to 0 by default
     new_row_count = 0
@@ -117,41 +130,51 @@ def fetch_and_append_data():
     # Check if there is new data to fetch (if rounded_timestamp_ms > last_opentime)
     if rounded_timestamp_ms > last_opentime:
         # Fetch the next data (increment by 1800000 ms, or 30 minutes)
-        data = binance_recursive_fetch_2(
-            ['SOL'],
-            '30m',
-            starttime=int(last_opentime + 1800000),
-            endtime=int(last_opentime + 3600000),
-            data_type='futures'  # Fetch futures/sport
-        )
+        try:
+            data = binance_recursive_fetch_2(
+                ['SOL'],
+                '30m',
+                starttime=int(last_opentime + 1800000),
+                endtime=int(last_opentime + 3600000),
+                data_type='futures'  # Fetch futures/sport
+            )
 
-        # Define the column names for the DataFrame based on the Binance API response structure
-        columns = ['coin', 'opentime', 'openprice', 'highprice', 'lowprice', 'closeprice', 'volume', 'closetime', 
-                   'quotevolume', 'trades', 'taker_buy_volume', 'taker_buy_quote', 'unused']
+            logging.info(f"Fetched data: {data}")
 
-        # Convert the list of data into a DataFrame
-        new_data = pd.DataFrame(data['data'], columns=columns)
+            # Check if the data exists
+            if 'data' in data and data['data']:
+                # Define the column names for the DataFrame based on the Binance API response structure
+                columns = ['coin', 'opentime', 'openprice', 'highprice', 'lowprice', 'closeprice', 'volume', 'closetime',
+                           'quotevolume', 'trades', 'taker_buy_volume', 'taker_buy_quote', 'unused']
 
-        # Drop unnecessary columns
-        new_data.drop(columns=['coin', 'volume', 'closetime', 'quotevolume', 'trades', 'taker_buy_volume', 'taker_buy_quote', 'unused'], inplace=True)
+                # Convert the list of data into a DataFrame
+                new_data = pd.DataFrame(data['data'], columns=columns)
 
-        # Convert columns 1-4 (openprice, highprice, lowprice, closeprice) to float
-        new_data[['openprice', 'highprice', 'lowprice', 'closeprice']] = new_data[['openprice', 'highprice', 'lowprice', 'closeprice']].apply(pd.to_numeric, errors='coerce')
+                # Drop unnecessary columns
+                new_data.drop(columns=['coin', 'volume', 'closetime', 'quotevolume', 'trades', 'taker_buy_volume', 'taker_buy_quote', 'unused'], inplace=True)
 
-        # Check if there are new rows
-        new_row_count = len(new_data)
+                # Convert columns 1-4 (openprice, highprice, lowprice, closeprice) to float
+                new_data[['openprice', 'highprice', 'lowprice', 'closeprice']] = new_data[['openprice', 'highprice', 'lowprice', 'closeprice']].apply(pd.to_numeric, errors='coerce')
 
-        if new_row_count > 0:
-            # Append the new data to the existing CSV
-            new_data.to_csv('sol_usdt_data.csv', mode='a', header=False, index=False)
-            
-            # logging.info the number of new rows appended
-            logging.info(f"{new_row_count} new rows fetched and appended successfully.")
-            # logging.info the new CSV length after appending
-            current_df = pd.read_csv('sol_usdt_data.csv')
-            logging.info(f"New CSV length after appending: {len(current_df)}")
-        else:
-            logging.info("No new data to append.")
+                # Check if there are new rows
+                new_row_count = len(new_data)
+
+                if new_row_count > 0:
+                    # Append the new data to the existing CSV
+                    new_data.to_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv', mode='a', header=False, index=False)
+                    
+                    # Log the number of new rows appended
+                    logging.info(f"{new_row_count} new rows fetched and appended successfully.")
+
+                    # Log the new CSV length after appending
+                    current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+                    logging.info(f"New CSV length after appending: {len(current_df)}")
+                else:
+                    logging.info("No new data to append.")
+            else:
+                logging.info("No new data fetched from Binance.")
+        except Exception as e:
+            logging.error(f"Error fetching data from Binance: {e}")
     else:
         logging.info("No new data available. The current timestamp is not greater than the last opentime.")
 
@@ -242,8 +265,8 @@ def compute_ichimoku_with_supertrend(supertrend_df, conversion_periods=9, base_p
 
 def determine_suggested_action(df):
 
-    # Get the last row of the DataFrame
-    last_row = df.tail(1).copy()
+    # Get the last 2 rows of the DataFrame
+    last_two_rows = df.tail(2).copy()
 
     # Rename the last 4 columns for convenience
     new_column_names = {
@@ -252,19 +275,36 @@ def determine_suggested_action(df):
         'leading_span_a': 'Leading Span A',
         'leading_span_b': 'Leading Span B'
     }
-    last_row = last_row.rename(columns=new_column_names)
+    last_two_rows = last_two_rows.rename(columns=new_column_names)
 
-    # Extract scalar values
-    up_trend = last_row['Up Trend'].iloc[0]
-    down_trend = last_row['Down Trend'].iloc[0]
-    closeprice = last_row['closeprice'].iloc[0]
-    leading_span_a = last_row['Leading Span A'].iloc[0]
-    leading_span_b = last_row['Leading Span B'].iloc[0]
+    # Extract scalar values from the last row (latest row)
+    up_trend_last = last_two_rows['Up Trend'].iloc[0]
+    down_trend_last = last_two_rows['Down Trend'].iloc[0]
+    closeprice_last = last_two_rows['closeprice'].iloc[0]
+    leading_span_a_last = last_two_rows['Leading Span A'].iloc[0]
+    leading_span_b_last = last_two_rows['Leading Span B'].iloc[0]
+
+    # Extract scalar values from the second last row
+    up_trend_second_last = last_two_rows['Up Trend'].iloc[1]
+
+    trend = None
+
+    # Check if the trend change
+    if (isinstance(up_trend_last, float) and isinstance(up_trend_second_last, float)) or \
+    (pd.isna(up_trend_last) and pd.isna(up_trend_second_last)):
+        # Action when both are either float or both NaN
+        print("Both values are either floats or both NaN. Perform action 1.")
+        trend = 'unchange'
+    else:
+        # Action when one is float and the other is NaN
+        trend = 'change'
 
     # Determine the suggested action
-    if pd.notna(up_trend) and closeprice > leading_span_a and closeprice > leading_span_b:
+    if trend == 'change' :
+        return 'Close'
+    elif pd.notna(up_trend_last) and closeprice_last > leading_span_a_last and closeprice_last > leading_span_b_last:
         return 'Long'
-    elif pd.notna(down_trend) and closeprice < leading_span_a and closeprice < leading_span_b:
+    elif pd.notna(up_trend_last) and closeprice_last < leading_span_a_last and closeprice_last < leading_span_b_last:
         return 'Short'
     else:
         return None
@@ -352,8 +392,39 @@ class BinanceAPI:
             params["price"] = price
 
         return self._send_request("POST", "/fapi/v1/order", params, signed=True)
+    
+    def close_all_position(self):
+        """Close all active positions on the account"""
+        # Get all active positions
+        positions = self.get_position_risk()
+        if positions is None:
+            logging.error("Failed to retrieve position information.")
+            return
 
-def handle_trading_action(suggested_action, prev_action=prev_action):
+        # Iterate through each position and close it
+        for position in positions:
+            symbol = position['symbol']
+            position_amt = float(position['positionAmt'])
+
+            if position_amt != 0:
+                side = 'SELL' if position_amt > 0 else 'BUY'
+                quantity = abs(position_amt)
+
+                # Create a market order to close the position
+                response = self.create_order(
+                    symbol=symbol,
+                    side=side,
+                    order_type="MARKET",
+                    quantity=quantity,
+                    reduce_only=True
+                )
+
+                if response:
+                    logging.info(f"Closed position: {symbol} with quantity {quantity}")
+                else:
+                    logging.error(f"Failed to close position: {symbol}")
+
+def handle_trading_action(suggested_action, prev_action=None):
 
     logging.info(f"Previous Action: {prev_action}")
     logging.info(f"Suggested Action: {suggested_action}")
@@ -367,28 +438,36 @@ def handle_trading_action(suggested_action, prev_action=prev_action):
     else:
         if prev_action is None and suggested_action == 'Long':
             curr_action = 'Open Long'
-            # logging.info(f'Open a Long Position: {curr_action}')
+            # open_long = self.api.create_order("SOLUSDT", "BUY", "MARKET", 1)
             logging.info(curr_action)
             prev_action = 'Long'
         elif prev_action is None and suggested_action == 'Short':
             curr_action = 'Open Short'
-            # logging.info(f'Open a Short Position: {curr_action}')
+            # open_short = self.api.create_order("SOLUSDT", "SELL", "MARKET", 1)
             logging.info(curr_action)
             prev_action = 'Short'
+        elif prev_action == 'Long' and suggested_action == 'Close':
+            curr_action = 'Close Long'
+            # close_long = self.api.create_order("SOLUSDT", "SELL", "MARKET", 1)  # Close Long
+            logging.info(curr_action)
+            prev_action = None
+        elif prev_action == 'Short' and suggested_action == 'Close':
+            curr_action = 'Close Short'
+            # close_short = self.api.create_order("SOLUSDT", "BUY", "MARKET", 1)  # Close Short
+            logging.info(curr_action)
+            prev_action = None
         elif prev_action == 'Long' and suggested_action == 'Short':
             curr_action = 'Close Long & Open Short'
-            # logging.info(f'Close all positions: {curr_action}')
+            # close_long = self.api.create_order("SOLUSDT", "SELL", "MARKET", 1)  # Close Long
+            # open_short = self.api.create_order("SOLUSDT", "SELL", "MARKET", 1)  # Open Short
             logging.info(curr_action)
             prev_action = 'Short'
-        elif prev_action == 'Long' and suggested_action is None:
-            pass  # Do nothing
         elif prev_action == 'Short' and suggested_action == 'Long':
             curr_action = 'Close Short & Open Long'
-            # logging.info(f'Close all positions: {curr_action}')
+            # close_short = self.api.create_order("SOLUSDT", "BUY", "MARKET", 1)  # Close Short
+            # open_long = self.api.create_order("SOLUSDT", "BUY", "MARKET", 1)  # Open Long
             logging.info(curr_action)
             prev_action = 'Long'
-        elif prev_action == 'Short' and suggested_action is None:
-            pass  # Do nothing
 
     # logging.info the result
     logging.info(f"Current Action: {curr_action if curr_action else 'No action taken'}")
@@ -404,14 +483,14 @@ def main():
             # Fetch new data continuously
             while True:
                 # Call the function to fetch and append the data
-                fetch_and_append_data()
+                new_row_count = fetch_and_append_data()
 
                 if new_row_count >= 1:
                     # Log the new data fetch
                     logging.info('New data fetched, processing now.')
 
                     # Get the latest 51 data as the Ichimoku Cloud needs 50 data
-                    df_sliced = pd.read_csv('sol_usdt_data.csv').tail(52)
+                    df_sliced = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv').tail(52)
 
                     # Apply super trend indicator
                     df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)
@@ -430,6 +509,9 @@ def main():
 
                     # Update previous action
                     prev_action = new_prev_action
+
+                # Sleep for 1 minute before starting the next iteration of the inner loop
+                time.sleep(60)
 
         except Exception as e:
             logging.error(f"An error occurred: {e}")

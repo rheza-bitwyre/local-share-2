@@ -1,6 +1,6 @@
 {
-    "api_key": "YOUR_BINANCE_API_KEY",
-    "api_secret": "YOUR_BINANCE_API_SECRET",
+    "api_key": "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC",
+    "api_secret": "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl",
     "trade_amount_usdt": 5,
     "trade_amount_coin": 1,
     "leverage": 1,
