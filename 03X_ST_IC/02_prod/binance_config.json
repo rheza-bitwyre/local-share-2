@@ -1,0 +1,9 @@
+{
+    "api_key": "YOUR_BINANCE_API_KEY",
+    "api_secret": "YOUR_BINANCE_API_SECRET",
+    "trade_amount_usdt": 5,
+    "trade_amount_coin": 1,
+    "leverage": 1,
+    "testnet": false,
+    "symbols": "SOLUSDT"
+}
