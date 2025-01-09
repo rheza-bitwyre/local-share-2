@@ -23,7 +23,7 @@ today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
 
 # Logging Setup
 logging.basicConfig(
-    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs/binance_live_test_{today_datetime}.log',
+    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs/binance_signal_live_test_{today_datetime}.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -461,9 +461,22 @@ def handle_trading_action(suggested_action, prev_action=None):
             logging.info(curr_action)
             prev_action = 'Long'
 
-    # logging.info the result
+    # Log the new CSV length after appending
+    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+
+    # Get the latest 'opentime' value
+    latest_opentime = new_df['opentime'].iloc[-1]
+
+    # Convert the 'opentime' from milliseconds to seconds
+    latest_opentime_in_seconds = latest_opentime / 1000
+
+    # Convert the 'opentime' to a human-readable format
+    converted_opentime = datetime.utcfromtimestamp(latest_opentime_in_seconds).strftime('%Y-%m-%d %H:%M:%S')
+
+    # Log the result
+    logging.info(f"at: {converted_opentime}")
+
     logging.info(f"Current Action: {curr_action if curr_action else 'No action taken'}")
-    logging.info(f"New Previous Action: {prev_action}")
     
     return curr_action, prev_action
 
@@ -496,7 +509,7 @@ def main():
                     suggested_action = determine_suggested_action(df_st_ic)
 
                     # Define real action and log it
-                    current_action, new_prev_action = handle_trading_action(suggested_action, prev_action)
+                    current_action, new_prev_action = handle_trading_action(suggested_action, prev_action = prev_action)
                     logging.info(f'Suggested Action: {suggested_action}, Real Action: {current_action}')
 
                     # Update previous action

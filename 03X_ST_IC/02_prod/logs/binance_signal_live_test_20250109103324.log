@@ -1,0 +1,8 @@
+2025-01-09 10:33:24 - INFO - Last opentime in CSV: 1736418600000
+2025-01-09 10:33:24 - INFO - CSV length before appending: 406
+2025-01-09 10:33:24 - INFO - Rounded timestamp: 1736418600000, Last opentime in CSV: 1736418600000
+2025-01-09 10:33:24 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-09 10:34:24 - INFO - Last opentime in CSV: 1736418600000
+2025-01-09 10:34:24 - INFO - CSV length before appending: 406
+2025-01-09 10:34:24 - INFO - Rounded timestamp: 1736418600000, Last opentime in CSV: 1736418600000
+2025-01-09 10:34:24 - INFO - No new data available. The current timestamp is not greater than the last opentime.
