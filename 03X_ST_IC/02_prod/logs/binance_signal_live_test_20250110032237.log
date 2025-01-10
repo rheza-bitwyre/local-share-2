@@ -1,0 +1,97 @@
+2025-01-10 03:22:37 - INFO - Last opentime in CSV: 1736478000000
+2025-01-10 03:22:37 - INFO - CSV length before appending: 439
+2025-01-10 03:22:37 - INFO - Rounded timestamp: 1736478000000, Last opentime in CSV: 1736478000000
+2025-01-10 03:22:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:23:37 - INFO - Last opentime in CSV: 1736478000000
+2025-01-10 03:23:37 - INFO - CSV length before appending: 439
+2025-01-10 03:23:37 - INFO - Rounded timestamp: 1736478000000, Last opentime in CSV: 1736478000000
+2025-01-10 03:23:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:24:37 - INFO - Last opentime in CSV: 1736478000000
+2025-01-10 03:24:37 - INFO - CSV length before appending: 439
+2025-01-10 03:24:37 - INFO - Rounded timestamp: 1736478000000, Last opentime in CSV: 1736478000000
+2025-01-10 03:24:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:25:37 - INFO - Last opentime in CSV: 1736478000000
+2025-01-10 03:25:37 - INFO - CSV length before appending: 439
+2025-01-10 03:25:37 - INFO - Rounded timestamp: 1736478000000, Last opentime in CSV: 1736478000000
+2025-01-10 03:25:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:26:37 - INFO - Last opentime in CSV: 1736478000000
+2025-01-10 03:26:37 - INFO - CSV length before appending: 439
+2025-01-10 03:26:37 - INFO - Rounded timestamp: 1736478000000, Last opentime in CSV: 1736478000000
+2025-01-10 03:26:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:27:37 - INFO - Last opentime in CSV: 1736478000000
+2025-01-10 03:27:37 - INFO - CSV length before appending: 439
+2025-01-10 03:27:37 - INFO - Rounded timestamp: 1736478000000, Last opentime in CSV: 1736478000000
+2025-01-10 03:27:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:28:37 - INFO - Last opentime in CSV: 1736478000000
+2025-01-10 03:28:37 - INFO - CSV length before appending: 439
+2025-01-10 03:28:37 - INFO - Rounded timestamp: 1736478000000, Last opentime in CSV: 1736478000000
+2025-01-10 03:28:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:29:37 - INFO - Last opentime in CSV: 1736478000000
+2025-01-10 03:29:37 - INFO - CSV length before appending: 439
+2025-01-10 03:29:37 - INFO - Rounded timestamp: 1736478000000, Last opentime in CSV: 1736478000000
+2025-01-10 03:29:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:30:37 - INFO - Last opentime in CSV: 1736478000000
+2025-01-10 03:30:37 - INFO - CSV length before appending: 439
+2025-01-10 03:30:37 - INFO - Rounded timestamp: 1736479800000, Last opentime in CSV: 1736478000000
+2025-01-10 03:30:37 - INFO - 2025-01-10 03:31:00 status: True, time: 1736479860000, calls: 1
+2025-01-10 03:30:37 - INFO - 2025-01-10 03:31:00 status: True, time: 1736479860000, calls: 2
+2025-01-10 03:30:37 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 03:30:37 - INFO - Fetched data: {'data': [['SOL', 1736479800000, '188.3400', '188.5800', '188.3400', '188.4800', '5214', 1736481599999, '982513.0620', 600, '4299', '810041.2920', '0']], 'call': {'SOL': 2}}
+2025-01-10 03:30:37 - INFO - 1 new rows fetched and appended successfully.
+2025-01-10 03:30:37 - INFO - New CSV length after appending: 440
+2025-01-10 03:30:37 - INFO - Header: ['opentime', 'openprice', 'highprice', 'lowprice', 'closeprice']
+2025-01-10 03:30:37 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+439  1736479800000     188.34     188.58    188.34      188.48
+2025-01-10 03:30:37 - INFO - New data fetched, processing now.
+2025-01-10 03:30:37 - INFO - Header: ['opentime', 'openprice', 'highprice', 'lowprice', 'closeprice', 'SUPERTl_10_3.0', 'SUPERTs_10_3.0']
+2025-01-10 03:30:37 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+439  1736479800000     188.34  ...      185.448678             NaN
+
+[1 rows x 7 columns]
+2025-01-10 03:30:37 - INFO - Supertrend indicator applied.
+2025-01-10 03:30:37 - INFO - Header: ['opentime', 'openprice', 'highprice', 'lowprice', 'closeprice', 'SUPERTl_10_3.0', 'SUPERTs_10_3.0', 'leading_span_a', 'leading_span_b']
+2025-01-10 03:30:37 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+439  1736479800000     188.34  ...        190.1575             NaN
+
+[1 rows x 9 columns]
+2025-01-10 03:30:37 - INFO - Ichimoku cloud indicator applied.
+2025-01-10 03:30:37 - INFO - Previous up trend: 185.35360311156936
+2025-01-10 03:30:37 - INFO - Current up trend: 185.44867784209887
+2025-01-10 03:30:37 - INFO - Trend: unchange
+2025-01-10 03:30:37 - INFO - Previous Action: None
+2025-01-10 03:30:37 - INFO - Suggested Action: None
+2025-01-10 03:30:37 - INFO - at: 2025-01-10 03:30:00
+2025-01-10 03:30:37 - INFO - Current Action: No action taken
+2025-01-10 03:30:37 - INFO - Suggested Action: None, Real Action: None
+2025-01-10 03:31:37 - INFO - Last opentime in CSV: 1736479800000
+2025-01-10 03:31:37 - INFO - CSV length before appending: 440
+2025-01-10 03:31:37 - INFO - Rounded timestamp: 1736479800000, Last opentime in CSV: 1736479800000
+2025-01-10 03:31:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:32:37 - INFO - Last opentime in CSV: 1736479800000
+2025-01-10 03:32:37 - INFO - CSV length before appending: 440
+2025-01-10 03:32:37 - INFO - Rounded timestamp: 1736479800000, Last opentime in CSV: 1736479800000
+2025-01-10 03:32:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:33:37 - INFO - Last opentime in CSV: 1736479800000
+2025-01-10 03:33:37 - INFO - CSV length before appending: 440
+2025-01-10 03:33:37 - INFO - Rounded timestamp: 1736479800000, Last opentime in CSV: 1736479800000
+2025-01-10 03:33:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:34:37 - INFO - Last opentime in CSV: 1736479800000
+2025-01-10 03:34:37 - INFO - CSV length before appending: 440
+2025-01-10 03:34:37 - INFO - Rounded timestamp: 1736479800000, Last opentime in CSV: 1736479800000
+2025-01-10 03:34:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:35:37 - INFO - Last opentime in CSV: 1736479800000
+2025-01-10 03:35:37 - INFO - CSV length before appending: 440
+2025-01-10 03:35:37 - INFO - Rounded timestamp: 1736479800000, Last opentime in CSV: 1736479800000
+2025-01-10 03:35:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:36:37 - INFO - Last opentime in CSV: 1736479800000
+2025-01-10 03:36:37 - INFO - CSV length before appending: 440
+2025-01-10 03:36:37 - INFO - Rounded timestamp: 1736479800000, Last opentime in CSV: 1736479800000
+2025-01-10 03:36:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:37:37 - INFO - Last opentime in CSV: 1736479800000
+2025-01-10 03:37:37 - INFO - CSV length before appending: 440
+2025-01-10 03:37:37 - INFO - Rounded timestamp: 1736479800000, Last opentime in CSV: 1736479800000
+2025-01-10 03:37:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 03:38:37 - INFO - Last opentime in CSV: 1736479800000
+2025-01-10 03:38:37 - INFO - CSV length before appending: 440
+2025-01-10 03:38:37 - INFO - Rounded timestamp: 1736479800000, Last opentime in CSV: 1736479800000
+2025-01-10 03:38:37 - INFO - No new data available. The current timestamp is not greater than the last opentime.

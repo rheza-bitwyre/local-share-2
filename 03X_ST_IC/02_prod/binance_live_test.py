@@ -169,7 +169,6 @@ def fetch_and_append_data():
                     # Log the new CSV length after appending
                     current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
                     logging.info(f"New CSV length after appending: {len(current_df)}")
-                    logging.info(f"Header: {list(current_df.columns)}")
                     logging.info(f"New data: {current_df.tail(1)}")
                 else:
                     logging.info("No new data to append.")
@@ -244,7 +243,6 @@ def calculate_supertrend(df, high_col='highprice', low_col='lowprice', close_col
     if drop_columns:
         result_df.drop(columns=[f"SUPERT{_props}", f"SUPERTd{_props}"], inplace=True)
 
-    logging.info(f"Header: {list(result_df.columns)}")
     logging.info(f"Last row: {result_df.tail(1)}")
 
     return result_df
@@ -266,7 +264,6 @@ def compute_ichimoku_with_supertrend(supertrend_df, conversion_periods=9, base_p
     # Drop unnecessary columns
     supertrend_df.drop(columns=['conversion_line', 'base_line', 'lagging_span'], inplace=True)
 
-    logging.info(f"Header: {list(supertrend_df.columns)}")
     logging.info(f"Last row: {supertrend_df.tail(1)}")
 
     return supertrend_df
@@ -310,14 +307,74 @@ def determine_suggested_action(df):
     logging.info(f"Trend: {trend}")
 
     # Determine the suggested action
+    suggested_action =  None
+
     if trend == 'change' :
-        return 'Close'
+        suggested_action = 'Close'
     elif pd.notna(up_trend_last) and closeprice_last > leading_span_a_last and closeprice_last > leading_span_b_last:
-        return 'Long'
+        suggested_action =  'Long'
     elif pd.notna(down_trend_last) and closeprice_last < leading_span_a_last and closeprice_last < leading_span_b_last:
-        return 'Short'
+        suggested_action =  'Short'
+
+    logging.info(f"Suggested Action: {suggested_action}")
+
+    return suggested_action
+
+def handle_trading_action(suggested_action, prev_action=None):
+
+    logging.info(f"Previous Action: {prev_action}")
+    logging.info(f"Suggested Action: {suggested_action}")
+    
+    # Initialize current action
+    curr_action = None
+    
+    # Action handling logic
+    if prev_action == suggested_action:
+        pass  # Do nothing if the action is the same
     else:
-        return None
+        if prev_action is None and suggested_action == 'Long':
+            curr_action = 'Open Long'
+            logging.info(curr_action)
+            prev_action = 'Long'
+        elif prev_action is None and suggested_action == 'Short':
+            curr_action = 'Open Short'
+            logging.info(curr_action)
+            prev_action = 'Short'
+        elif prev_action == 'Long' and suggested_action == 'Close':
+            curr_action = 'Close Long'
+            logging.info(curr_action)
+            prev_action = None
+        elif prev_action == 'Short' and suggested_action == 'Close':
+            curr_action = 'Close Short'
+            logging.info(curr_action)
+            prev_action = None
+        elif prev_action == 'Long' and suggested_action == 'Short':
+            curr_action = 'Close Long & Open Short'
+            logging.info(curr_action)
+            prev_action = 'Short'
+        elif prev_action == 'Short' and suggested_action == 'Long':
+            curr_action = 'Close Short & Open Long'
+            logging.info(curr_action)
+            prev_action = 'Long'
+
+    # Log the new CSV length after appending
+    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+
+    # Get the latest 'opentime' value
+    latest_opentime = new_df['opentime'].iloc[-1]
+
+    # Convert the 'opentime' from milliseconds to seconds
+    latest_opentime_in_seconds = latest_opentime / 1000
+
+    # Convert the 'opentime' to a human-readable format
+    converted_opentime = datetime.utcfromtimestamp(latest_opentime_in_seconds).strftime('%Y-%m-%d %H:%M:%S')
+
+    # Log the result
+    logging.info(f"at: {converted_opentime}")
+
+    logging.info(f"Current Action: {curr_action if curr_action else 'No action taken'}")
+    
+    return curr_action, prev_action
 
 class BinanceAPI:
     def __init__(self, api_key: str, api_secret: str, testnet: bool = False):
@@ -433,63 +490,62 @@ class BinanceAPI:
                     logging.info(f"Closed position: {symbol} with quantity {quantity}")
                 else:
                     logging.error(f"Failed to close position: {symbol}")
+                    
+    def list_open_positions(self) -> dict:
+        """List all open positions with details and trade status."""
+        positions = self.get_position_risk()
+        if positions is None:
+            logging.error("Failed to retrieve position information.")
+            return {"trade": None}
 
-def handle_trading_action(suggested_action, prev_action=None):
+        active_positions = []
+        long_positions = 0
+        short_positions = 0
 
-    logging.info(f"Previous Action: {prev_action}")
-    logging.info(f"Suggested Action: {suggested_action}")
-    
-    # Initialize current action
-    curr_action = None
-    
-    # Action handling logic
-    if prev_action == suggested_action:
-        pass  # Do nothing if the action is the same
-    else:
-        if prev_action is None and suggested_action == 'Long':
-            curr_action = 'Open Long'
-            logging.info(curr_action)
-            prev_action = 'Long'
-        elif prev_action is None and suggested_action == 'Short':
-            curr_action = 'Open Short'
-            logging.info(curr_action)
-            prev_action = 'Short'
-        elif prev_action == 'Long' and suggested_action == 'Close':
-            curr_action = 'Close Long'
-            logging.info(curr_action)
-            prev_action = None
-        elif prev_action == 'Short' and suggested_action == 'Close':
-            curr_action = 'Close Short'
-            logging.info(curr_action)
-            prev_action = None
-        elif prev_action == 'Long' and suggested_action == 'Short':
-            curr_action = 'Close Long & Open Short'
-            logging.info(curr_action)
-            prev_action = 'Short'
-        elif prev_action == 'Short' and suggested_action == 'Long':
-            curr_action = 'Close Short & Open Long'
-            logging.info(curr_action)
-            prev_action = 'Long'
+        for position in positions:
+            position_amt = float(position['positionAmt'])
+            if position_amt != 0:
+                symbol = position['symbol']
+                entry_price = float(position['entryPrice'])
+                mark_price = float(position['markPrice'])
+                unrealized_pnl = float(position['unRealizedProfit'])
+                margin = float(position['isolatedMargin'])
+                margin_ratio = (margin / abs(position_amt)) * 100 if position_amt != 0 else 0
+                roi = (unrealized_pnl / margin) * 100 if margin != 0 else 0
 
-    # Log the new CSV length after appending
-    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+                position_type = 'Long' if position_amt > 0 else 'Short'
+                if position_amt > 0:
+                    long_positions += 1
+                else:
+                    short_positions += 1
 
-    # Get the latest 'opentime' value
-    latest_opentime = new_df['opentime'].iloc[-1]
+                active_positions.append({
+                    "symbol": symbol,
+                    "entry_price": entry_price,
+                    "mark_price": mark_price,
+                    "roi": roi,
+                    "margin_ratio": margin_ratio,
+                    "position_type": position_type
+                })
 
-    # Convert the 'opentime' from milliseconds to seconds
-    latest_opentime_in_seconds = latest_opentime / 1000
+        if not active_positions:
+            logging.info("No active positions at the moment.")
+            return {"trade": None}
 
-    # Convert the 'opentime' to a human-readable format
-    converted_opentime = datetime.utcfromtimestamp(latest_opentime_in_seconds).strftime('%Y-%m-%d %H:%M:%S')
+        # Log summary
+        logging.info(f"Number of active positions: {len(active_positions)}")
+        logging.info(f"Long positions: {long_positions}")
+        logging.info(f"Short positions: {short_positions}")
+        for pos in active_positions:
+            logging.info(
+                f"Symbol: {pos['symbol']}, Entry Price: {pos['entry_price']}, "
+                f"Mark Price: {pos['mark_price']}, ROI: {pos['roi']:.2f}%, "
+                f"Margin Ratio: {pos['margin_ratio']:.2f}%, Position Type: {pos['position_type']}"
+            )
 
-    # Log the result
-    logging.info(f"at: {converted_opentime}")
+        return {"active_positions": active_positions, "trade": "active"}
 
-    logging.info(f"Current Action: {curr_action if curr_action else 'No action taken'}")
-    
-    return curr_action, prev_action
-
+        
 # Main Loop
 def main():
     prev_action = None
@@ -520,7 +576,6 @@ def main():
 
                     # Define real action and log it
                     current_action, new_prev_action = handle_trading_action(suggested_action, prev_action = prev_action)
-                    logging.info(f'Suggested Action: {suggested_action}, Real Action: {current_action}')
 
                     # Update previous action
                     prev_action = new_prev_action
