@@ -156,9 +156,10 @@ def fetch_and_append_data():
 
                 # Convert columns 1-4 (openprice, highprice, lowprice, closeprice) to float
                 new_data[['openprice', 'highprice', 'lowprice', 'closeprice']] = new_data[['openprice', 'highprice', 'lowprice', 'closeprice']].apply(pd.to_numeric, errors='coerce')
-                
+                logging.info(f'before dropping :{len(new_data)}')
+
                 # Check if there are new rows
-                new_data = new_data.head(1)
+                new_data = new_data.iloc[:-1]
 
                 # Check if there are new rows
                 new_row_count = len(new_data)
