@@ -134,10 +134,16 @@ def fetch_and_append_data():
             data = binance_recursive_fetch_2(
                 ['SOL'],
                 '30m',
-                starttime=int(last_opentime + 1800000),
-                endtime=int(last_opentime + 3600000),
+                starttime=int(last_opentime - 1800000),
+                endtime=None,
                 data_type='futures'  # Fetch futures/sport
             )
+
+            # Extract the first data entry and the 'call' object
+            data = {
+                'data': [data['data'][0]],  # Taking only the first entry from the 'data' list
+                'call': data['call']  # Keeping the 'call' object as is
+            }
 
             logging.info(f"Fetched data: {data}")
 
@@ -490,7 +496,7 @@ class BinanceAPI:
                     logging.info(f"Closed position: {symbol} with quantity {quantity}")
                 else:
                     logging.error(f"Failed to close position: {symbol}")
-                    
+
     def list_open_positions(self) -> dict:
         """List all open positions with details and trade status."""
         positions = self.get_position_risk()
