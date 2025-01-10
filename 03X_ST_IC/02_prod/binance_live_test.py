@@ -275,7 +275,6 @@ def compute_ichimoku_with_supertrend(supertrend_df, conversion_periods=9, base_p
     return supertrend_df
 
 def determine_suggested_action(df):
-
     # Get the last 2 rows of the DataFrame
     last_two_rows = df.tail(2).copy()
 
@@ -295,17 +294,16 @@ def determine_suggested_action(df):
     leading_span_a_last = last_two_rows['Leading Span A'].iloc[1]
     leading_span_b_last = last_two_rows['Leading Span B'].iloc[1]
 
-    # Extract scalar values from the previous last row
+    # Extract scalar values from the second last row
     up_trend_second_last = last_two_rows['Up Trend'].iloc[0]
 
     logging.info(f"Previous up trend: {up_trend_second_last}")
     logging.info(f"Current up trend: {up_trend_last}")
 
-    trend = None
-
-    # Check if the trend change
-    if (isinstance(up_trend_last, float) and isinstance(up_trend_second_last, float)) or \
-    (pd.isna(up_trend_last) and pd.isna(up_trend_second_last)):
+    # Check if the trend has changed
+    if (pd.isna(up_trend_last) and pd.isna(up_trend_second_last)):
+        trend = 'unchange'
+    elif isinstance(up_trend_last, float) and isinstance(up_trend_second_last, float):
         trend = 'unchange'
     else:
         trend = 'change'
@@ -313,14 +311,14 @@ def determine_suggested_action(df):
     logging.info(f"Trend: {trend}")
 
     # Determine the suggested action
-    suggested_action =  None
+    suggested_action = None
 
-    if trend == 'change' :
+    if trend == 'change':
         suggested_action = 'Close'
-    elif pd.notna(up_trend_last) and closeprice_last > leading_span_a_last and closeprice_last > leading_span_b_last:
-        suggested_action =  'Long'
-    elif pd.notna(down_trend_last) and closeprice_last < leading_span_a_last and closeprice_last < leading_span_b_last:
-        suggested_action =  'Short'
+    elif trend == 'unchange' and pd.notna(up_trend_last) and closeprice_last > (leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last):
+        suggested_action = 'Long'
+    elif trend == 'unchange' and pd.notna(down_trend_last) and closeprice_last < (leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last):
+        suggested_action = 'Short'
 
     logging.info(f"Suggested Action: {suggested_action}")
 
