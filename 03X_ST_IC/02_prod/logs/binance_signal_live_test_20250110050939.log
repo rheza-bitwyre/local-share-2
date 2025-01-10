@@ -1,0 +1,418 @@
+2025-01-10 05:09:39 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:09:39 - INFO - CSV length before appending: 442
+2025-01-10 05:09:39 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:09:40 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:09:40 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:09:40 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:09:40 - INFO - No new data to append.
+2025-01-10 05:10:40 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:10:40 - INFO - CSV length before appending: 442
+2025-01-10 05:10:40 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:10:40 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:10:40 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:10:40 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:10:40 - INFO - No new data to append.
+2025-01-10 05:11:40 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:11:40 - INFO - CSV length before appending: 442
+2025-01-10 05:11:40 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:11:40 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:11:40 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:11:40 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:11:40 - INFO - No new data to append.
+2025-01-10 05:12:40 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:12:40 - INFO - CSV length before appending: 442
+2025-01-10 05:12:40 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:12:40 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:12:40 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:12:40 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:12:41 - INFO - No new data to append.
+2025-01-10 05:13:41 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:13:41 - INFO - CSV length before appending: 442
+2025-01-10 05:13:41 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:13:41 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:13:41 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:13:41 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:13:41 - INFO - No new data to append.
+2025-01-10 05:14:41 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:14:41 - INFO - CSV length before appending: 442
+2025-01-10 05:14:41 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:14:41 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:14:41 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:14:41 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:14:41 - INFO - No new data to append.
+2025-01-10 05:15:41 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:15:41 - INFO - CSV length before appending: 442
+2025-01-10 05:15:41 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:15:41 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:15:41 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:15:41 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:15:41 - INFO - No new data to append.
+2025-01-10 05:16:41 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:16:41 - INFO - CSV length before appending: 442
+2025-01-10 05:16:41 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:16:42 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:16:42 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:16:42 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:16:42 - INFO - No new data to append.
+2025-01-10 05:17:42 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:17:42 - INFO - CSV length before appending: 442
+2025-01-10 05:17:42 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:17:42 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:17:42 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:17:42 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:17:42 - INFO - No new data to append.
+2025-01-10 05:18:42 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:18:42 - INFO - CSV length before appending: 442
+2025-01-10 05:18:42 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:18:42 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:18:42 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:18:42 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:18:42 - INFO - No new data to append.
+2025-01-10 05:19:42 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:19:42 - INFO - CSV length before appending: 442
+2025-01-10 05:19:42 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:19:43 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:19:43 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:19:43 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:19:43 - INFO - No new data to append.
+2025-01-10 05:20:43 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:20:43 - INFO - CSV length before appending: 442
+2025-01-10 05:20:43 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:20:43 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:20:43 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:20:43 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:20:43 - INFO - No new data to append.
+2025-01-10 05:21:43 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:21:43 - INFO - CSV length before appending: 442
+2025-01-10 05:21:43 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:21:43 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:21:43 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:21:43 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:21:43 - INFO - No new data to append.
+2025-01-10 05:22:43 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:22:43 - INFO - CSV length before appending: 442
+2025-01-10 05:22:43 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:22:43 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:22:44 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:22:44 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:22:44 - INFO - No new data to append.
+2025-01-10 05:23:44 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:23:44 - INFO - CSV length before appending: 442
+2025-01-10 05:23:44 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:23:44 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:23:44 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:23:44 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:23:44 - INFO - No new data to append.
+2025-01-10 05:24:44 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:24:44 - INFO - CSV length before appending: 442
+2025-01-10 05:24:44 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:24:44 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:24:44 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:24:44 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:24:44 - INFO - No new data to append.
+2025-01-10 05:25:44 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:25:44 - INFO - CSV length before appending: 442
+2025-01-10 05:25:44 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:25:44 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:25:44 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:25:44 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:25:44 - INFO - No new data to append.
+2025-01-10 05:26:44 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:26:44 - INFO - CSV length before appending: 442
+2025-01-10 05:26:44 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:26:45 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:26:45 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:26:45 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:26:45 - INFO - No new data to append.
+2025-01-10 05:27:45 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:27:45 - INFO - CSV length before appending: 442
+2025-01-10 05:27:45 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:27:45 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:27:45 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:27:45 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:27:45 - INFO - No new data to append.
+2025-01-10 05:28:45 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:28:45 - INFO - CSV length before appending: 442
+2025-01-10 05:28:45 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:28:45 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:28:45 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:28:45 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:28:45 - INFO - No new data to append.
+2025-01-10 05:29:45 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:29:45 - INFO - CSV length before appending: 442
+2025-01-10 05:29:45 - INFO - Rounded timestamp: 1736485200000, Last opentime in CSV: 1736483400000
+2025-01-10 05:29:45 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 1
+2025-01-10 05:29:45 - INFO - 2025-01-10 05:01:00 status: True, time: 1736485260000, calls: 2
+2025-01-10 05:29:45 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:29:45 - INFO - No new data to append.
+2025-01-10 05:30:45 - INFO - Last opentime in CSV: 1736483400000
+2025-01-10 05:30:45 - INFO - CSV length before appending: 442
+2025-01-10 05:30:45 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736483400000
+2025-01-10 05:30:46 - INFO - Reached endtime at 2025-01-10 05:31:00. Stopping fetch.
+2025-01-10 05:30:46 - INFO - 1 new rows fetched and appended successfully.
+2025-01-10 05:30:46 - INFO - New CSV length after appending: 443
+2025-01-10 05:30:46 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+442  1736485200000     188.98     189.42    188.27       188.7
+2025-01-10 05:30:46 - INFO - New data fetched, processing now.
+2025-01-10 05:30:46 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+442  1736485200000     188.98  ...      186.133037             NaN
+
+[1 rows x 7 columns]
+2025-01-10 05:30:46 - INFO - Supertrend indicator applied.
+2025-01-10 05:30:46 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+442  1736485200000     188.98  ...          189.54             NaN
+
+[1 rows x 9 columns]
+2025-01-10 05:30:46 - INFO - Ichimoku cloud indicator applied.
+2025-01-10 05:30:46 - INFO - Previous up trend: 186.1330370133002
+2025-01-10 05:30:46 - INFO - Current up trend: 186.1330370133002
+2025-01-10 05:30:46 - INFO - Trend: unchange
+2025-01-10 05:30:46 - INFO - Suggested Action: None
+2025-01-10 05:30:46 - INFO - Previous Action: None
+2025-01-10 05:30:46 - INFO - Suggested Action: None
+2025-01-10 05:30:46 - INFO - at: 2025-01-10 05:00:00
+2025-01-10 05:30:46 - INFO - Current Action: No action taken
+2025-01-10 05:31:46 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:31:46 - INFO - CSV length before appending: 443
+2025-01-10 05:31:46 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:31:46 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:31:46 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:31:46 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:31:46 - INFO - No new data to append.
+2025-01-10 05:32:46 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:32:46 - INFO - CSV length before appending: 443
+2025-01-10 05:32:46 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:32:46 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:32:46 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:32:46 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:32:46 - INFO - No new data to append.
+2025-01-10 05:33:46 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:33:46 - INFO - CSV length before appending: 443
+2025-01-10 05:33:46 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:33:46 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:33:47 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:33:47 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:33:47 - INFO - No new data to append.
+2025-01-10 05:34:47 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:34:47 - INFO - CSV length before appending: 443
+2025-01-10 05:34:47 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:34:47 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:34:47 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:34:47 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:34:47 - INFO - No new data to append.
+2025-01-10 05:35:47 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:35:47 - INFO - CSV length before appending: 443
+2025-01-10 05:35:47 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:35:47 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:35:47 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:35:47 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:35:47 - INFO - No new data to append.
+2025-01-10 05:36:47 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:36:47 - INFO - CSV length before appending: 443
+2025-01-10 05:36:47 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:36:47 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:36:48 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:36:48 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:36:48 - INFO - No new data to append.
+2025-01-10 05:37:48 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:37:48 - INFO - CSV length before appending: 443
+2025-01-10 05:37:48 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:37:48 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:37:48 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:37:48 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:37:48 - INFO - No new data to append.
+2025-01-10 05:38:48 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:38:48 - INFO - CSV length before appending: 443
+2025-01-10 05:38:48 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:38:48 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:38:48 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:38:48 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:38:48 - INFO - No new data to append.
+2025-01-10 05:39:48 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:39:48 - INFO - CSV length before appending: 443
+2025-01-10 05:39:48 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:39:48 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:39:48 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:39:48 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:39:48 - INFO - No new data to append.
+2025-01-10 05:40:48 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:40:48 - INFO - CSV length before appending: 443
+2025-01-10 05:40:48 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:40:49 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:40:49 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:40:49 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:40:49 - INFO - No new data to append.
+2025-01-10 05:41:49 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:41:49 - INFO - CSV length before appending: 443
+2025-01-10 05:41:49 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:41:49 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:41:49 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:41:49 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:41:49 - INFO - No new data to append.
+2025-01-10 05:42:49 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:42:49 - INFO - CSV length before appending: 443
+2025-01-10 05:42:49 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:42:49 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:42:49 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:42:49 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:42:49 - INFO - No new data to append.
+2025-01-10 05:43:49 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:43:49 - INFO - CSV length before appending: 443
+2025-01-10 05:43:49 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:43:49 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:43:49 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:43:49 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:43:49 - INFO - No new data to append.
+2025-01-10 05:44:49 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:44:49 - INFO - CSV length before appending: 443
+2025-01-10 05:44:49 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:44:50 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:44:50 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:44:50 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:44:50 - INFO - No new data to append.
+2025-01-10 05:45:50 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:45:50 - INFO - CSV length before appending: 443
+2025-01-10 05:45:50 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:45:50 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:45:50 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:45:50 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:45:50 - INFO - No new data to append.
+2025-01-10 05:46:50 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:46:50 - INFO - CSV length before appending: 443
+2025-01-10 05:46:50 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:46:50 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:46:51 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:46:51 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:46:51 - INFO - No new data to append.
+2025-01-10 05:47:51 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:47:51 - INFO - CSV length before appending: 443
+2025-01-10 05:47:51 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:47:51 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:47:51 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:47:51 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:47:51 - INFO - No new data to append.
+2025-01-10 05:48:51 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:48:51 - INFO - CSV length before appending: 443
+2025-01-10 05:48:51 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:48:51 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:48:51 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:48:51 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:48:51 - INFO - No new data to append.
+2025-01-10 05:49:51 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:49:51 - INFO - CSV length before appending: 443
+2025-01-10 05:49:51 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:49:51 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:49:52 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:49:52 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:49:52 - INFO - No new data to append.
+2025-01-10 05:50:52 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:50:52 - INFO - CSV length before appending: 443
+2025-01-10 05:50:52 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:50:52 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:50:52 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:50:52 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:50:52 - INFO - No new data to append.
+2025-01-10 05:51:52 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:51:52 - INFO - CSV length before appending: 443
+2025-01-10 05:51:52 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:51:52 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:51:52 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:51:52 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:51:52 - INFO - No new data to append.
+2025-01-10 05:52:52 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:52:52 - INFO - CSV length before appending: 443
+2025-01-10 05:52:52 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:52:52 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:52:52 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:52:52 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:52:52 - INFO - No new data to append.
+2025-01-10 05:53:52 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:53:52 - INFO - CSV length before appending: 443
+2025-01-10 05:53:52 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:53:53 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:53:53 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:53:53 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:53:53 - INFO - No new data to append.
+2025-01-10 05:54:53 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:54:53 - INFO - CSV length before appending: 443
+2025-01-10 05:54:53 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:54:53 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:54:53 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:54:53 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:54:53 - INFO - No new data to append.
+2025-01-10 05:55:53 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:55:53 - INFO - CSV length before appending: 443
+2025-01-10 05:55:53 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:55:53 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:55:53 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:55:53 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:55:53 - INFO - No new data to append.
+2025-01-10 05:56:53 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:56:53 - INFO - CSV length before appending: 443
+2025-01-10 05:56:53 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:56:53 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:56:53 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:56:53 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:56:53 - INFO - No new data to append.
+2025-01-10 05:57:53 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:57:53 - INFO - CSV length before appending: 443
+2025-01-10 05:57:53 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:57:54 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:57:54 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:57:54 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:57:54 - INFO - No new data to append.
+2025-01-10 05:58:54 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:58:54 - INFO - CSV length before appending: 443
+2025-01-10 05:58:54 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:58:54 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:58:54 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:58:54 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:58:54 - INFO - No new data to append.
+2025-01-10 05:59:54 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 05:59:54 - INFO - CSV length before appending: 443
+2025-01-10 05:59:54 - INFO - Rounded timestamp: 1736487000000, Last opentime in CSV: 1736485200000
+2025-01-10 05:59:54 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 1
+2025-01-10 05:59:54 - INFO - 2025-01-10 05:31:00 status: True, time: 1736487060000, calls: 2
+2025-01-10 05:59:54 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 05:59:54 - INFO - No new data to append.
+2025-01-10 06:00:54 - INFO - Last opentime in CSV: 1736485200000
+2025-01-10 06:00:54 - INFO - CSV length before appending: 443
+2025-01-10 06:00:54 - INFO - Rounded timestamp: 1736488800000, Last opentime in CSV: 1736485200000
+2025-01-10 06:00:54 - INFO - Reached endtime at 2025-01-10 06:01:00. Stopping fetch.
+2025-01-10 06:00:54 - INFO - 1 new rows fetched and appended successfully.
+2025-01-10 06:00:54 - INFO - New CSV length after appending: 444
+2025-01-10 06:00:54 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+443  1736487000000      188.7     191.32    188.66      189.78
+2025-01-10 06:00:54 - INFO - New data fetched, processing now.
+2025-01-10 06:00:54 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+443  1736487000000      188.7  ...      186.392485             NaN
+
+[1 rows x 7 columns]
+2025-01-10 06:00:54 - INFO - Supertrend indicator applied.
+2025-01-10 06:00:54 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+443  1736487000000      188.7  ...          189.54             NaN
+
+[1 rows x 9 columns]
+2025-01-10 06:00:54 - INFO - Ichimoku cloud indicator applied.
+2025-01-10 06:00:54 - INFO - Previous up trend: 186.13203361976454
+2025-01-10 06:00:54 - INFO - Current up trend: 186.39248455350568
+2025-01-10 06:00:54 - INFO - Trend: unchange
+2025-01-10 06:00:54 - INFO - Suggested Action: None
+2025-01-10 06:00:54 - INFO - Previous Action: None
+2025-01-10 06:00:54 - INFO - Suggested Action: None
+2025-01-10 06:00:54 - INFO - at: 2025-01-10 05:30:00
+2025-01-10 06:00:54 - INFO - Current Action: No action taken
+2025-01-10 06:01:54 - INFO - Last opentime in CSV: 1736487000000
+2025-01-10 06:01:54 - INFO - CSV length before appending: 444
+2025-01-10 06:01:54 - INFO - Rounded timestamp: 1736488800000, Last opentime in CSV: 1736487000000
+2025-01-10 06:01:55 - INFO - 2025-01-10 06:01:00 status: True, time: 1736488860000, calls: 1
+2025-01-10 06:01:55 - INFO - 2025-01-10 06:01:00 status: True, time: 1736488860000, calls: 2
+2025-01-10 06:01:55 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 06:01:55 - INFO - No new data to append.
+2025-01-10 06:02:55 - INFO - Last opentime in CSV: 1736487000000
+2025-01-10 06:02:55 - INFO - CSV length before appending: 444
+2025-01-10 06:02:55 - INFO - Rounded timestamp: 1736488800000, Last opentime in CSV: 1736487000000
+2025-01-10 06:02:55 - INFO - 2025-01-10 06:01:00 status: True, time: 1736488860000, calls: 1
+2025-01-10 06:02:55 - INFO - 2025-01-10 06:01:00 status: True, time: 1736488860000, calls: 2
+2025-01-10 06:02:55 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 06:02:55 - INFO - No new data to append.

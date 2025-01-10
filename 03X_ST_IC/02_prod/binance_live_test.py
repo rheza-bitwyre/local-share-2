@@ -158,10 +158,11 @@ def fetch_and_append_data():
                 new_data[['openprice', 'highprice', 'lowprice', 'closeprice']] = new_data[['openprice', 'highprice', 'lowprice', 'closeprice']].apply(pd.to_numeric, errors='coerce')
                 
                 # Check if there are new rows
-                new_data = new_data.iloc[:-1]
+                new_data = new_data.head(1)
 
                 # Check if there are new rows
                 new_row_count = len(new_data)
+                logging.info(new_data)
 
                 if new_row_count > 0:
                     # Append the new data to the existing CSV

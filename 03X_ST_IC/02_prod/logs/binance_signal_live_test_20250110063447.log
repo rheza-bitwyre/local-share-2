@@ -1,0 +1,75 @@
+2025-01-10 06:34:47 - INFO - Last opentime in CSV: 1736488800000
+2025-01-10 06:34:47 - INFO - CSV length before appending: 84
+2025-01-10 06:34:47 - INFO - Rounded timestamp: 1736490600000, Last opentime in CSV: 1736488800000
+2025-01-10 06:34:47 - INFO - 2025-01-10 06:31:00 status: True, time: 1736490660000, calls: 1
+2025-01-10 06:34:47 - INFO - 2025-01-10 06:31:00 status: True, time: 1736490660000, calls: 2
+2025-01-10 06:34:47 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 06:34:47 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1736490600000     189.99     189.99    189.35      189.72
+2025-01-10 06:34:47 - INFO - 1 new rows fetched and appended successfully.
+2025-01-10 06:34:47 - INFO - New CSV length after appending: 85
+2025-01-10 06:34:47 - INFO - New data:          opentime  openprice  highprice  lowprice  closeprice
+84  1736490600000     189.99     189.99    189.35      189.72
+2025-01-10 06:34:47 - INFO - New data fetched, processing now.
+2025-01-10 06:34:47 - INFO - Last row:          opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+84  1736490600000     189.99  ...             NaN      191.276224
+
+[1 rows x 7 columns]
+2025-01-10 06:34:47 - INFO - Supertrend indicator applied.
+2025-01-10 06:34:47 - INFO - Last row:          opentime  openprice  ...  leading_span_a  leading_span_b
+84  1736490600000     189.99  ...        189.5975             NaN
+
+[1 rows x 9 columns]
+2025-01-10 06:34:47 - INFO - Ichimoku cloud indicator applied.
+2025-01-10 06:34:47 - INFO - Previous up trend: nan
+2025-01-10 06:34:47 - INFO - Current up trend: nan
+2025-01-10 06:34:47 - INFO - Trend: unchange
+2025-01-10 06:34:47 - INFO - Suggested Action: None
+2025-01-10 06:34:47 - INFO - Previous Action: None
+2025-01-10 06:34:47 - INFO - Suggested Action: None
+2025-01-10 06:34:47 - INFO - at: 2025-01-10 06:30:00
+2025-01-10 06:34:47 - INFO - Current Action: No action taken
+2025-01-10 06:35:47 - INFO - Last opentime in CSV: 1736490600000
+2025-01-10 06:35:47 - INFO - CSV length before appending: 85
+2025-01-10 06:35:47 - INFO - Rounded timestamp: 1736490600000, Last opentime in CSV: 1736490600000
+2025-01-10 06:35:47 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 06:36:47 - INFO - Last opentime in CSV: 1736487000000
+2025-01-10 06:36:47 - INFO - CSV length before appending: 83
+2025-01-10 06:36:47 - INFO - Rounded timestamp: 1736490600000, Last opentime in CSV: 1736487000000
+2025-01-10 06:36:47 - INFO - 2025-01-10 06:31:00 status: True, time: 1736490660000, calls: 1
+2025-01-10 06:36:47 - INFO - 2025-01-10 06:31:00 status: True, time: 1736490660000, calls: 2
+2025-01-10 06:36:47 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-10 06:36:47 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1736488800000     189.78     190.26    189.24      189.98
+1  1736490600000     189.99     190.16    189.35      190.16
+2025-01-10 06:36:47 - INFO - 2 new rows fetched and appended successfully.
+2025-01-10 06:36:47 - INFO - New CSV length after appending: 85
+2025-01-10 06:36:47 - INFO - New data:          opentime  openprice  highprice  lowprice  closeprice
+84  1736490600000     189.99     190.16    189.35      190.16
+2025-01-10 06:36:47 - INFO - New data fetched, processing now.
+2025-01-10 06:36:47 - INFO - Last row:          opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+84  1736490600000     189.99  ...             NaN      191.276224
+
+[1 rows x 7 columns]
+2025-01-10 06:36:47 - INFO - Supertrend indicator applied.
+2025-01-10 06:36:47 - INFO - Last row:          opentime  openprice  ...  leading_span_a  leading_span_b
+84  1736490600000     189.99  ...        189.5975             NaN
+
+[1 rows x 9 columns]
+2025-01-10 06:36:47 - INFO - Ichimoku cloud indicator applied.
+2025-01-10 06:36:47 - INFO - Previous up trend: nan
+2025-01-10 06:36:47 - INFO - Current up trend: nan
+2025-01-10 06:36:47 - INFO - Trend: unchange
+2025-01-10 06:36:47 - INFO - Suggested Action: None
+2025-01-10 06:36:47 - INFO - Previous Action: None
+2025-01-10 06:36:47 - INFO - Suggested Action: None
+2025-01-10 06:36:47 - INFO - at: 2025-01-10 06:30:00
+2025-01-10 06:36:47 - INFO - Current Action: No action taken
+2025-01-10 06:37:47 - INFO - Last opentime in CSV: 1736490600000
+2025-01-10 06:37:47 - INFO - CSV length before appending: 85
+2025-01-10 06:37:47 - INFO - Rounded timestamp: 1736490600000, Last opentime in CSV: 1736490600000
+2025-01-10 06:37:47 - INFO - No new data available. The current timestamp is not greater than the last opentime.
+2025-01-10 06:38:47 - INFO - Last opentime in CSV: 1736490600000
+2025-01-10 06:38:47 - INFO - CSV length before appending: 85
+2025-01-10 06:38:47 - INFO - Rounded timestamp: 1736490600000, Last opentime in CSV: 1736490600000
+2025-01-10 06:38:47 - INFO - No new data available. The current timestamp is not greater than the last opentime.
