@@ -374,10 +374,8 @@ def handle_trading_action(suggested_action, prev_action=None):
     converted_opentime = datetime.utcfromtimestamp(latest_opentime_in_seconds).strftime('%Y-%m-%d %H:%M:%S')
 
     # Log the result
-    logging.info(f"at: {converted_opentime}")
+    logging.info(f"at: {converted_opentime} - {curr_action if curr_action else 'No action taken'}")
 
-    logging.info(f"Current Action: {curr_action if curr_action else 'No action taken'}")
-    
     return curr_action, prev_action
 
 class BinanceAPI:
