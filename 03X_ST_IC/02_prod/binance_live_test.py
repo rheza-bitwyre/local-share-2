@@ -134,18 +134,13 @@ def fetch_and_append_data():
             data = binance_recursive_fetch_2(
                 ['SOL'],
                 '30m',
-                starttime=int(last_opentime - 1800000),
+                starttime=int(last_opentime + 1800000),
                 endtime=None,
                 data_type='futures'  # Fetch futures/sport
             )
 
-            # Extract the first data entry and the 'call' object
-            data = {
-                'data': [data['data'][0]],  # Taking only the first entry from the 'data' list
-                'call': data['call']  # Keeping the 'call' object as is
-            }
-
-            logging.info(f"Fetched data: {data}")
+            print(f"Fetched data: {data}")
+            # logging.info(f"Fetched data: {data}")
 
             # Check if the data exists
             if 'data' in data and data['data']:
@@ -161,6 +156,9 @@ def fetch_and_append_data():
 
                 # Convert columns 1-4 (openprice, highprice, lowprice, closeprice) to float
                 new_data[['openprice', 'highprice', 'lowprice', 'closeprice']] = new_data[['openprice', 'highprice', 'lowprice', 'closeprice']].apply(pd.to_numeric, errors='coerce')
+                
+                # Check if there are new rows
+                new_data = new_data.iloc[:-1]
 
                 # Check if there are new rows
                 new_row_count = len(new_data)
@@ -551,7 +549,7 @@ class BinanceAPI:
 
         return {"active_positions": active_positions, "trade": "active"}
 
-        
+###########################################################################        
 # Main Loop
 def main():
     prev_action = None
