@@ -169,6 +169,8 @@ def fetch_and_append_data():
                     # Log the new CSV length after appending
                     current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
                     logging.info(f"New CSV length after appending: {len(current_df)}")
+                    logging.info(f"Header: {list(current_df.columns)}")
+                    logging.info(f"New data: {current_df.tail(1)}")
                 else:
                     logging.info("No new data to append.")
             else:
@@ -242,6 +244,9 @@ def calculate_supertrend(df, high_col='highprice', low_col='lowprice', close_col
     if drop_columns:
         result_df.drop(columns=[f"SUPERT{_props}", f"SUPERTd{_props}"], inplace=True)
 
+    logging.info(f"Header: {list(result_df.columns)}")
+    logging.info(f"Last row: {result_df.tail(1)}")
+
     return result_df
 
 def compute_ichimoku_with_supertrend(supertrend_df, conversion_periods=9, base_periods=26, span_b_periods=52, displacement=26):
@@ -260,7 +265,10 @@ def compute_ichimoku_with_supertrend(supertrend_df, conversion_periods=9, base_p
     
     # Drop unnecessary columns
     supertrend_df.drop(columns=['conversion_line', 'base_line', 'lagging_span'], inplace=True)
-    
+
+    logging.info(f"Header: {list(supertrend_df.columns)}")
+    logging.info(f"Last row: {supertrend_df.tail(1)}")
+
     return supertrend_df
 
 def determine_suggested_action(df):
@@ -278,33 +286,35 @@ def determine_suggested_action(df):
     last_two_rows = last_two_rows.rename(columns=new_column_names)
 
     # Extract scalar values from the last row (latest row)
-    up_trend_last = last_two_rows['Up Trend'].iloc[0]
-    down_trend_last = last_two_rows['Down Trend'].iloc[0]
-    closeprice_last = last_two_rows['closeprice'].iloc[0]
-    leading_span_a_last = last_two_rows['Leading Span A'].iloc[0]
-    leading_span_b_last = last_two_rows['Leading Span B'].iloc[0]
+    up_trend_last = last_two_rows['Up Trend'].iloc[1]
+    down_trend_last = last_two_rows['Down Trend'].iloc[1]
+    closeprice_last = last_two_rows['closeprice'].iloc[1]
+    leading_span_a_last = last_two_rows['Leading Span A'].iloc[1]
+    leading_span_b_last = last_two_rows['Leading Span B'].iloc[1]
 
-    # Extract scalar values from the second last row
-    up_trend_second_last = last_two_rows['Up Trend'].iloc[1]
+    # Extract scalar values from the previous last row
+    up_trend_second_last = last_two_rows['Up Trend'].iloc[0]
+
+    logging.info(f"Previous up trend: {up_trend_second_last}")
+    logging.info(f"Current up trend: {up_trend_last}")
 
     trend = None
 
     # Check if the trend change
     if (isinstance(up_trend_last, float) and isinstance(up_trend_second_last, float)) or \
     (pd.isna(up_trend_last) and pd.isna(up_trend_second_last)):
-        # Action when both are either float or both NaN
-        print("Both values are either floats or both NaN. Perform action 1.")
         trend = 'unchange'
     else:
-        # Action when one is float and the other is NaN
         trend = 'change'
+
+    logging.info(f"Trend: {trend}")
 
     # Determine the suggested action
     if trend == 'change' :
         return 'Close'
     elif pd.notna(up_trend_last) and closeprice_last > leading_span_a_last and closeprice_last > leading_span_b_last:
         return 'Long'
-    elif pd.notna(up_trend_last) and closeprice_last < leading_span_a_last and closeprice_last < leading_span_b_last:
+    elif pd.notna(down_trend_last) and closeprice_last < leading_span_a_last and closeprice_last < leading_span_b_last:
         return 'Short'
     else:
         return None
