@@ -334,7 +334,7 @@ def handle_trading_action(suggested_action, prev_action=None):
     
     # Action handling logic
     if prev_action == suggested_action:
-        pass  # Do nothing if the action is the same
+        prev_action = suggested_action
     else:
         if prev_action is None and suggested_action == 'Long':
             curr_action = 'Open Long'
