@@ -17,6 +17,7 @@ import hashlib
 import urllib.parse
 import hmac
 import logging
+import math
 
 # Get today's date and time in 'yyyymmddhhmmss' format
 today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
@@ -510,8 +511,9 @@ def handle_trading_action(suggested_action, prev_action=None):
     API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
-    position_coin_ammount = 1
+    # trade_amount_usdt = 1000
     symbol = 'SOLUSDT'
+    position_coin_ammount = 5
 
     logging.info(f"Previous Action: {prev_action}")
     logging.info(f"Suggested Action: {suggested_action}")
@@ -523,6 +525,17 @@ def handle_trading_action(suggested_action, prev_action=None):
     if prev_action == suggested_action:
         prev_action = suggested_action
     else:
+        # # Get initial mark price
+        # get_initial_price = binance_api.get_mark_price(symbol='SOLUSDT')
+        # initial_mark_price = float(get_initial_price['markPrice'])
+
+        # # Calculate raw quantity
+        # raw_quantity = trade_amount_usdt / initial_mark_price
+
+        # # Align quantity with step size
+        # step_size = 0.01  # Use the actual value retrieved above
+        # position_coin_ammount = math.floor(raw_quantity / step_size) * step_size
+
         if prev_action is None and suggested_action == 'Long':
             curr_action = 'Open Long'
             logging.info(curr_action)

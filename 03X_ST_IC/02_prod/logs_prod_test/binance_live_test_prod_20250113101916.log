@@ -1,0 +1,44 @@
+2025-01-13 10:19:16 - INFO - Last opentime in CSV: 1736758800000
+2025-01-13 10:19:16 - INFO - CSV length before appending: 234
+2025-01-13 10:19:16 - INFO - Rounded timestamp: 1736762400000, Last opentime in CSV: 1736758800000
+2025-01-13 10:19:16 - INFO - 2025-01-13 10:01:00 status: True, time: 1736762460000, calls: 1
+2025-01-13 10:19:16 - INFO - 2025-01-13 10:01:00 status: True, time: 1736762460000, calls: 2
+2025-01-13 10:19:16 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-13 10:19:16 - INFO - before dropping :2
+2025-01-13 10:19:16 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1736760600000     179.85     180.76    178.54      179.93
+2025-01-13 10:19:16 - INFO - 1 new rows fetched and appended successfully.
+2025-01-13 10:19:16 - INFO - New CSV length after appending: 235
+2025-01-13 10:19:16 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+234  1736760600000     179.85     180.76    178.54      179.93
+2025-01-13 10:19:16 - INFO - New data fetched, processing now.
+2025-01-13 10:19:16 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+234  1736760600000     179.85  ...             NaN      184.598772
+
+[1 rows x 7 columns]
+2025-01-13 10:19:16 - INFO - Supertrend indicator applied.
+2025-01-13 10:19:16 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+234  1736760600000     179.85  ...          188.82             NaN
+
+[1 rows x 9 columns]
+2025-01-13 10:19:16 - INFO - Ichimoku cloud indicator applied.
+2025-01-13 10:19:16 - INFO - Previous up trend: nan
+2025-01-13 10:19:16 - INFO - Current up trend: nan
+2025-01-13 10:19:16 - INFO - Trend: unchange
+2025-01-13 10:19:16 - INFO - Suggested Action: Short
+2025-01-13 10:19:16 - INFO - Previous Action: None
+2025-01-13 10:19:16 - INFO - Suggested Action: Short
+2025-01-13 10:19:16 - INFO - Open Short
+2025-01-13 10:19:16 - INFO - Open Short Order Response:
+2025-01-13 10:19:16 - INFO - at: 2025-01-13 09:30:00 - Open Short
+2025-01-13 10:20:16 - INFO - Last opentime in CSV: 1736760600000
+2025-01-13 10:20:16 - INFO - CSV length before appending: 235
+2025-01-13 10:20:16 - INFO - Rounded timestamp: 1736762400000, Last opentime in CSV: 1736760600000
+2025-01-13 10:20:16 - INFO - 2025-01-13 10:01:00 status: True, time: 1736762460000, calls: 1
+2025-01-13 10:20:16 - INFO - 2025-01-13 10:01:00 status: True, time: 1736762460000, calls: 2
+2025-01-13 10:20:16 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-13 10:20:16 - INFO - before dropping :1
+2025-01-13 10:20:16 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-13 10:20:16 - INFO - No new data to append.
