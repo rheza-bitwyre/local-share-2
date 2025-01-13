@@ -23,7 +23,7 @@ today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
 
 # Logging Setup
 logging.basicConfig(
-    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs/binance_signal_live_test_{today_datetime}.log',
+    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs_prod_test/binance_live_test_prod_{today_datetime}.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -99,7 +99,7 @@ def binance_recursive_fetch_2(coins, interval, starttime, endtime=None, data_typ
 def fetch_and_append_data():
     # Get the latest opentime from the CSV file
     try:
-        current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+        current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs_prod_test/sol_usdt_data_prod_test.csv')
         last_opentime = current_df['opentime'].iloc[-1]
     except FileNotFoundError:
         logging.error("CSV file not found. Ensure the path is correct.")
@@ -167,13 +167,13 @@ def fetch_and_append_data():
 
                 if new_row_count > 0:
                     # Append the new data to the existing CSV
-                    new_data.to_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv', mode='a', header=False, index=False)
+                    new_data.to_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs_prod_test/sol_usdt_data_prod_test.csv', mode='a', header=False, index=False)
                     
                     # Log the number of new rows appended
                     logging.info(f"{new_row_count} new rows fetched and appended successfully.")
 
                     # Log the new CSV length after appending
-                    current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+                    current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs_prod_test/sol_usdt_data_prod_test.csv')
                     logging.info(f"New CSV length after appending: {len(current_df)}")
                     logging.info(f"New data: {current_df.tail(1)}")
                 else:
@@ -505,6 +505,13 @@ class BinanceAPI:
         return {"active_positions": active_positions, "trade": "active"}
 
 def handle_trading_action(suggested_action, prev_action=None):
+    # Initialize connection to Binance
+    API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
+    API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
+    binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
+
+    position_coin_ammount = 1
+    symbol = 'SOLUSDT'
 
     logging.info(f"Previous Action: {prev_action}")
     logging.info(f"Suggested Action: {suggested_action}")
@@ -520,29 +527,106 @@ def handle_trading_action(suggested_action, prev_action=None):
             curr_action = 'Open Long'
             logging.info(curr_action)
             prev_action = 'Long'
+
+            long_order_response = binance_api.create_order(
+            symbol=symbol,    # Trading pair
+            side="BUY",          # Buy to open a long position
+            order_type="MARKET", # Market order for instant execution
+            quantity=position_coin_ammount        
+            )
+
+            logging.info("Open Long Order Response:", long_order_response)
+
         elif prev_action is None and suggested_action == 'Short':
             curr_action = 'Open Short'
             logging.info(curr_action)
             prev_action = 'Short'
+
+            long_order_response = binance_api.create_order(
+            symbol=symbol,    # Trading pair
+            side="SELL",          # Buy to open a long position
+            order_type="MARKET", # Market order for instant execution
+            quantity=position_coin_ammount        
+            )
+
+            logging.info("Open Short Order Response:", long_order_response)
+
         elif prev_action == 'Long' and suggested_action == 'Close':
             curr_action = 'Close Long'
             logging.info(curr_action)
+
+            long_order_response = binance_api.create_order(
+            symbol=symbol,    # Trading pair
+            side="SELL",          # Buy to open a long position
+            order_type="MARKET", # Market order for instant execution
+            quantity=position_coin_ammount        
+            )
+
+            logging.info("Close Long Order Response:", long_order_response)
+
             prev_action = None
         elif prev_action == 'Short' and suggested_action == 'Close':
             curr_action = 'Close Short'
             logging.info(curr_action)
             prev_action = None
+
+            long_order_response = binance_api.create_order(
+            symbol=symbol,    # Trading pair
+            side="BUY",          # Buy to open a long position
+            order_type="MARKET", # Market order for instant execution
+            quantity=position_coin_ammount        
+            )
+
+            logging.info("Close Short Order Response:", long_order_response)
+
         elif prev_action == 'Long' and suggested_action == 'Short':
             curr_action = 'Close Long & Open Short'
             logging.info(curr_action)
             prev_action = 'Short'
+
+            long_order_response = binance_api.create_order(
+            symbol=symbol,    # Trading pair
+            side="SELL",          # Buy to open a long position
+            order_type="MARKET", # Market order for instant execution
+            quantity=position_coin_ammount        
+            )
+
+            logging.info("Close Long Order Response:", long_order_response)
+
+            long_order_response = binance_api.create_order(
+            symbol=symbol,    # Trading pair
+            side="SELL",          # Buy to open a long position
+            order_type="MARKET", # Market order for instant execution
+            quantity=position_coin_ammount        
+            )
+
+            logging.info("Open Short Order Response:", long_order_response)
+
         elif prev_action == 'Short' and suggested_action == 'Long':
             curr_action = 'Close Short & Open Long'
             logging.info(curr_action)
             prev_action = 'Long'
 
+            long_order_response = binance_api.create_order(
+            symbol=symbol,    # Trading pair
+            side="BUY",          # Buy to open a long position
+            order_type="MARKET", # Market order for instant execution
+            quantity=position_coin_ammount        
+            )
+
+            logging.info("Open Long Order Response:", long_order_response)
+
+            long_order_response = binance_api.create_order(
+            symbol=symbol,    # Trading pair
+            side="BUY",          # Buy to open a long position
+            order_type="MARKET", # Market order for instant execution
+            quantity=position_coin_ammount        
+            )
+
+            logging.info("Open Long Order Response:", long_order_response)
+
     # Log the new CSV length after appending
-    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs_prod_test/sol_usdt_data_prod_test.csv')
 
     # Get the latest 'opentime' value
     latest_opentime = new_df['opentime'].iloc[-1]
@@ -574,7 +658,7 @@ def main():
                     logging.info('New data fetched, processing now.')
 
                     # Get the latest 51 data as the Ichimoku Cloud needs 50 data
-                    df_sliced = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv').tail(52)
+                    df_sliced = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs_prod_test/sol_usdt_data_prod_test.csv').tail(52)
 
                     # Apply super trend indicator
                     df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)
