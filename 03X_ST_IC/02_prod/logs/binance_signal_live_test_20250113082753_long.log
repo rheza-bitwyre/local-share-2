@@ -1,0 +1,33 @@
+2025-01-13 08:27:53 - INFO - Last opentime in CSV: 1736753400000
+2025-01-13 08:27:53 - INFO - CSV length before appending: 231
+2025-01-13 08:27:53 - INFO - Rounded timestamp: 1736755200000, Last opentime in CSV: 1736753400000
+2025-01-13 08:27:53 - INFO - 2025-01-13 08:01:00 status: True, time: 1736755260000, calls: 1
+2025-01-13 08:27:53 - INFO - 2025-01-13 08:01:00 status: True, time: 1736755260000, calls: 2
+2025-01-13 08:27:53 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-13 08:27:53 - INFO - before dropping :1
+2025-01-13 08:27:53 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-13 08:27:53 - INFO - No new data to append.
+2025-01-13 08:28:53 - INFO - Last opentime in CSV: 1736753400000
+2025-01-13 08:28:53 - INFO - CSV length before appending: 231
+2025-01-13 08:28:53 - INFO - Rounded timestamp: 1736755200000, Last opentime in CSV: 1736753400000
+2025-01-13 08:28:53 - INFO - 2025-01-13 08:01:00 status: True, time: 1736755260000, calls: 1
+2025-01-13 08:28:53 - INFO - 2025-01-13 08:01:00 status: True, time: 1736755260000, calls: 2
+2025-01-13 08:28:53 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-13 08:28:53 - INFO - before dropping :1
+2025-01-13 08:28:53 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-13 08:28:53 - INFO - No new data to append.
+2025-01-13 08:29:53 - INFO - Last opentime in CSV: 1736753400000
+2025-01-13 08:29:53 - INFO - CSV length before appending: 231
+2025-01-13 08:29:53 - INFO - Rounded timestamp: 1736755200000, Last opentime in CSV: 1736753400000
+2025-01-13 08:29:53 - INFO - 2025-01-13 08:01:00 status: True, time: 1736755260000, calls: 1
+2025-01-13 08:29:53 - INFO - 2025-01-13 08:01:00 status: True, time: 1736755260000, calls: 2
+2025-01-13 08:29:53 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-13 08:29:53 - INFO - before dropping :1
+2025-01-13 08:29:53 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-13 08:29:53 - INFO - No new data to append.

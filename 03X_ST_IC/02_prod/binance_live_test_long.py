@@ -23,7 +23,7 @@ today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
 
 # Logging Setup
 logging.basicConfig(
-    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs/binance_signal_live_test_{today_datetime}.log',
+    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs/binance_signal_live_test_{today_datetime}_long.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -99,7 +99,7 @@ def binance_recursive_fetch_2(coins, interval, starttime, endtime=None, data_typ
 def fetch_and_append_data():
     # Get the latest opentime from the CSV file
     try:
-        current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+        current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data_long.csv')
         last_opentime = current_df['opentime'].iloc[-1]
     except FileNotFoundError:
         logging.error("CSV file not found. Ensure the path is correct.")
@@ -167,13 +167,13 @@ def fetch_and_append_data():
 
                 if new_row_count > 0:
                     # Append the new data to the existing CSV
-                    new_data.to_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv', mode='a', header=False, index=False)
+                    new_data.to_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data_long.csv', mode='a', header=False, index=False)
                     
                     # Log the number of new rows appended
                     logging.info(f"{new_row_count} new rows fetched and appended successfully.")
 
                     # Log the new CSV length after appending
-                    current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+                    current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data_long.csv')
                     logging.info(f"New CSV length after appending: {len(current_df)}")
                     logging.info(f"New data: {current_df.tail(1)}")
                 else:
@@ -373,7 +373,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             prev_action = 'Long'
 
     # Log the new CSV length after appending
-    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv')
+    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data_long.csv')
 
     # Get the latest 'opentime' value
     latest_opentime = new_df['opentime'].iloc[-1]
@@ -574,7 +574,7 @@ def main():
                     logging.info('New data fetched, processing now.')
 
                     # Get the latest 51 data as the Ichimoku Cloud needs 50 data
-                    df_sliced = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data.csv').tail(52)
+                    df_sliced = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/sol_usdt_data_long.csv').tail(52)
 
                     # Apply super trend indicator
                     df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)
@@ -585,7 +585,7 @@ def main():
                     logging.info('Ichimoku cloud indicator applied.')
 
                     # Define action suggestion
-                    suggested_action = determine_suggested_action(df_st_ic)
+                    suggested_action = determine_suggested_action(df_st_ic, postion_option=1) # long only
 
                     # Define real action and log it
                     current_action, new_prev_action = handle_trading_action(suggested_action, prev_action = prev_action)
