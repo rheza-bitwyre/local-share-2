@@ -24,7 +24,7 @@ today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
 
 # Logging Setup
 logging.basicConfig(
-    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SUI/binance_stic_sui_bot__{today_datetime}.log',
+    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SOL/binance_stic_sol_bot__{today_datetime}.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -100,7 +100,7 @@ def binance_recursive_fetch_2(coins, interval, starttime, endtime=None, data_typ
 def fetch_and_append_data():
     # Get the latest opentime from the CSV file
     try:
-        current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SUI/historical_OHLC_SUI.csv')
+        current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SOL/historical_OHLC_SOL.csv')
         last_opentime = current_df['opentime'].iloc[-1]
     except FileNotFoundError:
         logging.error("CSV file not found. Ensure the path is correct.")
@@ -133,7 +133,7 @@ def fetch_and_append_data():
         # Fetch the next data (increment by 1800000 ms, or 30 minutes)
         try:
             data = binance_recursive_fetch_2(
-                ['SUI'],
+                ['SOL'],
                 '30m',
                 starttime=int(last_opentime + 1800000),
                 endtime=None,
@@ -168,13 +168,13 @@ def fetch_and_append_data():
 
                 if new_row_count > 0:
                     # Append the new data to the existing CSV
-                    new_data.to_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SUI/historical_OHLC_SUI.csv', mode='a', header=False, index=False)
+                    new_data.to_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SOL/historical_OHLC_SOL.csv', mode='a', header=False, index=False)
                     
                     # Log the number of new rows appended
                     logging.info(f"{new_row_count} new rows fetched and appended successfully.")
 
                     # Log the new CSV length after appending
-                    current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SUI/historical_OHLC_SUI.csv')
+                    current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SOL/historical_OHLC_SOL.csv')
                     logging.info(f"New CSV length after appending: {len(current_df)}")
                     logging.info(f"New data: {current_df.tail(1)}")
                 else:
@@ -511,8 +511,8 @@ def handle_trading_action(suggested_action, prev_action=None):
     API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
-    trade_amount_usdt = 1000
-    symbol = 'SUIUSDT'
+    trade_amount_usdt = 2000
+    symbol = 'SOLUSDT'
 
     logging.info(f"Previous Action: {prev_action}")
     logging.info(f"Suggested Action: {suggested_action}")
@@ -524,15 +524,15 @@ def handle_trading_action(suggested_action, prev_action=None):
         prev_action = suggested_action
     else:
         # Get initial mark price
-        get_price = binance_api.get_mark_price(symbol='SUIUSDT')
+        get_price = binance_api.get_mark_price(symbol='SOLUSDT')
         mark_price = float(get_price['markPrice'])
 
         # Calculate coin quantity
         coin_quantity = trade_amount_usdt / mark_price
-        position_coin_amount = round(coin_quantity, 1)
+        position_coin_amount = math.floor(coin_quantity)
 
         # Get current coin amount
-        gpr = binance_api.get_position_risk(symbol='SUIUSDT')
+        gpr = binance_api.get_position_risk(symbol='SOLUSDT')
         close_position_coin_amount = float(gpr[0]['positionAmt'])
         
         if prev_action is None and suggested_action == 'Long':
@@ -638,7 +638,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             logging.info("Open Long Order Response:", long_order_response)
 
     # Log the new CSV length after appending
-    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SUI/historical_OHLC_SUI.csv')
+    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SOL/historical_OHLC_SOL.csv')
 
     # Get the latest 'opentime' value
     latest_opentime = new_df['opentime'].iloc[-1]
@@ -662,7 +662,7 @@ def main():
     API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
-    symbol = 'SUIUSDT'
+    symbol = 'SOLUSDT'
 
     gpr = binance_api.get_position_risk(symbol=symbol)
     if gpr:
@@ -685,7 +685,7 @@ def main():
                     logging.info('New data fetched, processing now.')
 
                     # Get the latest 51 data as the Ichimoku Cloud needs 50 data
-                    df_sliced = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SUI/historical_OHLC_SUI.csv').tail(52)
+                    df_sliced = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SOL/historical_OHLC_SOL.csv').tail(52)
 
                     # Apply super trend indicator
                     df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)

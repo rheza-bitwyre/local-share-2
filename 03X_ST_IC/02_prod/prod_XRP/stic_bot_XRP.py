@@ -24,7 +24,7 @@ today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
 
 # Logging Setup
 logging.basicConfig(
-    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/logs_prod_test/binance_live_test_prod_{today_datetime}.log',
+    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_XRP/binance_stic_xpr_bot_{today_datetime}.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -529,7 +529,7 @@ def handle_trading_action(suggested_action, prev_action=None):
 
         # Calculate coin quantity
         coin_quantity = trade_amount_usdt / mark_price
-        position_coin_amount = math.floor(coin_quantity)
+        position_coin_amount = round(coin_quantity, 1)
 
         # Get current coin amount
         gpr = binance_api.get_position_risk(symbol='XRPUSDT')
@@ -665,10 +665,11 @@ def main():
     symbol = 'XRPUSDT'
 
     gpr = binance_api.get_position_risk(symbol=symbol)
-    if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
-        prev_action = 'Long'
-    elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
-        prev_action = 'Short'
+    if gpr:
+        if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
+            prev_action = 'Long'
+        elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
+            prev_action = 'Short'
     else:
         prev_action = None
 

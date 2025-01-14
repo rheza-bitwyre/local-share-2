@@ -665,10 +665,11 @@ def main():
     symbol = 'SOLUSDT'
 
     gpr = binance_api.get_position_risk(symbol=symbol)
-    if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
-        prev_action = 'Long'
-    elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
-        prev_action = 'Short'
+    if gpr:
+        if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
+            prev_action = 'Long'
+        elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
+            prev_action = 'Short'
     else:
         prev_action = None
 
