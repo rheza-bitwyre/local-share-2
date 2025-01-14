@@ -511,7 +511,7 @@ def handle_trading_action(suggested_action, prev_action=None):
     API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
-    trade_amount_usdt = 2000
+    trade_amount_usdt = 4000
     symbol = 'SOLUSDT'
 
     logging.info(f"Previous Action: {prev_action}")
