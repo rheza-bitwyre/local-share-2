@@ -511,31 +511,30 @@ def handle_trading_action(suggested_action, prev_action=None):
     API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
-    # trade_amount_usdt = 1000
+    trade_amount_usdt = 2000
     symbol = 'SOLUSDT'
-    position_coin_ammount = 5
 
     logging.info(f"Previous Action: {prev_action}")
     logging.info(f"Suggested Action: {suggested_action}")
     
-    # Initialize current action
     curr_action = None
     
     # Action handling logic
     if prev_action == suggested_action:
         prev_action = suggested_action
     else:
-        # # Get initial mark price
-        # get_initial_price = binance_api.get_mark_price(symbol='SOLUSDT')
-        # initial_mark_price = float(get_initial_price['markPrice'])
+        # Get initial mark price
+        get_price = binance_api.get_mark_price(symbol='SOLUSDT')
+        mark_price = float(get_price['markPrice'])
 
-        # # Calculate raw quantity
-        # raw_quantity = trade_amount_usdt / initial_mark_price
+        # Calculate coin quantity
+        coin_quantity = trade_amount_usdt / mark_price
+        position_coin_amount = math.floor(coin_quantity)
 
-        # # Align quantity with step size
-        # step_size = 0.01  # Use the actual value retrieved above
-        # position_coin_ammount = math.floor(raw_quantity / step_size) * step_size
-
+        # Get current coin amount
+        gpr = binance_api.get_position_risk(symbol='SOLUSDT')
+        close_position_coin_amount = float(gpr[0]['positionAmt'])
+        
         if prev_action is None and suggested_action == 'Long':
             curr_action = 'Open Long'
             logging.info(curr_action)
@@ -545,7 +544,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             symbol=symbol,    # Trading pair
             side="BUY",          # Buy to open a long position
             order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_ammount        
+            quantity=position_coin_amount        
             )
 
             logging.info("Open Long Order Response:", long_order_response)
@@ -559,7 +558,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             symbol=symbol,    # Trading pair
             side="SELL",          # Buy to open a long position
             order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_ammount        
+            quantity=position_coin_amount        
             )
 
             logging.info("Open Short Order Response:", long_order_response)
@@ -572,7 +571,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             symbol=symbol,    # Trading pair
             side="SELL",          # Buy to open a long position
             order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_ammount        
+            quantity=close_position_coin_amount        
             )
 
             logging.info("Close Long Order Response:", long_order_response)
@@ -587,7 +586,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             symbol=symbol,    # Trading pair
             side="BUY",          # Buy to open a long position
             order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_ammount        
+            quantity=close_position_coin_amount        
             )
 
             logging.info("Close Short Order Response:", long_order_response)
@@ -601,7 +600,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             symbol=symbol,    # Trading pair
             side="SELL",          # Buy to open a long position
             order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_ammount        
+            quantity=close_position_coin_amount        
             )
 
             logging.info("Close Long Order Response:", long_order_response)
@@ -610,7 +609,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             symbol=symbol,    # Trading pair
             side="SELL",          # Buy to open a long position
             order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_ammount        
+            quantity=position_coin_amount        
             )
 
             logging.info("Open Short Order Response:", long_order_response)
@@ -624,7 +623,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             symbol=symbol,    # Trading pair
             side="BUY",          # Buy to open a long position
             order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_ammount        
+            quantity=close_position_coin_amount        
             )
 
             logging.info("Open Long Order Response:", long_order_response)
@@ -633,7 +632,7 @@ def handle_trading_action(suggested_action, prev_action=None):
             symbol=symbol,    # Trading pair
             side="BUY",          # Buy to open a long position
             order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_ammount        
+            quantity=position_coin_amount        
             )
 
             logging.info("Open Long Order Response:", long_order_response)
@@ -658,7 +657,21 @@ def handle_trading_action(suggested_action, prev_action=None):
 ###########################################################################        
 # Main Loop
 def main():
-    prev_action = None
+    # Initialize connection to Binance
+    API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
+    API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
+    binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
+
+    symbol = 'SOLUSDT'
+
+    gpr = binance_api.get_position_risk(symbol=symbol)
+    if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
+        prev_action = 'Long'
+    elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
+        prev_action = 'Short'
+    else:
+        prev_action = None
+
     while True:
         try:
             # Fetch new data continuously
