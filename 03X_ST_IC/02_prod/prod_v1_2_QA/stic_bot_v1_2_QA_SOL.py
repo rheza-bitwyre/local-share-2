@@ -109,8 +109,10 @@ def fetch_and_append_data():
         logging.error(f"Error reading CSV file: {e}")
         return 0
 
+    last_opentime_converted = datetime.utcfromtimestamp(last_opentime / 1000).strftime('%Y-%m-%d %H:%M:%S')
+
     # Log the last opentime and the length of the CSV before appending
-    logging.info(f"Last opentime in CSV: {last_opentime}")
+    logging.info(f"Last opentime in CSV: {last_opentime_converted}")
     logging.info(f"CSV length before appending: {len(current_df)}")
 
     # Get the current Unix timestamp in seconds
@@ -122,8 +124,10 @@ def fetch_and_append_data():
     # Convert the timestamp back to milliseconds
     rounded_timestamp_ms = rounded_timestamp * 1000
 
+    rounded_timestamp_ms_converted = datetime.utcfromtimestamp(rounded_timestamp_ms / 1000).strftime('%Y-%m-%d %H:%M:%S')
+
     # Log the rounded timestamp for comparison
-    logging.info(f"Rounded timestamp: {rounded_timestamp_ms}, Last opentime in CSV: {last_opentime}")
+    logging.info(f"Rounded timestamp: {rounded_timestamp_ms_converted}, Last opentime in CSV: {last_opentime_converted}")
 
     # Initialize new_row_count to 0 by default
     new_row_count = 0
@@ -275,7 +279,7 @@ def compute_ichimoku_with_supertrend(supertrend_df, conversion_periods=9, base_p
 
     return supertrend_df
 
-def determine_suggested_action(df,postion_option = 2, body_size_threshold = 0.8):
+def determine_suggested_action(df,postion_option = 2, body_size_threshold = 0.8, opened_position = 0):
     # Get the last 2 rows of the DataFrame
     last_two_rows = df.tail(2).copy()
 
@@ -319,6 +323,8 @@ def determine_suggested_action(df,postion_option = 2, body_size_threshold = 0.8)
 
     ## to close the opened position earlier
     # only when open a position for the first time on a single term of trend, doesnt change trend
+    reversal_open = None
+    early_close = None
     if last_body_size >= body_size_threshold :
         if bull_last == 1 :
             early_close = 'Close Short Earlier'
@@ -328,11 +334,15 @@ def determine_suggested_action(df,postion_option = 2, body_size_threshold = 0.8)
 
     ## to repoen a position after early close
     # only after opening and closing on the first time on a single term, doesnt change trend
+    reopen = None
     if reversal_open :
         if bull_last == 1 and closeprice_last > reversal_open :
             reopen = 'Open Long Again'
         elif bull_last == 0 and closeprice_last < reversal_open :
             reopen = 'Open Short Again'
+
+    logging.info(f"Early Action: {early_close}")
+    logging.info(f"Re-Open: {reopen}")
 
     # Determine the suggested action
     if postion_option == 2: # will open both open and short
@@ -535,206 +545,60 @@ def handle_trading_action(suggested_action, prev_action=None, early_close=None, 
     API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
-    trade_amount_usdt = 4000
+    trade_amount_usdt = 5000
     symbol = 'SOLUSDT'
 
     logging.info(f"Previous Action: {prev_action}")
     logging.info(f"Suggested Action: {suggested_action}")
     
-    curr_action = None
+    # Get initial mark price and calculate coin quantity
+    mark_price = float(binance_api.get_mark_price(symbol)['markPrice'])
+    coin_quantity = trade_amount_usdt / mark_price
+    position_coin_amount = math.floor(coin_quantity)
 
-    # Action handling logic
-    if prev_action == suggested_action:
-        prev_action = suggested_action
-    else:
-        # Get initial mark price
-        get_price = binance_api.get_mark_price(symbol='SOLUSDT')
-        mark_price = float(get_price['markPrice'])
-        logging.info({mark_price})
-        
-        # Calculate coin quantity
-        coin_quantity = trade_amount_usdt / mark_price
-        position_coin_amount = math.floor(coin_quantity)
+    # Get current coin position
+    close_position_coin_amount = float(binance_api.get_position_risk(symbol)[0]['positionAmt'])
 
-        # Get current coin amount
-        gpr = binance_api.get_position_risk(symbol='SOLUSDT')
-        close_position_coin_amount = float(gpr[0]['positionAmt'])
+    current_action = None
+    if opened_position == 0:  # No position open, need to open a new one
+        if suggested_action == 'Long':
+            current_action = 'Open Long'
+            opened_position = 1
+            prev_action = 'Long'
+        elif suggested_action == 'Short':
+            current_action = 'Open Short'
+            opened_position = 1
+            prev_action = 'Short'
+        elif suggested_action == 'None':
+            current_action = 'Hold'  # No action, just hold
 
-        
-        if opened_position == 0 :
-            if prev_action is None and suggested_action == 'Long':
-                curr_action = 'Open Long'
-                logging.info(curr_action)
-                prev_action = 'Long'
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="BUY",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=position_coin_amount        
-                # )
-
-                opened_position +=1
-
-                # logging.info("Open Long Order Response:", long_order_response)
-
-            elif prev_action is None and suggested_action == 'Short':
-                curr_action = 'Open Short'
-                logging.info(curr_action)
-                prev_action = 'Short'
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="SELL",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=position_coin_amount        
-                # )
-
-                opened_position +=1
-
-                # logging.info("Open Short Order Response:", long_order_response)
-
-            elif prev_action == 'Long' and suggested_action == 'Close':
-                curr_action = 'Close Long'
-                logging.info(curr_action)
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="SELL",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=close_position_coin_amount        
-                # )
-
-                # logging.info("Close Long Order Response:", long_order_response)
-
-                prev_action = None
-            elif prev_action == 'Short' and suggested_action == 'Close':
-                curr_action = 'Close Short'
-                logging.info(curr_action)
-                prev_action = None
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="BUY",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=close_position_coin_amount        
-                # )
-
-                # logging.info("Close Short Order Response:", long_order_response)
-
-            elif prev_action == 'Long' and suggested_action == 'Short':
-                curr_action = 'Close Long & Open Short'
-                logging.info(curr_action)
-                prev_action = 'Short'
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="SELL",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=close_position_coin_amount        
-                # )
-
-                # logging.info("Close Long Order Response:", long_order_response)
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="SELL",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=position_coin_amount        
-                # )
-
-                opened_position +=1
-
-                # logging.info("Open Short Order Response:", long_order_response)
-
-            elif prev_action == 'Short' and suggested_action == 'Long':
-                curr_action = 'Close Short & Open Long'
-                logging.info(curr_action)
-                prev_action = 'Long'
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="BUY",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=close_position_coin_amount        
-                # )
-
-                # logging.info("Open Long Order Response:", long_order_response)
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="BUY",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=position_coin_amount        
-                # )
-
-                opened_position +=1
-
-                # logging.info("Open Long Order Response:", long_order_response)
-        else:
-            if prev_action == 'Long' and early_close == 'Close Long Earlier' :
-                curr_action = 'Close Long'
-                logging.info(curr_action)
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="SELL",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=close_position_coin_amount        
-                # )
-
-                # logging.info("Close Long Order Response:", long_order_response)
-
-                prev_action = None
-            elif prev_action == 'Short' and early_close == 'Close Short Earlier' :
-                curr_action = 'Close Short'
-                logging.info(curr_action)
-                prev_action = None
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="BUY",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=close_position_coin_amount        
-                # )
-
-                # logging.info("Close Short Order Response:", long_order_response)
-
-            elif prev_action == None and reopen == 'Open Long Again' :
-                curr_action = 'Open Long'
-                logging.info(curr_action)
-                prev_action = 'Long'
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="BUY",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=position_coin_amount        
-                # )
-
-                opened_position +=1
-
-                # logging.info("Open Long Order Response:", long_order_response)
-
-            elif prev_action == None and reopen == 'Open Short Again' :
-                curr_action = 'Open Short'
-                logging.info(curr_action)
-                prev_action = 'Short'
-
-                # long_order_response = binance_api.create_order(
-                # symbol=symbol,    # Trading pair
-                # side="SELL",          # Buy to open a long position
-                # order_type="MARKET", # Market order for instant execution
-                # quantity=position_coin_amount        
-                # )
-
-                opened_position +=1
-
-                # logging.info("Open Short Order Response:", long_order_response)
+    elif opened_position == 1:  # There is an open position, check if it needs to be adjusted
+        if early_close == 'Close Long Earlier' and prev_action == 'Long':
+            current_action = 'Close Long'
+            prev_action = 'None'  # No position after closing
+        elif early_close == 'Close Short Earlier' and prev_action == 'Short':
+            current_action = 'Close Short'
+            prev_action = 'None'  # No position after closing
+        elif reopen == 'Open Long Again' and prev_action == 'Short':
+            current_action = 'Close Short & Open Long'
+            opened_position = 1  # Reopen a long position
+            prev_action = 'Long'
+        elif reopen == 'Open Short Again' and prev_action == 'Long':
+            current_action = 'Close Long & Open Short'
+            opened_position = 1  # Reopen a short position
+            prev_action = 'Short'
+        elif suggested_action == 'Long' and prev_action == 'Short':
+            current_action = 'Close Short & Open Long'
+            prev_action = 'Long'
+        elif suggested_action == 'Short' and prev_action == 'Long':
+            current_action = 'Close Long & Open Short'
+            prev_action = 'Short'
+        elif suggested_action == 'None':
+            current_action = 'Hold'  # No action, just hold the position
 
     # Log the new CSV length after appending
     new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_v1_2_QA/historical_OHLC_SOL.csv')
-
+    
     # Get the latest 'opentime' value
     latest_opentime = new_df['opentime'].iloc[-1]
 
@@ -744,31 +608,39 @@ def handle_trading_action(suggested_action, prev_action=None, early_close=None, 
     # Convert the 'opentime' to a human-readable format
     converted_opentime = datetime.utcfromtimestamp(latest_opentime_in_seconds).strftime('%Y-%m-%d %H:%M:%S')
 
-    # Log the result
-    logging.info(f"at: {converted_opentime} - {curr_action if curr_action else 'No action taken'}")
-
-    return curr_action, prev_action, opened_position
+    # Log the result with time and action
+    logging.info(f"At: {converted_opentime} - Action: {current_action if current_action else 'No action taken'}, Opened Position: {opened_position}")
+    
+    return current_action, prev_action, opened_position
 
 ###########################################################################        
 # Main Loop
 def main():
-    # # Initialize connection to Binance
-    # API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
-    # API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
-    # binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
+    # Initialize connection to Binance
+    API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
+    API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
+    binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
-    # symbol = 'SOLUSDT'
+    symbol = 'SOLUSDT'
 
-    # gpr = binance_api.get_position_risk(symbol=symbol)
+    # gpr = binance_api.futures_position_information(symbol=symbol)
+
+    # prev_action = None
+    # opened_position = 0
+
     # if gpr:
     #     if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
     #         prev_action = 'Long'
+    #         opened_position = 1  # A position is opened in Long
     #     elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
     #         prev_action = 'Short'
+    #         opened_position = -1  # A position is opened in Short
     # else:
     #     prev_action = None
+    #     opened_position = 0  # No position is opened
 
     prev_action = None
+    opened_position = 0
 
     while True:
         try:
@@ -793,11 +665,14 @@ def main():
                     logging.info('Ichimoku cloud indicator applied.')
 
                     # Define action suggestion
-                    suggested_action, reversal_open, early_close, reopen = determine_suggested_action(df_st_ic)
+                    suggested_action, early_close, reopen, opened_position = determine_suggested_action(df_st_ic,opened_position = opened_position)
+
+                    # Log suggested action
+                    logging.info(f'Suggested Action: {suggested_action}, Early Close: {early_close}, Reopen: {reopen}')
 
                     # Define real action and log it
                     current_action, new_prev_action, opened_position = handle_trading_action(suggested_action, prev_action, early_close, reopen, opened_position)
-                    logging.info(f'Opened Position: {opened_position}')
+                    logging.info(f'Current Action: {current_action}, Opened Position: {opened_position}')
 
                     # Update previous action
                     prev_action = new_prev_action
@@ -807,8 +682,8 @@ def main():
 
         except Exception as e:
             logging.error(f"An error occurred: {e}")
-            break  # Exit on error for debugging; you can choose to continue or retry.
+            time.sleep(60)  # Retry after 1 minute or adjust as needed
 
 # Run the main function
 if __name__ == "__main__":
-    main()      
+    main()
