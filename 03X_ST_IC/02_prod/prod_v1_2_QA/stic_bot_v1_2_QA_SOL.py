@@ -610,7 +610,8 @@ def handle_trading_action(suggested_action, prev_action=None, early_close=None, 
 
     # Log the result with time and action
     logging.info(f"At: {converted_opentime} - Action: {current_action if current_action else 'No action taken'}, Opened Position: {opened_position}")
-    
+    logging.info(f"At: {converted_opentime} - Mark Price: {mark_price}")
+
     return current_action, prev_action, opened_position
 
 ###########################################################################        
@@ -623,24 +624,24 @@ def main():
 
     symbol = 'SOLUSDT'
 
-    # gpr = binance_api.futures_position_information(symbol=symbol)
-
-    # prev_action = None
-    # opened_position = 0
-
-    # if gpr:
-    #     if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
-    #         prev_action = 'Long'
-    #         opened_position = 1  # A position is opened in Long
-    #     elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
-    #         prev_action = 'Short'
-    #         opened_position = -1  # A position is opened in Short
-    # else:
-    #     prev_action = None
-    #     opened_position = 0  # No position is opened
+    gpr = binance_api.get_position_risk(symbol=symbol)
 
     prev_action = None
     opened_position = 0
+
+    if gpr:
+        if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
+            prev_action = 'Long'
+            opened_position = 1
+        elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
+            prev_action = 'Short'
+            opened_position = 1
+    else:
+        prev_action = None
+        opened_position = 0  # No position is opened
+
+    # prev_action = None
+    # opened_position = 0
 
     while True:
         try:
