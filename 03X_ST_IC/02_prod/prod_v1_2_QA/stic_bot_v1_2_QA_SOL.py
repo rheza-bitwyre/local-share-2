@@ -19,12 +19,23 @@ import hmac
 import logging
 import math
 
+#################################### Config ####################################
+API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
+API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
+trade_amount_usdt = 5000
+symbol = 'SOLUSDT'
+path = '/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_v1_2_QA'
+log_filename = 'binance_stic_sol_bot_v1_2_QA'
+csv_filename = 'historical_OHLC_SOL.csv'
+################################################################################
+f_symbol = symbol.replace('USDT', '')
+
 # Get today's date and time in 'yyyymmddhhmmss' format
 today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
 
 # Logging Setup
 logging.basicConfig(
-    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_v1_2_QA/binance_stic_sol_bot_v1_2_QA{today_datetime}.log',
+    filename=f'{path}/{log_filename}_{today_datetime}.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -97,10 +108,10 @@ def binance_recursive_fetch_2(coins, interval, starttime, endtime=None, data_typ
 
     return {'data': data_list, 'call': call_dict}
 
-def fetch_and_append_data():
+def fetch_and_append_data(f_symbol):
     # Get the latest opentime from the CSV file
     try:
-        current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_v1_2_QA/historical_OHLC_SOL.csv')
+        current_df = pd.read_csv(f'{path}/{csv_filename}')
         last_opentime = current_df['opentime'].iloc[-1]
     except FileNotFoundError:
         logging.error("CSV file not found. Ensure the path is correct.")
@@ -137,7 +148,7 @@ def fetch_and_append_data():
         # Fetch the next data (increment by 1800000 ms, or 30 minutes)
         try:
             data = binance_recursive_fetch_2(
-                ['SOL'],
+                [f_symbol],
                 '30m',
                 starttime=int(last_opentime + 1800000),
                 endtime=None,
@@ -172,13 +183,13 @@ def fetch_and_append_data():
 
                 if new_row_count > 0:
                     # Append the new data to the existing CSV
-                    new_data.to_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_v1_2_QA/historical_OHLC_SOL.csv', mode='a', header=False, index=False)
+                    new_data.to_csv(f'{path}/{csv_filename}', mode='a', header=False, index=False)
                     
                     # Log the number of new rows appended
                     logging.info(f"{new_row_count} new rows fetched and appended successfully.")
 
                     # Log the new CSV length after appending
-                    current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_v1_2_QA/historical_OHLC_SOL.csv')
+                    current_df = pd.read_csv(f'{path}/{csv_filename}')
                     logging.info(f"New CSV length after appending: {len(current_df)}")
                     logging.info(f"New data: {current_df.tail(1)}")
                 else:
@@ -279,7 +290,7 @@ def compute_ichimoku_with_supertrend(supertrend_df, conversion_periods=9, base_p
 
     return supertrend_df
 
-def determine_suggested_action(df,postion_option = 2, body_size_threshold = 0.8, opened_position = 0):
+def determine_suggested_action(df,postion_option = 2, body_size_threshold_close = 0.8, body_size_threshold_open = 0.2,  opened_position = 0):
     # Get the last 2 rows of the DataFrame
     last_two_rows = df.tail(2).copy()
 
@@ -317,28 +328,29 @@ def determine_suggested_action(df,postion_option = 2, body_size_threshold = 0.8,
 
     # v1.2 Additional
     openprice_last = last_two_rows['openprice'].iloc[1]
+    openprice_second_last = last_two_rows['openprice'].iloc[0]
     closeprice_second_last = last_two_rows['closeprice'].iloc[0]
     last_body_size = abs(openprice_last - closeprice_last) / openprice_last * 100
     bull_last = 1 if closeprice_last >= openprice_last else 0
+    bull_second_last = 1 if closeprice_second_last >= openprice_second_last else 0
 
     ## to close the opened position earlier
     # only when open a position for the first time on a single term of trend, doesnt change trend
     reversal_open = None
     early_close = None
-    if last_body_size >= body_size_threshold :
+    if last_body_size >= body_size_threshold_close :
         if bull_last == 1 :
             early_close = 'Close Short Earlier'
         elif bull_last == 0 :
             early_close = 'Close Long Earlier'
-        reversal_open = openprice_last
 
     ## to repoen a position after early close
     # only after opening and closing on the first time on a single term, doesnt change trend
     reopen = None
-    if reversal_open :
-        if bull_last == 1 and closeprice_last > reversal_open :
+    if last_body_size >=  body_size_threshold_open:
+        if bull_last == 1 and bull_second_last == 0 and closeprice_last > openprice_second_last :
             reopen = 'Open Long Again'
-        elif bull_last == 0 and closeprice_last < reversal_open :
+        elif bull_last == 0 and bull_second_last == 1 and closeprice_last < openprice_second_last :
             reopen = 'Open Short Again'
 
     logging.info(f"Early Action: {early_close}")
@@ -539,25 +551,28 @@ class BinanceAPI:
 
         return {"active_positions": active_positions, "trade": "active"}
 
-def handle_trading_action(suggested_action, prev_action=None, early_close=None, reopen=None, opened_position=0):
+def handle_trading_action(suggested_action, prev_action=None, early_close=None, reopen=None, opened_position=0, trade_amount_usdt=5000, symbol='SOLUSDT',API_KEY=None, API_SECRET=None):
     # Initialize connection to Binance
-    API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
-    API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
-
-    trade_amount_usdt = 5000
-    symbol = 'SOLUSDT'
 
     logging.info(f"Previous Action: {prev_action}")
     logging.info(f"Suggested Action: {suggested_action}")
     
     # Get initial mark price and calculate coin quantity
-    mark_price = float(binance_api.get_mark_price(symbol)['markPrice'])
-    coin_quantity = trade_amount_usdt / mark_price
-    position_coin_amount = math.floor(coin_quantity)
+    mark_price = float(binance_api.get_mark_price(symbol).get('markPrice', 0))
 
-    # Get current coin position
-    close_position_coin_amount = float(binance_api.get_position_risk(symbol)[0]['positionAmt'])
+    if mark_price == 0:
+        logging.error("Error: Unable to retrieve mark price.")
+    coin_quantity = trade_amount_usdt / mark_price if mark_price != 0 else 0
+    position_coin_amount = math.floor(coin_quantity) if mark_price != 0 else 0
+
+    # Get current coin position and handle the case where no position is open
+    position_data = binance_api.get_position_risk(symbol)
+
+    if position_data and 'positionAmt' in position_data[0]:
+        close_position_coin_amount = float(position_data[0]['positionAmt'])
+    else:
+        close_position_coin_amount = 0  # No position open, set to 0
 
     current_action = None
     if opened_position == 0:  # No position open, need to open a new one
@@ -597,20 +612,29 @@ def handle_trading_action(suggested_action, prev_action=None, early_close=None, 
             current_action = 'Hold'  # No action, just hold the position
 
     # Log the new CSV length after appending
-    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_v1_2_QA/historical_OHLC_SOL.csv')
+    try:
+        new_df = pd.read_csv(f'{path}/{csv_filename}')
+        logging.info(f"DataFrame length before appending: {len(new_df)}")
+        
+        # Ensure the DataFrame has data before accessing it
+        if not new_df.empty:
+            # Get the latest 'opentime' value
+            latest_opentime = new_df['opentime'].iloc[-1]
     
-    # Get the latest 'opentime' value
-    latest_opentime = new_df['opentime'].iloc[-1]
-
-    # Convert the 'opentime' from milliseconds to seconds
-    latest_opentime_in_seconds = latest_opentime / 1000
-
-    # Convert the 'opentime' to a human-readable format
-    converted_opentime = datetime.utcfromtimestamp(latest_opentime_in_seconds).strftime('%Y-%m-%d %H:%M:%S')
-
-    # Log the result with time and action
-    logging.info(f"At: {converted_opentime} - Action: {current_action if current_action else 'No action taken'}, Opened Position: {opened_position}")
-    logging.info(f"At: {converted_opentime} - Mark Price: {mark_price}")
+            # Convert the 'opentime' from milliseconds to seconds
+            latest_opentime_in_seconds = latest_opentime / 1000
+    
+            # Convert the 'opentime' to a human-readable format
+            converted_opentime = datetime.utcfromtimestamp(latest_opentime_in_seconds).strftime('%Y-%m-%d %H:%M:%S')
+    
+            # Log the result with time and action
+            logging.info(f"At: {converted_opentime} - Action: {current_action if current_action else 'No action taken'}, Opened Position: {opened_position}")
+            logging.info(f"At: {converted_opentime} - Mark Price: {mark_price}")
+        else:
+            logging.warning("The DataFrame is empty. No 'opentime' value to access.")
+    
+    except Exception as e:
+        logging.error(f"An error occurred while processing the CSV: {str(e)}")
 
     return current_action, prev_action, opened_position
 
@@ -618,66 +642,70 @@ def handle_trading_action(suggested_action, prev_action=None, early_close=None, 
 # Main Loop
 def main():
     # Initialize connection to Binance
-    API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
-    API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
-
-    symbol = 'SOLUSDT'
 
     gpr = binance_api.get_position_risk(symbol=symbol)
 
     prev_action = None
     opened_position = 0
 
-    if gpr:
-        if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
-            prev_action = 'Long'
-            opened_position = 1
-        elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
-            prev_action = 'Short'
-            opened_position = 1
+    # Check if gpr is not empty and contains the required elements
+    if gpr and len(gpr) > 0:
+        if 'entryPrice' in gpr[0] and 'breakEvenPrice' in gpr[0]:
+            if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
+                prev_action = 'Long'
+                opened_position = 1
+            elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
+                prev_action = 'Short'
+                opened_position = 1
+        else:
+            logging.error("gpr does not contain expected keys 'entryPrice' and 'breakEvenPrice'.")
+            prev_action = None
+            opened_position = 0
     else:
         prev_action = None
         opened_position = 0  # No position is opened
-
-    # prev_action = None
-    # opened_position = 0
 
     while True:
         try:
             # Fetch new data continuously
             while True:
                 # Call the function to fetch and append the data
-                new_row_count = fetch_and_append_data()
+                new_row_count = fetch_and_append_data(f_symbol)
 
                 if new_row_count >= 1:
                     # Log the new data fetch
                     logging.info('New data fetched, processing now.')
 
                     # Get the latest 51 data as the Ichimoku Cloud needs 50 data
-                    df_sliced = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_v1_2_QA/historical_OHLC_SOL.csv').tail(52)
+                    df_sliced = pd.read_csv(f'{path}/{csv_filename}').tail(52)
 
-                    # Apply super trend indicator
-                    df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)
-                    logging.info('Supertrend indicator applied.')
+                    # Check if the DataFrame has enough rows before processing
+                    if len(df_sliced) >= 52:
+                        # Apply super trend indicator
+                        df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)
+                        logging.info('Supertrend indicator applied.')
 
-                    # Apply Ichimoku cloud indicator
-                    df_st_ic = compute_ichimoku_with_supertrend(df_st)
-                    logging.info('Ichimoku cloud indicator applied.')
+                        # Apply Ichimoku cloud indicator
+                        df_st_ic = compute_ichimoku_with_supertrend(df_st)
+                        logging.info('Ichimoku cloud indicator applied.')
 
-                    # Define action suggestion
-                    suggested_action, early_close, reopen, opened_position = determine_suggested_action(df_st_ic,opened_position = opened_position)
+                        # Define action suggestion
+                        suggested_action, early_close, reopen, opened_position = determine_suggested_action(df_st_ic, opened_position=opened_position)
 
-                    # Log suggested action
-                    logging.info(f'Suggested Action: {suggested_action}, Early Close: {early_close}, Reopen: {reopen}')
+                        # Log suggested action
+                        logging.info(f'Suggested Action: {suggested_action}, Early Close: {early_close}, Reopen: {reopen}')
 
-                    # Define real action and log it
-                    current_action, new_prev_action, opened_position = handle_trading_action(suggested_action, prev_action, early_close, reopen, opened_position)
-                    logging.info(f'Current Action: {current_action}, Opened Position: {opened_position}')
+                        # Define real action and log it
+                        current_action, new_prev_action, opened_position = handle_trading_action(suggested_action, prev_action, early_close, reopen, opened_position, API_KEY=API_KEY, API_SECRET=API_SECRET)
+                        logging.info(f'Current Action: {current_action}, Opened Position: {opened_position}')
 
-                    # Update previous action
-                    prev_action = new_prev_action
+                        # Update previous action
+                        prev_action = new_prev_action
 
+                    else:
+                        logging.error("Not enough data to calculate indicators.")
+                
                 # Sleep for 1 minute before starting the next iteration of the inner loop
                 time.sleep(60)
 
