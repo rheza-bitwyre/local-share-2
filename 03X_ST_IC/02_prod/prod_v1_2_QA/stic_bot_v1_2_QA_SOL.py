@@ -691,7 +691,7 @@ def main():
                         logging.info('Ichimoku cloud indicator applied.')
 
                         # Define action suggestion
-                        suggested_action, early_close, reopen, opened_position = determine_suggested_action(df_st_ic, opened_position=opened_position)
+                        suggested_action, early_close, reopen, opened_position = determine_suggested_action(df_st_ic, opened_position)
 
                         # Log suggested action
                         logging.info(f'Suggested Action: {suggested_action}, Early Close: {early_close}, Reopen: {reopen}')

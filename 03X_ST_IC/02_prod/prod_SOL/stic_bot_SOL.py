@@ -22,7 +22,7 @@ import math
 #################################### Config ####################################
 API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
 API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
-trade_amount_usdt = 100
+trade_amount_usdt = 250
 symbol = 'SOLUSDT'
 path = '/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SOL'
 log_filename = 'binance_stic_sol_bot_v1_1_QA'
@@ -336,11 +336,13 @@ def determine_suggested_action(df,postion_option = 2):
             suggested_action = 'Long'
         elif trend == 'unchange' and pd.notna(down_trend_last) and closeprice_last < (leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last):
             suggested_action = 'Short'
+
     elif postion_option == 1: # will only open long
         if trend == 'change':
             suggested_action = 'Close'
         elif trend == 'unchange' and pd.notna(up_trend_last) and closeprice_last > (leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last):
             suggested_action = 'Long'
+            
     elif postion_option == -1: # will only open short
         if trend == 'change':
             suggested_action = 'Close'
@@ -600,7 +602,7 @@ def main():
             prev_action = 'Short'
 
     while True:
-        new_row_count = fetch_and_append_data()
+        new_row_count = fetch_and_append_data(f_symbol)
 
         if new_row_count >= 1:
             # Log the new data fetch

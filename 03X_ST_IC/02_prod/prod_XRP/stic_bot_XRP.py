@@ -19,12 +19,23 @@ import hmac
 import logging
 import math
 
+#################################### Config ####################################
+API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
+API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
+trade_amount_usdt = 20
+symbol = 'XRPUSDT'
+path = '/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_XRP'
+log_filename = 'binance_stic_xrp_bot_v1_1_QA'
+csv_filename = 'historical_OHLC_XRP.csv'
+################################################################################
+f_symbol = symbol.replace('USDT', '')
+
 # Get today's date and time in 'yyyymmddhhmmss' format
 today_datetime = datetime.today().strftime('%Y%m%d%H%M%S')
 
 # Logging Setup
 logging.basicConfig(
-    filename=f'/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_XRP/binance_stic_xpr_bot_{today_datetime}.log',
+    filename=f'{path}/{log_filename}_{today_datetime}.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -97,10 +108,10 @@ def binance_recursive_fetch_2(coins, interval, starttime, endtime=None, data_typ
 
     return {'data': data_list, 'call': call_dict}
 
-def fetch_and_append_data():
+def fetch_and_append_data(f_symbol):
     # Get the latest opentime from the CSV file
     try:
-        current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_XRP/historical_OHLC_XRP.csv')
+        current_df = pd.read_csv(f'{path}/{csv_filename}')
         last_opentime = current_df['opentime'].iloc[-1]
     except FileNotFoundError:
         logging.error("CSV file not found. Ensure the path is correct.")
@@ -109,8 +120,10 @@ def fetch_and_append_data():
         logging.error(f"Error reading CSV file: {e}")
         return 0
 
+    last_opentime_converted = datetime.utcfromtimestamp(last_opentime / 1000).strftime('%Y-%m-%d %H:%M:%S')
+
     # Log the last opentime and the length of the CSV before appending
-    logging.info(f"Last opentime in CSV: {last_opentime}")
+    logging.info(f"Last opentime in CSV: {last_opentime_converted}")
     logging.info(f"CSV length before appending: {len(current_df)}")
 
     # Get the current Unix timestamp in seconds
@@ -122,8 +135,10 @@ def fetch_and_append_data():
     # Convert the timestamp back to milliseconds
     rounded_timestamp_ms = rounded_timestamp * 1000
 
+    rounded_timestamp_ms_converted = datetime.utcfromtimestamp(rounded_timestamp_ms / 1000).strftime('%Y-%m-%d %H:%M:%S')
+
     # Log the rounded timestamp for comparison
-    logging.info(f"Rounded timestamp: {rounded_timestamp_ms}, Last opentime in CSV: {last_opentime}")
+    logging.info(f"Rounded timestamp: {rounded_timestamp_ms_converted}, Last opentime in CSV: {last_opentime_converted}")
 
     # Initialize new_row_count to 0 by default
     new_row_count = 0
@@ -133,7 +148,7 @@ def fetch_and_append_data():
         # Fetch the next data (increment by 1800000 ms, or 30 minutes)
         try:
             data = binance_recursive_fetch_2(
-                ['XRP'],
+                [f_symbol],
                 '30m',
                 starttime=int(last_opentime + 1800000),
                 endtime=None,
@@ -168,13 +183,13 @@ def fetch_and_append_data():
 
                 if new_row_count > 0:
                     # Append the new data to the existing CSV
-                    new_data.to_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_XRP/historical_OHLC_XRP.csv', mode='a', header=False, index=False)
+                    new_data.to_csv(f'{path}/{csv_filename}', mode='a', header=False, index=False)
                     
                     # Log the number of new rows appended
                     logging.info(f"{new_row_count} new rows fetched and appended successfully.")
 
                     # Log the new CSV length after appending
-                    current_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_XRP/historical_OHLC_XRP.csv')
+                    current_df = pd.read_csv(f'{path}/{csv_filename}')
                     logging.info(f"New CSV length after appending: {len(current_df)}")
                     logging.info(f"New data: {current_df.tail(1)}")
                 else:
@@ -505,211 +520,114 @@ class BinanceAPI:
 
         return {"active_positions": active_positions, "trade": "active"}
 
-def handle_trading_action(suggested_action, prev_action=None):
-    # Initialize connection to Binance
-    API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
-    API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
+def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='SOLUSDT', API_KEY=None, API_SECRET=None):
+    # Initiate connection to Binance
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
-
-    trade_amount_usdt = 2000
-    symbol = 'XRPUSDT'
 
     logging.info(f"Previous Action: {prev_action}")
     logging.info(f"Suggested Action: {suggested_action}")
-    
+
     curr_action = None
-    
-    # Action handling logic
+
+    # If previous action is the same as suggested action, no need to take any new action
     if prev_action == suggested_action:
-        prev_action = suggested_action
-    else:
-        # Get initial mark price
-        get_price = binance_api.get_mark_price(symbol='XRPUSDT')
-        mark_price = float(get_price['markPrice'])
+        logging.info("No action needed as previous and suggested actions are the same.")
+        return None, prev_action
 
-        # Calculate coin quantity
-        coin_quantity = trade_amount_usdt / mark_price
-        position_coin_amount = round(coin_quantity, 1)
+    # Get the current mark price
+    mark_price = float(binance_api.get_mark_price(symbol).get('markPrice', 0))
+    logging.info(f'Current {symbol} Mark Price: {mark_price}')
 
-        # Get current coin amount
-        gpr = binance_api.get_position_risk(symbol='XRPUSDT')
-        close_position_coin_amount = float(gpr[0]['positionAmt'])
-        
-        if prev_action is None and suggested_action == 'Long':
+    # Calculate the position quantity
+    coin_quantity = trade_amount_usdt / mark_price
+    position_coin_amount = math.floor(coin_quantity)
+    logging.info(f'Expected {symbol} Amount: {position_coin_amount}')
+
+    # Get current coin amount (position)
+    close_position_coin_amount = float(binance_api.get_mark_price(symbol).get('positionAmt', 0))
+    logging.info(f'Current Opened {symbol} Amount: {close_position_coin_amount}')
+
+    if prev_action is None:
+        if suggested_action == 'Long':
             curr_action = 'Open Long'
-            logging.info(curr_action)
+            # binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
             prev_action = 'Long'
-
-            long_order_response = binance_api.create_order(
-            symbol=symbol,    # Trading pair
-            side="BUY",          # Buy to open a long position
-            order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_amount        
-            )
-
-            logging.info("Open Long Order Response:", long_order_response)
-
-        elif prev_action is None and suggested_action == 'Short':
+        elif suggested_action == 'Short':
             curr_action = 'Open Short'
-            logging.info(curr_action)
+            # binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
             prev_action = 'Short'
+    elif prev_action == 'Long' and suggested_action == 'Close':
+        curr_action = 'Close Long'
+        # binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+        prev_action = None
+    elif prev_action == 'Short' and suggested_action == 'Close':
+        curr_action = 'Close Short'
+        # binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+        prev_action = None
+    elif prev_action == 'Long' and suggested_action == 'Short':
+        curr_action = 'Close Long & Open Short'
+        # binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+        # binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
+        prev_action = 'Short'
+    elif prev_action == 'Short' and suggested_action == 'Long':
+        curr_action = 'Close Short & Open Long'
+        # binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+        # binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
+        prev_action = 'Long'
 
-            long_order_response = binance_api.create_order(
-            symbol=symbol,    # Trading pair
-            side="SELL",          # Buy to open a long position
-            order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_amount        
-            )
-
-            logging.info("Open Short Order Response:", long_order_response)
-
-        elif prev_action == 'Long' and suggested_action == 'Close':
-            curr_action = 'Close Long'
-            logging.info(curr_action)
-
-            long_order_response = binance_api.create_order(
-            symbol=symbol,    # Trading pair
-            side="SELL",          # Buy to open a long position
-            order_type="MARKET", # Market order for instant execution
-            quantity=close_position_coin_amount        
-            )
-
-            logging.info("Close Long Order Response:", long_order_response)
-
-            prev_action = None
-        elif prev_action == 'Short' and suggested_action == 'Close':
-            curr_action = 'Close Short'
-            logging.info(curr_action)
-            prev_action = None
-
-            long_order_response = binance_api.create_order(
-            symbol=symbol,    # Trading pair
-            side="BUY",          # Buy to open a long position
-            order_type="MARKET", # Market order for instant execution
-            quantity=close_position_coin_amount        
-            )
-
-            logging.info("Close Short Order Response:", long_order_response)
-
-        elif prev_action == 'Long' and suggested_action == 'Short':
-            curr_action = 'Close Long & Open Short'
-            logging.info(curr_action)
-            prev_action = 'Short'
-
-            long_order_response = binance_api.create_order(
-            symbol=symbol,    # Trading pair
-            side="SELL",          # Buy to open a long position
-            order_type="MARKET", # Market order for instant execution
-            quantity=close_position_coin_amount        
-            )
-
-            logging.info("Close Long Order Response:", long_order_response)
-
-            long_order_response = binance_api.create_order(
-            symbol=symbol,    # Trading pair
-            side="SELL",          # Buy to open a long position
-            order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_amount        
-            )
-
-            logging.info("Open Short Order Response:", long_order_response)
-
-        elif prev_action == 'Short' and suggested_action == 'Long':
-            curr_action = 'Close Short & Open Long'
-            logging.info(curr_action)
-            prev_action = 'Long'
-
-            long_order_response = binance_api.create_order(
-            symbol=symbol,    # Trading pair
-            side="BUY",          # Buy to open a long position
-            order_type="MARKET", # Market order for instant execution
-            quantity=close_position_coin_amount        
-            )
-
-            logging.info("Open Long Order Response:", long_order_response)
-
-            long_order_response = binance_api.create_order(
-            symbol=symbol,    # Trading pair
-            side="BUY",          # Buy to open a long position
-            order_type="MARKET", # Market order for instant execution
-            quantity=position_coin_amount        
-            )
-
-            logging.info("Open Long Order Response:", long_order_response)
-
-    # Log the new CSV length after appending
-    new_df = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_XRP/historical_OHLC_XRP.csv')
-
-    # Get the latest 'opentime' value
+    # Handle CSV updates and timestamp conversion outside of main logic to optimize
+    new_df = pd.read_csv(f'{path}/{csv_filename}')
     latest_opentime = new_df['opentime'].iloc[-1]
+    converted_opentime = datetime.utcfromtimestamp(latest_opentime / 1000).strftime('%Y-%m-%d %H:%M:%S')
 
-    # Convert the 'opentime' from milliseconds to seconds
-    latest_opentime_in_seconds = latest_opentime / 1000
-
-    # Convert the 'opentime' to a human-readable format
-    converted_opentime = datetime.utcfromtimestamp(latest_opentime_in_seconds).strftime('%Y-%m-%d %H:%M:%S')
-
-    # Log the result
     logging.info(f"at: {converted_opentime} - {curr_action if curr_action else 'No action taken'}")
 
-    return curr_action, prev_action
+    return prev_action
 
 ###########################################################################        
 # Main Loop
 def main():
-    # Initialize connection to Binance
-    API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
-    API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
+    # Initialize connection to Binancee
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
-    symbol = 'XRPUSDT'
-
+    # Get the initial position (if any) for the first action
+    prev_action = None
     gpr = binance_api.get_position_risk(symbol=symbol)
     if gpr:
         if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
             prev_action = 'Long'
         elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
             prev_action = 'Short'
-    else:
-        prev_action = None
 
     while True:
-        try:
-            # Fetch new data continuously
-            while True:
-                # Call the function to fetch and append the data
-                new_row_count = fetch_and_append_data()
+        new_row_count = fetch_and_append_data(f_symbol)
 
-                if new_row_count >= 1:
-                    # Log the new data fetch
-                    logging.info('New data fetched, processing now.')
+        if new_row_count >= 1:
+            # Log the new data fetch
+            logging.info('New data fetched, processing now.')
 
-                    # Get the latest 51 data as the Ichimoku Cloud needs 50 data
-                    df_sliced = pd.read_csv('/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_XRP/historical_OHLC_XRP.csv').tail(52)
+            # Get the latest 51 data as the Ichimoku Cloud needs 50 data
+            df_sliced = pd.read_csv(f'{path}/{csv_filename}').tail(52)
 
-                    # Apply super trend indicator
-                    df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)
-                    logging.info('Supertrend indicator applied.')
+            # Apply super trend indicator
+            df_st = calculate_supertrend(df_sliced, length=10, multiplier=3.0)
+            logging.info('Supertrend indicator applied.')
 
-                    # Apply Ichimoku cloud indicator
-                    df_st_ic = compute_ichimoku_with_supertrend(df_st)
-                    logging.info('Ichimoku cloud indicator applied.')
+            # Apply Ichimoku cloud indicator
+            df_st_ic = compute_ichimoku_with_supertrend(df_st)
+            logging.info('Ichimoku cloud indicator applied.')
 
-                    # Define action suggestion
-                    suggested_action = determine_suggested_action(df_st_ic)
+            # Define action suggestion
+            suggested_action = determine_suggested_action(df_st_ic)
 
-                    # Define real action and log it
-                    current_action, new_prev_action = handle_trading_action(suggested_action, prev_action = prev_action)
+            # Define real action and log it
+            new_prev_action = handle_trading_action(suggested_action, prev_action, trade_amount_usdt, symbol, API_KEY, API_SECRET)
 
-                    # Update previous action
-                    prev_action = new_prev_action
+            # Update previous action
+            prev_action = new_prev_action
 
-                # Sleep for 1 minute before starting the next iteration of the inner loop
-                time.sleep(60)
-
-        except Exception as e:
-            logging.error(f"An error occurred: {e}")
-            break  # Exit on error for debugging; you can choose to continue or retry.
+        # Sleep for 1 minute before starting the next iteration of the inner loop
+        time.sleep(60)
 
 # Run the main function
 if __name__ == "__main__":
