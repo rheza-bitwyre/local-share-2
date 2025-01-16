@@ -1,0 +1,89 @@
+2025-01-16 07:06:21 - INFO - Last opentime in CSV: 2025-01-16 06:00:00
+2025-01-16 07:06:21 - INFO - CSV length before appending: 301
+2025-01-16 07:06:21 - INFO - Rounded timestamp: 2025-01-16 07:00:00, Last opentime in CSV: 2025-01-16 06:00:00
+2025-01-16 07:06:21 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 1
+2025-01-16 07:06:22 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 2
+2025-01-16 07:06:22 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-16 07:06:22 - INFO - before dropping :2
+2025-01-16 07:06:22 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1737009000000      3.059     3.1209    3.0578      3.1201
+2025-01-16 07:06:22 - INFO - 1 new rows fetched and appended successfully.
+2025-01-16 07:06:22 - INFO - New CSV length after appending: 302
+2025-01-16 07:06:22 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+301  1737009000000      3.059     3.1209    3.0578      3.1201
+2025-01-16 07:06:22 - INFO - New data fetched, processing now.
+2025-01-16 07:06:22 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+301  1737009000000      3.059  ...        2.975838             NaN
+
+[1 rows x 7 columns]
+2025-01-16 07:06:22 - INFO - Supertrend indicator applied.
+2025-01-16 07:06:22 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+301  1737009000000      3.059  ...        2.892625             NaN
+
+[1 rows x 9 columns]
+2025-01-16 07:06:22 - INFO - Ichimoku cloud indicator applied.
+2025-01-16 07:06:22 - INFO - Previous up trend: 2.9758383383665876
+2025-01-16 07:06:22 - INFO - Current up trend: 2.9758383383665876
+2025-01-16 07:06:22 - INFO - Trend: unchange
+2025-01-16 07:06:22 - INFO - Suggested Action: Long
+2025-01-16 07:06:22 - INFO - Previous Action: None
+2025-01-16 07:06:22 - INFO - Suggested Action: Long
+2025-01-16 07:06:22 - INFO - Current XRPUSDT Mark Price: 3.13511743
+2025-01-16 07:06:22 - INFO - Expected XRPUSDT Amount: 159
+2025-01-16 07:06:22 - INFO - Current Opened XRPUSDT Amount: 0.0
+2025-01-16 07:06:22 - INFO - at: 2025-01-16 06:30:00 - Open Long
+2025-01-16 07:07:22 - INFO - Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:07:22 - INFO - CSV length before appending: 302
+2025-01-16 07:07:22 - INFO - Rounded timestamp: 2025-01-16 07:00:00, Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:07:22 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 1
+2025-01-16 07:07:22 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 2
+2025-01-16 07:07:22 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-16 07:07:22 - INFO - before dropping :1
+2025-01-16 07:07:22 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-16 07:07:22 - INFO - No new data to append.
+2025-01-16 07:08:22 - INFO - Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:08:22 - INFO - CSV length before appending: 302
+2025-01-16 07:08:22 - INFO - Rounded timestamp: 2025-01-16 07:00:00, Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:08:22 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 1
+2025-01-16 07:08:22 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 2
+2025-01-16 07:08:22 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-16 07:08:22 - INFO - before dropping :1
+2025-01-16 07:08:22 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-16 07:08:22 - INFO - No new data to append.
+2025-01-16 07:09:22 - INFO - Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:09:22 - INFO - CSV length before appending: 302
+2025-01-16 07:09:22 - INFO - Rounded timestamp: 2025-01-16 07:00:00, Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:09:22 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 1
+2025-01-16 07:09:23 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 2
+2025-01-16 07:09:23 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-16 07:09:23 - INFO - before dropping :1
+2025-01-16 07:09:23 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-16 07:09:23 - INFO - No new data to append.
+2025-01-16 07:10:23 - INFO - Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:10:23 - INFO - CSV length before appending: 302
+2025-01-16 07:10:23 - INFO - Rounded timestamp: 2025-01-16 07:00:00, Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:10:23 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 1
+2025-01-16 07:10:23 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 2
+2025-01-16 07:10:23 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-16 07:10:23 - INFO - before dropping :1
+2025-01-16 07:10:23 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-16 07:10:23 - INFO - No new data to append.
+2025-01-16 07:11:23 - INFO - Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:11:23 - INFO - CSV length before appending: 302
+2025-01-16 07:11:23 - INFO - Rounded timestamp: 2025-01-16 07:00:00, Last opentime in CSV: 2025-01-16 06:30:00
+2025-01-16 07:11:23 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 1
+2025-01-16 07:11:23 - INFO - 2025-01-16 07:01:00 status: True, time: 1737010860000, calls: 2
+2025-01-16 07:11:23 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-16 07:11:23 - INFO - before dropping :1
+2025-01-16 07:11:23 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-16 07:11:23 - INFO - No new data to append.

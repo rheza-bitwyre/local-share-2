@@ -22,7 +22,7 @@ import math
 #################################### Config ####################################
 API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
 API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
-trade_amount_usdt = 20
+trade_amount_usdt = 500
 symbol = 'XRPUSDT'
 path = '/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_XRP'
 log_filename = 'binance_stic_xrp_bot_v1_1_QA'
@@ -550,29 +550,29 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
     if prev_action is None:
         if suggested_action == 'Long':
             curr_action = 'Open Long'
-            # binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
+            binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
             prev_action = 'Long'
         elif suggested_action == 'Short':
             curr_action = 'Open Short'
-            # binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
+            binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
             prev_action = 'Short'
     elif prev_action == 'Long' and suggested_action == 'Close':
         curr_action = 'Close Long'
-        # binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+        binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
         prev_action = None
     elif prev_action == 'Short' and suggested_action == 'Close':
         curr_action = 'Close Short'
-        # binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+        binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
         prev_action = None
     elif prev_action == 'Long' and suggested_action == 'Short':
         curr_action = 'Close Long & Open Short'
-        # binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
-        # binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
+        binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+        binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
         prev_action = 'Short'
     elif prev_action == 'Short' and suggested_action == 'Long':
         curr_action = 'Close Short & Open Long'
-        # binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
-        # binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
+        binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+        binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
         prev_action = 'Long'
 
     # Handle CSV updates and timestamp conversion outside of main logic to optimize

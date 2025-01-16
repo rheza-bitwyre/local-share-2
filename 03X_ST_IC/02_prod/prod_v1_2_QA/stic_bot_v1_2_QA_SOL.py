@@ -313,6 +313,9 @@ def determine_suggested_action(df,postion_option = 2, body_size_threshold_close 
     # Extract scalar values from the second last row
     up_trend_second_last = last_two_rows['Up Trend'].iloc[0]
 
+    logging.info(f"Last Close: {closeprice_last}")
+    logging.info(f"Last Up Trend: {up_trend_last}")
+    logging.info(f"Last Down trend: {down_trend_last}")
     logging.info(f"Previous up trend: {up_trend_second_last}")
     logging.info(f"Current up trend: {up_trend_last}")
 
@@ -336,7 +339,6 @@ def determine_suggested_action(df,postion_option = 2, body_size_threshold_close 
 
     ## to close the opened position earlier
     # only when open a position for the first time on a single term of trend, doesnt change trend
-    reversal_open = None
     early_close = None
     if last_body_size >= body_size_threshold_close :
         if bull_last == 1 :
@@ -357,24 +359,47 @@ def determine_suggested_action(df,postion_option = 2, body_size_threshold_close 
     logging.info(f"Re-Open: {reopen}")
 
     # Determine the suggested action
-    if postion_option == 2: # will open both open and short
+    if postion_option == 2:  # will open both open and short
         if trend == 'change':
             opened_position = 0
             suggested_action = 'Close'
-        elif trend == 'unchange' and pd.notna(up_trend_last) and closeprice_last > (leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last):
-            suggested_action = 'Long'
-        elif trend == 'unchange' and pd.notna(down_trend_last) and closeprice_last < (leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last):
-            suggested_action = 'Short'
-    elif postion_option == 1: # will only open long
+        elif trend == 'unchange':
+            if pd.notna(up_trend_last):
+                # Compare with the available leading span (either a or b)
+                leading_span = leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last
+                if closeprice_last > leading_span:
+                    suggested_action = 'Long'
+                else:
+                    suggested_action = 'Short'
+            elif pd.notna(down_trend_last):
+                # Compare with the available leading span (either a or b)
+                leading_span = leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last
+                if closeprice_last < leading_span:
+                    suggested_action = 'Short'
+                else:
+                    suggested_action = 'Long'
+
+    elif postion_option == 1:  # will only open long
         if trend == 'change':
             suggested_action = 'Close'
-        elif trend == 'unchange' and pd.notna(up_trend_last) and closeprice_last > (leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last):
-            suggested_action = 'Long'
-    elif postion_option == -1: # will only open short
+        elif trend == 'unchange' and pd.notna(up_trend_last):
+            # Compare with the available leading span (either a or b)
+            leading_span = leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last
+            if closeprice_last > leading_span:
+                suggested_action = 'Long'
+            else:
+                suggested_action = 'Hold'  # Or any other appropriate fallback action
+            
+    elif postion_option == -1:  # will only open short
         if trend == 'change':
             suggested_action = 'Close'
-        elif trend == 'unchange' and pd.notna(down_trend_last) and closeprice_last < (leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last):
-            suggested_action = 'Short'
+        elif trend == 'unchange' and pd.notna(down_trend_last):
+            # Compare with the available leading span (either a or b)
+            leading_span = leading_span_a_last if pd.notna(leading_span_a_last) else leading_span_b_last
+            if closeprice_last < leading_span:
+                suggested_action = 'Short'
+            else:
+                suggested_action = 'Hold'  # Or any other appropriate fallback action
     else:
         suggested_action = None
 
@@ -666,6 +691,8 @@ def main():
         prev_action = None
         opened_position = 0  # No position is opened
 
+    logging.info(f'Current Opened Position: {prev_action} | {opened_position}')
+
     while True:
         try:
             # Fetch new data continuously
@@ -692,9 +719,6 @@ def main():
 
                         # Define action suggestion
                         suggested_action, early_close, reopen, opened_position = determine_suggested_action(df_st_ic, opened_position)
-
-                        # Log suggested action
-                        logging.info(f'Suggested Action: {suggested_action}, Early Close: {early_close}, Reopen: {reopen}')
 
                         # Define real action and log it
                         current_action, new_prev_action, opened_position = handle_trading_action(suggested_action, prev_action, early_close, reopen, opened_position, trade_amount_usdt, symbol, API_KEY, API_SECRET)
