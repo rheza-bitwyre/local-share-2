@@ -551,7 +551,7 @@ class BinanceAPI:
 
         return {"active_positions": active_positions, "trade": "active"}
 
-def handle_trading_action(suggested_action, prev_action=None, early_close=None, reopen=None, opened_position=0, trade_amount_usdt=5000, symbol='SOLUSDT',API_KEY=None, API_SECRET=None):
+def handle_trading_action(suggested_action, prev_action=None, early_close=None, reopen=None, opened_position=0, trade_amount_usdt=100, symbol='SOLUSDT',API_KEY=None, API_SECRET=None):
     # Initialize connection to Binance
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
@@ -697,7 +697,7 @@ def main():
                         logging.info(f'Suggested Action: {suggested_action}, Early Close: {early_close}, Reopen: {reopen}')
 
                         # Define real action and log it
-                        current_action, new_prev_action, opened_position = handle_trading_action(suggested_action, prev_action, early_close, reopen, opened_position, API_KEY=API_KEY, API_SECRET=API_SECRET)
+                        current_action, new_prev_action, opened_position = handle_trading_action(suggested_action, prev_action, early_close, reopen, opened_position, trade_amount_usdt, symbol, API_KEY, API_SECRET)
                         logging.info(f'Current Action: {current_action}, Opened Position: {opened_position}')
 
                         # Update previous action
