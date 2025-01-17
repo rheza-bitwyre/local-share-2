@@ -534,7 +534,7 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
     # If previous action is the same as suggested action, no need to take any new action
     if prev_action == suggested_action:
         logging.info("No action needed as previous and suggested actions are the same.")
-        return None, prev_action
+        return prev_action
 
     # Get the current mark price
     mark_price = float(binance_api.get_mark_price(symbol).get('markPrice', 0))
