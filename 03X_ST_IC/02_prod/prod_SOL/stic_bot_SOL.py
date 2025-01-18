@@ -22,7 +22,7 @@ import math
 #################################### Config ####################################
 API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
 API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
-trade_amount_usdt = 1000
+trade_amount_usdt = 1500
 symbol = 'SOLUSDT'
 path = '/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SOL'
 log_filename = 'binance_stic_sol_bot_v1_1_QA'

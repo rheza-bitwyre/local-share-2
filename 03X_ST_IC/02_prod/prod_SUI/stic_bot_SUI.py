@@ -22,7 +22,7 @@ import math
 #################################### Config ####################################
 API_KEY = "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC"
 API_SECRET = "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl"
-trade_amount_usdt = 500
+trade_amount_usdt = 250
 symbol = 'SUIUSDT'
 path = '/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SUI'
 log_filename = 'binance_stic_sui_bot_v1_1_QA'
@@ -540,7 +540,7 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
 
     # Calculate the position quantity
     coin_quantity = trade_amount_usdt / mark_price
-    position_coin_amount = math.floor(coin_quantity)
+    position_coin_amount = float(round(coin_quantity, 2))
     logging.info(f'Expected {symbol} Amount: {position_coin_amount}')
 
     # Get current coin amount (position)
