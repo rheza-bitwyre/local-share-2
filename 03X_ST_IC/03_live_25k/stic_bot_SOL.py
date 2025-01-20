@@ -558,7 +558,7 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
         logging.info(f'USDT Available Balance: {usdt_balance}')
 
         # Determine Trade Amount
-        trade_amount_usdt = usdt_balance (1/proportion) / life / safe_fac
+        trade_amount_usdt = usdt_balance * proportion / life / safe_fac
         logging.info(f'Datermined Trade Amount: {trade_amount_usdt} USDT')
 
     # Get the current mark price
@@ -662,7 +662,7 @@ def main():
     logging.info(f'USDT Available Balance: {usdt_balance}')
 
     # Determine Trade Amount
-    trade_amount_usdt = usdt_balance (1/proportion) / life / safe_fac
+    trade_amount_usdt = usdt_balance * proportion / life / safe_fac
     logging.info(f'Determined Trade Amount: {trade_amount_usdt} USDT')
 
     # Get the initial position (if any) for the first action
@@ -681,7 +681,7 @@ def main():
         logging.info(f'USDT Available Balance: {usdt_balance}')
 
         # Determine Trade Amount
-        trade_amount_usdt = usdt_balance (1/proportion) / life / safe_fac
+        trade_amount_usdt = usdt_balance * proportion / life / safe_fac
         logging.info(f'Determined Trade Amount: {trade_amount_usdt} USDT')
 
     while True:
