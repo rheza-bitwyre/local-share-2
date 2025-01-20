@@ -1,0 +1,12 @@
+{
+    "API_KEY": "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC",
+    "API_SECRET": "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl",
+    "trade_amount_usdt" : 100,
+    "proportion": 0.25,
+    "life": 5,
+    "safe_fac": 1.36,
+    "symbol": "XRPUSDT",
+    "path": "/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k",
+    "log_filename": "binance_stic_xrp_bot_25k",
+    "csv_filename": "historical_OHLC_XRP.csv"
+  }  

@@ -21,7 +21,7 @@ import math
 import json
 
 # Load the configuration from the JSON file
-with open("/home/ubuntu/Rheza/local-share/03X_ST_IC/02_prod/prod_SOL/stic_binance_SOL_config.json", "r") as file:
+with open("/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k/stic_binance_SOL_config.json", "r") as file:
     config = json.load(file)
 
 # Access configuration values
@@ -538,7 +538,7 @@ class BinanceAPI:
         params["signature"] = self._generate_signature(params)
         return self._send_request("GET", endpoint, params=params)
 
-def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='SOLUSDT',proportion = 0.01, life = 20, safe_fac = 2, API_KEY=None, API_SECRET=None):
+def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='SOLUSDT',proportion = 0.01, life = 20, safe_fac = 2, API_KEY=None, API_SECRET=None, position = 2):
     # Initiate connection to Binance
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
@@ -574,33 +574,72 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
     close_position_coin_amount = float(binance_api.get_mark_price(symbol).get('positionAmt', 0))
     logging.info(f'Current Opened {symbol} Amount: {close_position_coin_amount}')
 
-    if prev_action is None:
-        if suggested_action == 'Long':
+    if position == 2: # long and short
+        if prev_action is None:
+            if suggested_action == 'Long':
+                curr_action = 'Open Long'
+                binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
+                prev_action = 'Long'
+            elif suggested_action == 'Short':
+                curr_action = 'Open Short'
+                binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
+                prev_action = 'Short'
+        elif prev_action == 'Long' and suggested_action == 'Close':
+            curr_action = 'Close Long'
+            binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+            prev_action = None
+        elif prev_action == 'Short' and suggested_action == 'Close':
+            curr_action = 'Close Short'
+            binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+            prev_action = None
+        elif prev_action == 'Long' and suggested_action == 'Short':
+            curr_action = 'Close Long & Open Short'
+            binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+            binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
+            prev_action = 'Short'
+        elif prev_action == 'Short' and suggested_action == 'Long':
+            curr_action = 'Close Short & Open Long'
+            binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+            binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
+            prev_action = 'Long'
+
+    if position == 1: # only long
+        if prev_action is None:
+            if suggested_action == 'Long':
+                curr_action = 'Open Long'
+                binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
+                prev_action = 'Long'
+        elif prev_action == 'Long' and suggested_action == 'Close':
+            curr_action = 'Close Long'
+            binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+            prev_action = None
+        elif prev_action == 'Long' and suggested_action == 'Short':
+            curr_action = 'Close Long'
+            binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+            prev_action = None
+        elif prev_action == 'Short' and suggested_action == 'Long':
             curr_action = 'Open Long'
             binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
             prev_action = 'Long'
-        elif suggested_action == 'Short':
+
+    if position == -1: # only short
+        if prev_action is None:
+            if suggested_action == 'Short':
+                curr_action = 'Open Short'
+                binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
+                prev_action = 'Short'
+        elif prev_action == 'Short' and suggested_action == 'Close':
+            curr_action = 'Close Short'
+            binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+            prev_action = None
+        elif prev_action == 'Long' and suggested_action == 'Short':
             curr_action = 'Open Short'
             binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
             prev_action = 'Short'
-    elif prev_action == 'Long' and suggested_action == 'Close':
-        curr_action = 'Close Long'
-        binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
-        prev_action = None
-    elif prev_action == 'Short' and suggested_action == 'Close':
-        curr_action = 'Close Short'
-        binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
-        prev_action = None
-    elif prev_action == 'Long' and suggested_action == 'Short':
-        curr_action = 'Close Long & Open Short'
-        binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
-        binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
-        prev_action = 'Short'
-    elif prev_action == 'Short' and suggested_action == 'Long':
-        curr_action = 'Close Short & Open Long'
-        binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
-        binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
-        prev_action = 'Long'
+        elif prev_action == 'Short' and suggested_action == 'Long':
+            curr_action = 'Close Short'
+            binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+            prev_action = None
 
     # Handle CSV updates and timestamp conversion outside of main logic to optimize
     new_df = pd.read_csv(f'{path}/{csv_filename}')
