@@ -6,6 +6,7 @@
     "life": 5,
     "safe_fac": 1.36,
     "symbol": "XRPUSDT",
+    "position" : 2,
     "path": "/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k",
     "log_filename": "binance_stic_xrp_bot_25k",
     "csv_filename": "historical_OHLC_XRP.csv"

@@ -31,6 +31,7 @@ proportion = config["proportion"]
 life = config["life"]
 safe_fac = config["safe_fac"]
 symbol = config["symbol"]
+position = config["position"]
 path = config["path"]
 log_filename = config["log_filename"]
 csv_filename = config["csv_filename"]
@@ -47,7 +48,7 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 
-logging.info(f"Trading symbol: {symbol}, Log file: {log_filename}")
+logging.info(f"Trading symbol: {symbol}, Log file: {log_filename}_{today_datetime}")
 
 def binance_recursive_fetch_2(coins, interval, starttime, endtime=None, data_type='futures'):
 
@@ -706,8 +707,8 @@ def main():
             suggested_action = determine_suggested_action(df_st_ic)
 
             # Define real action and log it
-            new_prev_action = handle_trading_action(suggested_action, prev_action, trade_amount_usdt, symbol, proportion, life, safe_fac, API_KEY, API_SECRET)
-
+            new_prev_action = handle_trading_action(suggested_action, prev_action, trade_amount_usdt, symbol, proportion, life, safe_fac, API_KEY, API_SECRET, position)
+            
             # Update previous action
             prev_action = new_prev_action
 

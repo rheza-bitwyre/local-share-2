@@ -6,6 +6,7 @@
     "life": 5,
     "safe_fac": 1.52,
     "symbol": "SUIUSDT",
+    "position" : 2,
     "path": "/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k",
     "log_filename": "binance_stic_sui_bot_25k",
     "csv_filename": "historical_OHLC_SUI.csv"
