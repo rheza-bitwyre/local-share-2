@@ -7,6 +7,10 @@
     "safe_fac": 1.28,
     "symbol": "SOLUSDT",
     "position" : 2,
+    "long_tp" : 2.2,
+    "long_sl" : -1.9,
+    "short_tp" : 1,
+    "short_sl" : -1,
     "path": "/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k",
     "log_filename": "binance_stic_sol_bot_25k",
     "csv_filename": "historical_OHLC_SOL.csv"
