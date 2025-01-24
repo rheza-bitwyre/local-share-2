@@ -1,0 +1,36 @@
+2025-01-24 07:19:11 - INFO - Trading symbol: SUIUSDT, Log file: binance_stic_sui_bot_25k_20250124071911
+2025-01-24 07:19:11 - INFO - USDT Available Balance: 14376.91349698
+2025-01-24 07:19:11 - INFO - Determined Trade Amount: 472.92478608486846 USDT
+2025-01-24 07:19:11 - INFO - Last opentime in CSV: 2025-01-24 06:30:00
+2025-01-24 07:19:11 - INFO - CSV length before appending: 686
+2025-01-24 07:19:11 - INFO - Rounded timestamp: 2025-01-24 07:00:00, Last opentime in CSV: 2025-01-24 06:30:00
+2025-01-24 07:19:11 - INFO - 2025-01-24 07:01:00 status: True, time: 1737702060000, calls: 1
+2025-01-24 07:19:11 - INFO - 2025-01-24 07:01:00 status: True, time: 1737702060000, calls: 2
+2025-01-24 07:19:11 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 07:19:11 - INFO - before dropping :1
+2025-01-24 07:19:11 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 07:19:11 - INFO - No new data to append.
+2025-01-24 07:20:11 - INFO - Last opentime in CSV: 2025-01-24 06:30:00
+2025-01-24 07:20:11 - INFO - CSV length before appending: 686
+2025-01-24 07:20:11 - INFO - Rounded timestamp: 2025-01-24 07:00:00, Last opentime in CSV: 2025-01-24 06:30:00
+2025-01-24 07:20:12 - INFO - 2025-01-24 07:01:00 status: True, time: 1737702060000, calls: 1
+2025-01-24 07:20:12 - INFO - 2025-01-24 07:01:00 status: True, time: 1737702060000, calls: 2
+2025-01-24 07:20:12 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 07:20:12 - INFO - before dropping :1
+2025-01-24 07:20:12 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 07:20:12 - INFO - No new data to append.
+2025-01-24 07:21:12 - INFO - Last opentime in CSV: 2025-01-24 06:30:00
+2025-01-24 07:21:12 - INFO - CSV length before appending: 686
+2025-01-24 07:21:12 - INFO - Rounded timestamp: 2025-01-24 07:00:00, Last opentime in CSV: 2025-01-24 06:30:00
+2025-01-24 07:21:12 - INFO - 2025-01-24 07:01:00 status: True, time: 1737702060000, calls: 1
+2025-01-24 07:21:12 - INFO - 2025-01-24 07:01:00 status: True, time: 1737702060000, calls: 2
+2025-01-24 07:21:12 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 07:21:12 - INFO - before dropping :1
+2025-01-24 07:21:12 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 07:21:12 - INFO - No new data to append.
