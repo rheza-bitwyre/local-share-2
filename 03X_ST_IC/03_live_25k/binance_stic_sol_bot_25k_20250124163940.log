@@ -1,0 +1,16 @@
+2025-01-24 16:39:40 - INFO - Trading symbol: SOLUSDT, Log file: binance_stic_sol_bot_25k_20250124163940
+2025-01-24 16:39:40 - INFO - USDT Available Balance: 24852.06573731
+2025-01-24 16:39:40 - INFO - Determined Trade Amount: 300 USDT
+2025-01-24 16:39:40 - INFO - USDT Available Balance: 24852.06573731
+2025-01-24 16:39:40 - INFO - Determined Trade Amount: 1941.5676357273437 USDT
+2025-01-24 16:39:40 - INFO - Last opentime in CSV: 2025-01-24 16:00:00
+2025-01-24 16:39:40 - INFO - CSV length before appending: 776
+2025-01-24 16:39:40 - INFO - Rounded timestamp: 2025-01-24 16:30:00, Last opentime in CSV: 2025-01-24 16:00:00
+2025-01-24 16:39:40 - INFO - 2025-01-24 16:31:00 status: True, time: 1737736260000, calls: 1
+2025-01-24 16:39:40 - INFO - 2025-01-24 16:31:00 status: True, time: 1737736260000, calls: 2
+2025-01-24 16:39:40 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 16:39:40 - INFO - before dropping :1
+2025-01-24 16:39:40 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 16:39:40 - INFO - No new data to append.
