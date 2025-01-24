@@ -747,6 +747,7 @@ def main():
 
     # Determine Trade Amount
     trade_amount_usdt = usdt_balance * proportion / life / safe_fac
+    trade_amount_usdt = 30
     logging.info(f'Determined Trade Amount: {trade_amount_usdt} USDT')
 
     # Get the initial position (if any) for the first action

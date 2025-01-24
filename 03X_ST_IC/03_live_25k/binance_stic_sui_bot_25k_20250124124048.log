@@ -1,0 +1,39 @@
+2025-01-24 12:40:48 - INFO - Trading symbol: SUIUSDT, Log file: binance_stic_sui_bot_25k_20250124124048
+2025-01-24 12:40:48 - INFO - USDT Available Balance: 19852.72025964
+2025-01-24 12:40:48 - INFO - Determined Trade Amount: 653.0500085407893 USDT
+2025-01-24 12:40:48 - INFO - Last opentime in CSV: 2025-01-24 07:00:00
+2025-01-24 12:40:48 - INFO - CSV length before appending: 687
+2025-01-24 12:40:48 - INFO - Rounded timestamp: 2025-01-24 12:30:00, Last opentime in CSV: 2025-01-24 07:00:00
+2025-01-24 12:40:48 - INFO - 2025-01-24 12:31:00 status: True, time: 1737721860000, calls: 1
+2025-01-24 12:40:48 - INFO - 2025-01-24 12:31:00 status: True, time: 1737721860000, calls: 2
+2025-01-24 12:40:48 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 12:40:48 - INFO - before dropping :11
+2025-01-24 12:40:48 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1737703800000     4.3684     4.3858    4.3540      4.3783
+1  1737705600000     4.3782     4.4273    4.3730      4.4256
+2  1737707400000     4.4255     4.4274    4.3926      4.4106
+3  1737709200000     4.4106     4.4320    4.3920      4.4069
+4  1737711000000     4.4069     4.4186    4.3956      4.4090
+5  1737712800000     4.4089     4.4166    4.3773      4.3935
+6  1737714600000     4.3935     4.4610    4.3925      4.4540
+7  1737716400000     4.4539     4.4840    4.4386      4.4658
+8  1737718200000     4.4658     4.4826    4.4358      4.4410
+9  1737720000000     4.4410     4.4607    4.4078      4.4097
+2025-01-24 12:40:48 - INFO - 10 new rows fetched and appended successfully.
+2025-01-24 12:40:48 - INFO - New CSV length after appending: 697
+2025-01-24 12:40:48 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+696  1737720000000      4.441     4.4607    4.4078      4.4097
+2025-01-24 12:40:48 - INFO - New data fetched, processing now.
+2025-01-24 12:40:48 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+696  1737720000000      4.441  ...        4.305452             NaN
+
+[1 rows x 7 columns]
+2025-01-24 12:40:48 - INFO - Supertrend indicator applied.
+2025-01-24 12:40:48 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+696  1737720000000      4.441  ...        4.300825             NaN
+
+[1 rows x 9 columns]
+2025-01-24 12:40:48 - INFO - Ichimoku cloud indicator applied.
+2025-01-24 12:40:48 - INFO - Previous up trend: 4.305451916651005
+2025-01-24 12:40:48 - INFO - Current up trend: 4.305451916651005
+2025-01-24 12:40:48 - INFO - Trend: unchange

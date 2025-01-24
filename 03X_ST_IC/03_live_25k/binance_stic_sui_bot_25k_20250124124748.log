@@ -1,0 +1,14 @@
+2025-01-24 12:47:48 - INFO - Trading symbol: SUIUSDT, Log file: binance_stic_sui_bot_25k_20250124124748
+2025-01-24 12:47:48 - INFO - USDT Available Balance: 19851.92667847
+2025-01-24 12:47:48 - INFO - Determined Trade Amount: 30 USDT
+2025-01-24 12:47:48 - INFO - Last opentime in CSV: 2025-01-24 12:00:00
+2025-01-24 12:47:48 - INFO - CSV length before appending: 697
+2025-01-24 12:47:48 - INFO - Rounded timestamp: 2025-01-24 12:30:00, Last opentime in CSV: 2025-01-24 12:00:00
+2025-01-24 12:47:48 - INFO - 2025-01-24 12:31:00 status: True, time: 1737721860000, calls: 1
+2025-01-24 12:47:48 - INFO - 2025-01-24 12:31:00 status: True, time: 1737721860000, calls: 2
+2025-01-24 12:47:48 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 12:47:48 - INFO - before dropping :1
+2025-01-24 12:47:48 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 12:47:48 - INFO - No new data to append.
