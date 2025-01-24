@@ -1,0 +1,58 @@
+2025-01-24 17:53:25 - INFO - Trading symbol: XRPUSDT, Log file: binance_stic_xrp_bot_25k_20250124175325
+2025-01-24 17:53:25 - INFO - USDT Available Balance: 24852.06568967
+2025-01-24 17:53:25 - INFO - Determined Trade Amount: 30 USDT
+2025-01-24 17:53:25 - INFO - USDT Available Balance: 24852.06568967
+2025-01-24 17:53:25 - INFO - Determined Trade Amount: 913.6788856496322 USDT
+2025-01-24 17:53:25 - INFO - Last opentime in CSV: 2025-01-18 08:00:00
+2025-01-24 17:53:25 - INFO - CSV length before appending: 401
+2025-01-24 17:53:25 - INFO - Rounded timestamp: 2025-01-24 17:30:00, Last opentime in CSV: 2025-01-18 08:00:00
+2025-01-24 17:53:25 - INFO - 2025-01-24 17:31:00 status: True, time: 1737739860000, calls: 1
+2025-01-24 17:53:25 - INFO - 2025-01-24 17:31:00 status: True, time: 1737739860000, calls: 2
+2025-01-24 17:53:25 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 17:53:25 - INFO - before dropping :307
+2025-01-24 17:53:25 - INFO -           opentime  openprice  highprice  lowprice  closeprice
+0    1737189000000     3.1057     3.1389    3.1018      3.1330
+1    1737190800000     3.1331     3.1430    3.1118      3.1224
+2    1737192600000     3.1224     3.1283    3.0952      3.1256
+3    1737194400000     3.1256     3.1347    3.0916      3.0977
+4    1737196200000     3.0977     3.1148    3.0551      3.1040
+..             ...        ...        ...       ...         ...
+301  1737730800000     3.1811     3.1872    3.1574      3.1622
+302  1737732600000     3.1622     3.1658    3.1350      3.1646
+303  1737734400000     3.1646     3.1697    3.1521      3.1583
+304  1737736200000     3.1583     3.1672    3.1477      3.1512
+305  1737738000000     3.1511     3.1596    3.1294      3.1585
+
+[306 rows x 5 columns]
+2025-01-24 17:53:25 - INFO - 306 new rows fetched and appended successfully.
+2025-01-24 17:53:25 - INFO - New CSV length after appending: 707
+2025-01-24 17:53:25 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+706  1737738000000     3.1511     3.1596    3.1294      3.1585
+2025-01-24 17:53:25 - INFO - New data fetched, processing now.
+2025-01-24 17:53:25 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+706  1737738000000     3.1511  ...         3.12995             NaN
+
+[1 rows x 7 columns]
+2025-01-24 17:53:25 - INFO - Supertrend indicator applied.
+2025-01-24 17:53:25 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+706  1737738000000     3.1511  ...          3.1051             NaN
+
+[1 rows x 9 columns]
+2025-01-24 17:53:25 - INFO - Ichimoku cloud indicator applied.
+2025-01-24 17:53:25 - INFO - Previous up trend: 3.129949720753926
+2025-01-24 17:53:25 - INFO - Current up trend: 3.129949720753926
+2025-01-24 17:53:25 - INFO - Trend: unchange
+2025-01-24 17:53:25 - INFO - Active Position: 1
+2025-01-24 17:53:25 - INFO - Suggested Action: Long
+2025-01-24 17:53:25 - INFO - Previous Action: None
+2025-01-24 17:53:25 - INFO - Suggested Action: Long
+2025-01-24 17:53:25 - INFO - Active Position: 1
+2025-01-24 17:53:25 - INFO - USDT Available Balance: 24852.06568967
+2025-01-24 17:53:25 - INFO - Datermined Trade Amount: 30 USDT
+2025-01-24 17:53:26 - INFO - Current XRPUSDT Mark Price: 3.1587
+2025-01-24 17:53:26 - INFO - Expected XRPUSDT Amount: 9
+2025-01-24 17:53:26 - INFO - Current Opened XRPUSDT Amount: 0.0
+2025-01-24 17:53:26 - INFO - at: 2025-01-24 17:00:00 - No action taken
+2025-01-24 17:54:26 - INFO - Last opentime in CSV: 2025-01-24 17:00:00
+2025-01-24 17:54:26 - INFO - CSV length before appending: 707
+2025-01-24 17:54:26 - INFO - Rounded timestamp: 2025-01-24 17:30:00, Last opentime in CSV: 2025-01-24 17:00:00

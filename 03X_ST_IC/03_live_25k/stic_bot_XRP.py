@@ -21,7 +21,7 @@ import math
 import json
 
 # Load the configuration from the JSON file
-with open("/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k/stic_binance_SUI_config.json", "r") as file:
+with open("/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k/stic_binance_XRP_config.json", "r") as file:
     config = json.load(file)
 
 # Access configuration values
@@ -329,7 +329,7 @@ def determine_suggested_action(df,postion_option = 2):
     logging.info(f"Previous up trend: {up_trend_second_last}")
     logging.info(f"Current up trend: {up_trend_last}")
 
-    active_pos = None
+    active_pos = 1
 
     # Check if the trend has changed
     if (pd.isna(up_trend_last) and pd.isna(up_trend_second_last)):
@@ -614,7 +614,7 @@ class BinanceAPI:
         params["signature"] = self._generate_signature(params)
         return self._send_request("GET", endpoint, params=params)
 
-def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='SUIUSDT',proportion = 0.01, life = 20, safe_fac = 2, API_KEY=None, API_SECRET=None, position = 2, active_pos = 1):
+def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='XRPUSDT',proportion = 0.01, life = 20, safe_fac = 2, API_KEY=None, API_SECRET=None, position = 2, active_pos = 1):
     # Initiate connection to Binance
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
@@ -756,7 +756,7 @@ def main():
     # Get the initial position (if any) for the first action
     prev_action = None
     active_pos = 1
-    
+
     gpr = binance_api.get_position_risk(symbol=symbol)
 
     if gpr:
