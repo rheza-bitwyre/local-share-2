@@ -538,6 +538,73 @@ class BinanceAPI:
         }
         params["signature"] = self._generate_signature(params)
         return self._send_request("GET", endpoint, params=params)
+        
+    def create_order_with_tp_sl(
+        self,
+        symbol: str,
+        side: str,
+        order_type: str,
+        quantity: float,
+        price: float = None,
+        tp: float = None,
+        sl: float = None,
+        reduce_only: bool = False,
+    ) -> dict:
+        """
+        Create a new order with optional take profit (TP) and stop loss (SL).
+        """
+        params = {
+            "symbol": symbol,
+            "side": side,
+            "type": order_type,
+            "quantity": quantity,
+            "reduceOnly": reduce_only,
+        }
+
+        if price:
+            params["price"] = price
+
+        if tp or sl:
+            if not (order_type == "MARKET" or order_type == "LIMIT"):
+                raise ValueError("TP/SL can only be set for MARKET or LIMIT orders.")
+
+            if tp:
+                tp_side = "SELL" if side == "BUY" else "BUY"
+                tp_order = self._send_request(
+                    "POST",
+                    "/fapi/v1/order",
+                    {
+                        "symbol": symbol,
+                        "side": tp_side,
+                        "type": "TAKE_PROFIT_MARKET",
+                        "quantity": quantity,
+                        "stopPrice": tp,
+                        "reduceOnly": True,
+                        "timestamp": int(time.time() * 1000),
+                    },
+                    signed=True,
+                )
+                logging.info(f"Take Profit order placed: {tp_order}")
+
+            if sl:
+                sl_side = "SELL" if side == "BUY" else "BUY"
+                sl_order = self._send_request(
+                    "POST",
+                    "/fapi/v1/order",
+                    {
+                        "symbol": symbol,
+                        "side": sl_side,
+                        "type": "STOP_MARKET",
+                        "quantity": quantity,
+                        "stopPrice": sl,
+                        "reduceOnly": True,
+                        "timestamp": int(time.time() * 1000),
+                    },
+                    signed=True,
+                )
+                logging.info(f"Stop Loss order placed: {sl_order}")
+
+        return self._send_request("POST", "/fapi/v1/order", params, signed=True)
 
 def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='SOLUSDT',proportion = 0.01, life = 20, safe_fac = 2, API_KEY=None, API_SECRET=None, position = 2):
     # Initiate connection to Binance
@@ -587,20 +654,20 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
                 prev_action = 'Short'
         elif prev_action == 'Long' and suggested_action == 'Close':
             curr_action = 'Close Long'
-            binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+            binance_api.create_order(symbol, "SELL", "MARKET", -close_position_coin_amount)
             prev_action = None
         elif prev_action == 'Short' and suggested_action == 'Close':
             curr_action = 'Close Short'
-            binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+            binance_api.create_order(symbol, "BUY", "MARKET", -close_position_coin_amount)
             prev_action = None
         elif prev_action == 'Long' and suggested_action == 'Short':
             curr_action = 'Close Long & Open Short'
-            binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
+            binance_api.create_order(symbol, "SELL", "MARKET", -close_position_coin_amount)
             binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount)
             prev_action = 'Short'
         elif prev_action == 'Short' and suggested_action == 'Long':
             curr_action = 'Close Short & Open Long'
-            binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+            binance_api.create_order(symbol, "BUY", "MARKET", -close_position_coin_amount)
             binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount)
             prev_action = 'Long'
 
@@ -651,7 +718,13 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
 
     return prev_action
 
-###########################################################################        
+########################################################################### 
+
+long_tp = 2
+long_sl = -2
+short_tp = 4
+short_sl = -6
+     
 # Main Loop
 def main():
     # Initialize connection to Binancee
@@ -687,6 +760,53 @@ def main():
 
     while True:
         new_row_count = fetch_and_append_data(f_symbol)
+
+        gpr = binance_api.get_position_risk(symbol=symbol)
+
+        # Check Active position ROI
+        if gpr :
+            # Get the current mark price
+            mark_price = float(binance_api.get_mark_price(symbol).get('markPrice', 0))
+            entry_price = float(binance_api.get_mark_price(symbol).get('entryPrice', 0))
+            
+            if float(gpr[0]['entryPrice']) < float(gpr[0]['breakEvenPrice']):
+                position_type = 'Long'
+            elif float(gpr[0]['entryPrice']) > float(gpr[0]['breakEvenPrice']):
+                position_type = 'Short'
+
+            if position_type == 'Long' :
+                roi = (mark_price - entry_price)/entry_price * 100
+            elif position_type == 'Short' :
+                roi = (entry_price - mark_price)/entry_price * 100
+
+            if position_type == 'Long' and roi >= long_tp :
+                # Get current coin amount (position)
+                close_position_coin_amount = float(binance_api.get_mark_price(symbol).get('positionAmt', 0))
+                logging.info(f'Current Opened {symbol} Amount: {close_position_coin_amount}')
+                curr_action = 'Close Long'
+                binance_api.create_order(symbol, "SELL", "MARKET", -close_position_coin_amount)
+                prev_action = None
+            elif position_type == 'Long' and roi <= long_sl :
+                # Get current coin amount (position)
+                close_position_coin_amount = float(binance_api.get_mark_price(symbol).get('positionAmt', 0))
+                logging.info(f'Current Opened {symbol} Amount: {close_position_coin_amount}')
+                curr_action = 'Close Long'
+                binance_api.create_order(symbol, "SELL", "MARKET", -close_position_coin_amount)
+                prev_action = None
+            elif position_type == 'Short' and roi >= short_tp :
+                # Get current coin amount (position)
+                close_position_coin_amount = float(binance_api.get_mark_price(symbol).get('positionAmt', 0))
+                logging.info(f'Current Opened {symbol} Amount: {close_position_coin_amount}')
+                curr_action = 'Close Short'
+                binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+                prev_action = None
+            elif position_type == 'Short' and roi <= short_sl :
+               # Get current coin amount (position)
+                close_position_coin_amount = float(binance_api.get_mark_price(symbol).get('positionAmt', 0))
+                logging.info(f'Current Opened {symbol} Amount: {close_position_coin_amount}')
+                curr_action = 'Close Short'
+                binance_api.create_order(symbol, "BUY", "MARKET", close_position_coin_amount)
+                prev_action = None 
 
         if new_row_count >= 1:
             # Log the new data fetch

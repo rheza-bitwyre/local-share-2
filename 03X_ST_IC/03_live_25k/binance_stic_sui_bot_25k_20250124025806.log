@@ -1,0 +1,1077 @@
+2025-01-24 02:58:06 - INFO - Trading symbol: SUIUSDT, Log file: binance_stic_sui_bot_25k_20250124025806
+2025-01-24 02:58:06 - INFO - USDT Available Balance: 24804.74737071
+2025-01-24 02:58:06 - INFO - Determined Trade Amount: 815.9456371944079 USDT
+2025-01-24 02:58:06 - INFO - USDT Available Balance: 24804.74737071
+2025-01-24 02:58:06 - INFO - Determined Trade Amount: 815.9456371944079 USDT
+2025-01-24 02:58:06 - INFO - Last opentime in CSV: 2025-01-24 01:30:00
+2025-01-24 02:58:06 - INFO - CSV length before appending: 676
+2025-01-24 02:58:06 - INFO - Rounded timestamp: 2025-01-24 02:30:00, Last opentime in CSV: 2025-01-24 01:30:00
+2025-01-24 02:58:06 - INFO - 2025-01-24 02:31:00 status: True, time: 1737685860000, calls: 1
+2025-01-24 02:58:06 - INFO - 2025-01-24 02:31:00 status: True, time: 1737685860000, calls: 2
+2025-01-24 02:58:06 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 02:58:06 - INFO - before dropping :2
+2025-01-24 02:58:06 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1737684000000     4.1843     4.2017     4.165      4.1961
+2025-01-24 02:58:06 - INFO - 1 new rows fetched and appended successfully.
+2025-01-24 02:58:06 - INFO - New CSV length after appending: 677
+2025-01-24 02:58:06 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+676  1737684000000     4.1843     4.2017     4.165      4.1961
+2025-01-24 02:58:06 - INFO - New data fetched, processing now.
+2025-01-24 02:58:06 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+676  1737684000000     4.1843  ...             NaN        4.390409
+
+[1 rows x 7 columns]
+2025-01-24 02:58:06 - INFO - Supertrend indicator applied.
+2025-01-24 02:58:06 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+676  1737684000000     4.1843  ...        4.343775             NaN
+
+[1 rows x 9 columns]
+2025-01-24 02:58:06 - INFO - Ichimoku cloud indicator applied.
+2025-01-24 02:58:06 - INFO - Previous up trend: nan
+2025-01-24 02:58:06 - INFO - Current up trend: nan
+2025-01-24 02:58:06 - INFO - Trend: unchange
+2025-01-24 02:58:06 - INFO - Suggested Action: Short
+2025-01-24 02:58:06 - INFO - Previous Action: None
+2025-01-24 02:58:06 - INFO - Suggested Action: Short
+2025-01-24 02:58:07 - INFO - USDT Available Balance: 24804.74737071
+2025-01-24 02:58:07 - INFO - Determined Trade Amount: 815.9456371944079 USDT
+2025-01-24 02:58:07 - INFO - Current SUIUSDT Mark Price: 4.1737
+2025-01-24 02:58:07 - INFO - Expected SUIUSDT Amount: 11
+2025-01-24 02:58:07 - INFO - Current Opened SUIUSDT Amount: 0.0
+2025-01-24 02:58:07 - ERROR - API request failed: 400 Client Error: Bad Request for url: https://fapi.binance.com/fapi/v1/order?symbol=SUIUSDT&side=BUY&type=TAKE_PROFIT_MARKET&quantity=5&stopPrice=4.4241&reduceOnly=True&timestamp=1737687487211&signature=6215013df6a72e696befc1d78bbf48137e09fd2ab9f6b09568c257f1d42451b7
+2025-01-24 02:58:07 - INFO - Take Profit order placed: None
+2025-01-24 02:58:07 - ERROR - API request failed: 400 Client Error: Bad Request for url: https://fapi.binance.com/fapi/v1/order?symbol=SUIUSDT&side=SELL&type=LIMIT&quantity=5&reduceOnly=False&price=4.0068&timestamp=1737687487340&signature=b10b1ca271670102c4e03a634f0f74286a4b27aad049e35a73aabd9018fdf55f
+2025-01-24 02:58:07 - INFO - at: 2025-01-24 02:00:00 - Open Short
+2025-01-24 02:59:07 - INFO - Last opentime in CSV: 2025-01-24 02:00:00
+2025-01-24 02:59:07 - INFO - CSV length before appending: 677
+2025-01-24 02:59:07 - INFO - Rounded timestamp: 2025-01-24 02:30:00, Last opentime in CSV: 2025-01-24 02:00:00
+2025-01-24 02:59:07 - INFO - 2025-01-24 02:31:00 status: True, time: 1737685860000, calls: 1
+2025-01-24 02:59:07 - INFO - 2025-01-24 02:31:00 status: True, time: 1737685860000, calls: 2
+2025-01-24 02:59:07 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 02:59:07 - INFO - before dropping :1
+2025-01-24 02:59:07 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 02:59:07 - INFO - No new data to append.
+2025-01-24 03:00:07 - INFO - Last opentime in CSV: 2025-01-24 02:00:00
+2025-01-24 03:00:07 - INFO - CSV length before appending: 677
+2025-01-24 03:00:07 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:00:00
+2025-01-24 03:00:07 - INFO - Reached endtime at 2025-01-24 03:01:00. Stopping fetch.
+2025-01-24 03:00:07 - INFO - before dropping :2
+2025-01-24 03:00:07 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1737685800000      4.196     4.2125    4.1628      4.1789
+2025-01-24 03:00:07 - INFO - 1 new rows fetched and appended successfully.
+2025-01-24 03:00:07 - INFO - New CSV length after appending: 678
+2025-01-24 03:00:07 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+677  1737685800000      4.196     4.2125    4.1628      4.1789
+2025-01-24 03:00:07 - INFO - New data fetched, processing now.
+2025-01-24 03:00:07 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+677  1737685800000      4.196  ...             NaN        4.388947
+
+[1 rows x 7 columns]
+2025-01-24 03:00:07 - INFO - Supertrend indicator applied.
+2025-01-24 03:00:07 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+677  1737685800000      4.196  ...        4.338875             NaN
+
+[1 rows x 9 columns]
+2025-01-24 03:00:07 - INFO - Ichimoku cloud indicator applied.
+2025-01-24 03:00:07 - INFO - Previous up trend: nan
+2025-01-24 03:00:07 - INFO - Current up trend: nan
+2025-01-24 03:00:07 - INFO - Trend: unchange
+2025-01-24 03:00:07 - INFO - Suggested Action: Short
+2025-01-24 03:00:07 - INFO - Previous Action: Short
+2025-01-24 03:00:07 - INFO - Suggested Action: Short
+2025-01-24 03:00:07 - INFO - No action needed as previous and suggested actions are the same.
+2025-01-24 03:01:07 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:01:07 - INFO - CSV length before appending: 678
+2025-01-24 03:01:07 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:01:08 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:01:08 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:01:08 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:01:08 - INFO - before dropping :1
+2025-01-24 03:01:08 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:01:08 - INFO - No new data to append.
+2025-01-24 03:02:08 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:02:08 - INFO - CSV length before appending: 678
+2025-01-24 03:02:08 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:02:08 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:02:08 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:02:08 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:02:08 - INFO - before dropping :1
+2025-01-24 03:02:08 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:02:08 - INFO - No new data to append.
+2025-01-24 03:03:08 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:03:08 - INFO - CSV length before appending: 678
+2025-01-24 03:03:08 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:03:08 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:03:09 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:03:09 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:03:09 - INFO - before dropping :1
+2025-01-24 03:03:09 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:03:09 - INFO - No new data to append.
+2025-01-24 03:04:09 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:04:09 - INFO - CSV length before appending: 678
+2025-01-24 03:04:09 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:04:09 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:04:09 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:04:09 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:04:09 - INFO - before dropping :1
+2025-01-24 03:04:09 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:04:09 - INFO - No new data to append.
+2025-01-24 03:05:09 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:05:09 - INFO - CSV length before appending: 678
+2025-01-24 03:05:09 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:05:09 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:05:09 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:05:09 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:05:09 - INFO - before dropping :1
+2025-01-24 03:05:09 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:05:09 - INFO - No new data to append.
+2025-01-24 03:06:09 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:06:09 - INFO - CSV length before appending: 678
+2025-01-24 03:06:09 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:06:10 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:06:10 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:06:10 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:06:10 - INFO - before dropping :1
+2025-01-24 03:06:10 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:06:10 - INFO - No new data to append.
+2025-01-24 03:07:10 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:07:10 - INFO - CSV length before appending: 678
+2025-01-24 03:07:10 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:07:10 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:07:10 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:07:10 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:07:10 - INFO - before dropping :1
+2025-01-24 03:07:10 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:07:10 - INFO - No new data to append.
+2025-01-24 03:08:10 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:08:10 - INFO - CSV length before appending: 678
+2025-01-24 03:08:10 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:08:10 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:08:10 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:08:10 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:08:10 - INFO - before dropping :1
+2025-01-24 03:08:10 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:08:10 - INFO - No new data to append.
+2025-01-24 03:09:10 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:09:10 - INFO - CSV length before appending: 678
+2025-01-24 03:09:10 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:09:11 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:09:11 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:09:11 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:09:11 - INFO - before dropping :1
+2025-01-24 03:09:11 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:09:11 - INFO - No new data to append.
+2025-01-24 03:10:11 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:10:11 - INFO - CSV length before appending: 678
+2025-01-24 03:10:11 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:10:11 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:10:11 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:10:11 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:10:11 - INFO - before dropping :1
+2025-01-24 03:10:11 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:10:11 - INFO - No new data to append.
+2025-01-24 03:11:11 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:11:11 - INFO - CSV length before appending: 678
+2025-01-24 03:11:11 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:11:11 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:11:11 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:11:11 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:11:11 - INFO - before dropping :1
+2025-01-24 03:11:11 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:11:11 - INFO - No new data to append.
+2025-01-24 03:12:11 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:12:11 - INFO - CSV length before appending: 678
+2025-01-24 03:12:11 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:12:12 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:12:12 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:12:12 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:12:12 - INFO - before dropping :1
+2025-01-24 03:12:12 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:12:12 - INFO - No new data to append.
+2025-01-24 03:13:12 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:13:12 - INFO - CSV length before appending: 678
+2025-01-24 03:13:12 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:13:12 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:13:12 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:13:12 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:13:12 - INFO - before dropping :1
+2025-01-24 03:13:12 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:13:12 - INFO - No new data to append.
+2025-01-24 03:14:12 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:14:12 - INFO - CSV length before appending: 678
+2025-01-24 03:14:12 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:14:12 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:14:13 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:14:13 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:14:13 - INFO - before dropping :1
+2025-01-24 03:14:13 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:14:13 - INFO - No new data to append.
+2025-01-24 03:15:13 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:15:13 - INFO - CSV length before appending: 678
+2025-01-24 03:15:13 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:15:13 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:15:13 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:15:13 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:15:13 - INFO - before dropping :1
+2025-01-24 03:15:13 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:15:13 - INFO - No new data to append.
+2025-01-24 03:16:13 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:16:13 - INFO - CSV length before appending: 678
+2025-01-24 03:16:13 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:16:13 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:16:13 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:16:13 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:16:13 - INFO - before dropping :1
+2025-01-24 03:16:13 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:16:13 - INFO - No new data to append.
+2025-01-24 03:17:13 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:17:13 - INFO - CSV length before appending: 678
+2025-01-24 03:17:13 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:17:14 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:17:14 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:17:14 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:17:14 - INFO - before dropping :1
+2025-01-24 03:17:14 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:17:14 - INFO - No new data to append.
+2025-01-24 03:18:14 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:18:14 - INFO - CSV length before appending: 678
+2025-01-24 03:18:14 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:18:14 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:18:14 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:18:14 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:18:14 - INFO - before dropping :1
+2025-01-24 03:18:14 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:18:14 - INFO - No new data to append.
+2025-01-24 03:19:14 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:19:14 - INFO - CSV length before appending: 678
+2025-01-24 03:19:14 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:19:14 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:19:14 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:19:14 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:19:14 - INFO - before dropping :1
+2025-01-24 03:19:14 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:19:14 - INFO - No new data to append.
+2025-01-24 03:20:14 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:20:14 - INFO - CSV length before appending: 678
+2025-01-24 03:20:14 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:20:15 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:20:15 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:20:15 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:20:15 - INFO - before dropping :1
+2025-01-24 03:20:15 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:20:15 - INFO - No new data to append.
+2025-01-24 03:21:15 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:21:15 - INFO - CSV length before appending: 678
+2025-01-24 03:21:15 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:21:15 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:21:15 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:21:15 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:21:15 - INFO - before dropping :1
+2025-01-24 03:21:15 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:21:15 - INFO - No new data to append.
+2025-01-24 03:22:15 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:22:15 - INFO - CSV length before appending: 678
+2025-01-24 03:22:15 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:22:16 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:22:16 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:22:16 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:22:16 - INFO - before dropping :1
+2025-01-24 03:22:16 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:22:16 - INFO - No new data to append.
+2025-01-24 03:23:16 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:23:16 - INFO - CSV length before appending: 678
+2025-01-24 03:23:16 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:23:16 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:23:16 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:23:16 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:23:16 - INFO - before dropping :1
+2025-01-24 03:23:16 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:23:16 - INFO - No new data to append.
+2025-01-24 03:24:16 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:24:16 - INFO - CSV length before appending: 678
+2025-01-24 03:24:16 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:24:16 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:24:16 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:24:16 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:24:16 - INFO - before dropping :1
+2025-01-24 03:24:16 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:24:16 - INFO - No new data to append.
+2025-01-24 03:25:16 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:25:16 - INFO - CSV length before appending: 678
+2025-01-24 03:25:16 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:25:17 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:25:17 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:25:17 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:25:17 - INFO - before dropping :1
+2025-01-24 03:25:17 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:25:17 - INFO - No new data to append.
+2025-01-24 03:26:17 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:26:17 - INFO - CSV length before appending: 678
+2025-01-24 03:26:17 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:26:17 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:26:17 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:26:17 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:26:17 - INFO - before dropping :1
+2025-01-24 03:26:17 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:26:17 - INFO - No new data to append.
+2025-01-24 03:27:17 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:27:17 - INFO - CSV length before appending: 678
+2025-01-24 03:27:17 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:27:17 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:27:17 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:27:17 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:27:17 - INFO - before dropping :1
+2025-01-24 03:27:17 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:27:17 - INFO - No new data to append.
+2025-01-24 03:28:17 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:28:17 - INFO - CSV length before appending: 678
+2025-01-24 03:28:17 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:28:17 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:28:17 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:28:17 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:28:17 - INFO - before dropping :1
+2025-01-24 03:28:17 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:28:17 - INFO - No new data to append.
+2025-01-24 03:29:17 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:29:17 - INFO - CSV length before appending: 678
+2025-01-24 03:29:17 - INFO - Rounded timestamp: 2025-01-24 03:00:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:29:18 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 1
+2025-01-24 03:29:18 - INFO - 2025-01-24 03:01:00 status: True, time: 1737687660000, calls: 2
+2025-01-24 03:29:18 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:29:18 - INFO - before dropping :1
+2025-01-24 03:29:18 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:29:18 - INFO - No new data to append.
+2025-01-24 03:30:18 - INFO - Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:30:18 - INFO - CSV length before appending: 678
+2025-01-24 03:30:18 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 02:30:00
+2025-01-24 03:30:18 - INFO - Reached endtime at 2025-01-24 03:31:00. Stopping fetch.
+2025-01-24 03:30:18 - INFO - before dropping :2
+2025-01-24 03:30:18 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1737687600000     4.1789     4.2653    4.1789      4.2236
+2025-01-24 03:30:18 - INFO - 1 new rows fetched and appended successfully.
+2025-01-24 03:30:18 - INFO - New CSV length after appending: 679
+2025-01-24 03:30:18 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+678  1737687600000     4.1789     4.2653    4.1789      4.2236
+2025-01-24 03:30:18 - INFO - New data fetched, processing now.
+2025-01-24 03:30:18 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+678  1737687600000     4.1789  ...             NaN        4.388911
+
+[1 rows x 7 columns]
+2025-01-24 03:30:18 - INFO - Supertrend indicator applied.
+2025-01-24 03:30:18 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+678  1737687600000     4.1789  ...        4.338875             NaN
+
+[1 rows x 9 columns]
+2025-01-24 03:30:18 - INFO - Ichimoku cloud indicator applied.
+2025-01-24 03:30:18 - INFO - Previous up trend: nan
+2025-01-24 03:30:18 - INFO - Current up trend: nan
+2025-01-24 03:30:18 - INFO - Trend: unchange
+2025-01-24 03:30:18 - INFO - Suggested Action: Short
+2025-01-24 03:30:18 - INFO - Previous Action: Short
+2025-01-24 03:30:18 - INFO - Suggested Action: Short
+2025-01-24 03:30:18 - INFO - No action needed as previous and suggested actions are the same.
+2025-01-24 03:31:18 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:31:18 - INFO - CSV length before appending: 679
+2025-01-24 03:31:18 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:31:18 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:31:18 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:31:18 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:31:18 - INFO - before dropping :1
+2025-01-24 03:31:18 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:31:18 - INFO - No new data to append.
+2025-01-24 03:32:18 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:32:18 - INFO - CSV length before appending: 679
+2025-01-24 03:32:18 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:32:18 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:32:18 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:32:18 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:32:18 - INFO - before dropping :1
+2025-01-24 03:32:18 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:32:18 - INFO - No new data to append.
+2025-01-24 03:33:18 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:33:18 - INFO - CSV length before appending: 679
+2025-01-24 03:33:18 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:33:19 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:33:19 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:33:19 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:33:19 - INFO - before dropping :1
+2025-01-24 03:33:19 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:33:19 - INFO - No new data to append.
+2025-01-24 03:34:19 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:34:19 - INFO - CSV length before appending: 679
+2025-01-24 03:34:19 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:34:19 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:34:19 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:34:19 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:34:19 - INFO - before dropping :1
+2025-01-24 03:34:19 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:34:19 - INFO - No new data to append.
+2025-01-24 03:35:19 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:35:19 - INFO - CSV length before appending: 679
+2025-01-24 03:35:19 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:35:19 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:35:19 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:35:19 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:35:19 - INFO - before dropping :1
+2025-01-24 03:35:19 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:35:19 - INFO - No new data to append.
+2025-01-24 03:36:19 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:36:19 - INFO - CSV length before appending: 679
+2025-01-24 03:36:19 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:36:19 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:36:20 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:36:20 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:36:20 - INFO - before dropping :1
+2025-01-24 03:36:20 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:36:20 - INFO - No new data to append.
+2025-01-24 03:37:20 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:37:20 - INFO - CSV length before appending: 679
+2025-01-24 03:37:20 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:37:20 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:37:20 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:37:20 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:37:20 - INFO - before dropping :1
+2025-01-24 03:37:20 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:37:20 - INFO - No new data to append.
+2025-01-24 03:38:20 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:38:20 - INFO - CSV length before appending: 679
+2025-01-24 03:38:20 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:38:20 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:38:20 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:38:20 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:38:20 - INFO - before dropping :1
+2025-01-24 03:38:20 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:38:20 - INFO - No new data to append.
+2025-01-24 03:39:20 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:39:20 - INFO - CSV length before appending: 679
+2025-01-24 03:39:20 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:39:20 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:39:20 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:39:20 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:39:20 - INFO - before dropping :1
+2025-01-24 03:39:20 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:39:20 - INFO - No new data to append.
+2025-01-24 03:40:20 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:40:20 - INFO - CSV length before appending: 679
+2025-01-24 03:40:20 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:40:21 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:40:21 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:40:21 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:40:21 - INFO - before dropping :1
+2025-01-24 03:40:21 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:40:21 - INFO - No new data to append.
+2025-01-24 03:41:21 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:41:21 - INFO - CSV length before appending: 679
+2025-01-24 03:41:21 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:41:21 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:41:21 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:41:21 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:41:21 - INFO - before dropping :1
+2025-01-24 03:41:21 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:41:21 - INFO - No new data to append.
+2025-01-24 03:42:21 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:42:21 - INFO - CSV length before appending: 679
+2025-01-24 03:42:21 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:42:21 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:42:21 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:42:21 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:42:21 - INFO - before dropping :1
+2025-01-24 03:42:21 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:42:21 - INFO - No new data to append.
+2025-01-24 03:43:21 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:43:21 - INFO - CSV length before appending: 679
+2025-01-24 03:43:21 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:43:21 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:43:22 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:43:22 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:43:22 - INFO - before dropping :1
+2025-01-24 03:43:22 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:43:22 - INFO - No new data to append.
+2025-01-24 03:44:22 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:44:22 - INFO - CSV length before appending: 679
+2025-01-24 03:44:22 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:44:22 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:44:22 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:44:22 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:44:22 - INFO - before dropping :1
+2025-01-24 03:44:22 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:44:22 - INFO - No new data to append.
+2025-01-24 03:45:22 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:45:22 - INFO - CSV length before appending: 679
+2025-01-24 03:45:22 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:45:22 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:45:22 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:45:22 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:45:22 - INFO - before dropping :1
+2025-01-24 03:45:22 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:45:22 - INFO - No new data to append.
+2025-01-24 03:46:22 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:46:22 - INFO - CSV length before appending: 679
+2025-01-24 03:46:22 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:46:22 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:46:22 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:46:22 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:46:22 - INFO - before dropping :1
+2025-01-24 03:46:22 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:46:22 - INFO - No new data to append.
+2025-01-24 03:47:22 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:47:22 - INFO - CSV length before appending: 679
+2025-01-24 03:47:22 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:47:23 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:47:23 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:47:23 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:47:23 - INFO - before dropping :1
+2025-01-24 03:47:23 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:47:23 - INFO - No new data to append.
+2025-01-24 03:48:23 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:48:23 - INFO - CSV length before appending: 679
+2025-01-24 03:48:23 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:48:23 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:48:23 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:48:23 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:48:23 - INFO - before dropping :1
+2025-01-24 03:48:23 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:48:23 - INFO - No new data to append.
+2025-01-24 03:49:23 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:49:23 - INFO - CSV length before appending: 679
+2025-01-24 03:49:23 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:49:23 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:49:23 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:49:23 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:49:23 - INFO - before dropping :1
+2025-01-24 03:49:23 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:49:23 - INFO - No new data to append.
+2025-01-24 03:50:23 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:50:23 - INFO - CSV length before appending: 679
+2025-01-24 03:50:23 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:50:23 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:50:24 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:50:24 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:50:24 - INFO - before dropping :1
+2025-01-24 03:50:24 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:50:24 - INFO - No new data to append.
+2025-01-24 03:51:24 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:51:24 - INFO - CSV length before appending: 679
+2025-01-24 03:51:24 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:51:24 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:51:24 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:51:24 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:51:24 - INFO - before dropping :1
+2025-01-24 03:51:24 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:51:24 - INFO - No new data to append.
+2025-01-24 03:52:24 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:52:24 - INFO - CSV length before appending: 679
+2025-01-24 03:52:24 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:52:24 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:52:24 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:52:24 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:52:24 - INFO - before dropping :1
+2025-01-24 03:52:24 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:52:24 - INFO - No new data to append.
+2025-01-24 03:53:24 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:53:24 - INFO - CSV length before appending: 679
+2025-01-24 03:53:24 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:53:24 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:53:24 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:53:24 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:53:24 - INFO - before dropping :1
+2025-01-24 03:53:24 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:53:24 - INFO - No new data to append.
+2025-01-24 03:54:24 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:54:24 - INFO - CSV length before appending: 679
+2025-01-24 03:54:24 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:54:25 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:54:25 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:54:25 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:54:25 - INFO - before dropping :1
+2025-01-24 03:54:25 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:54:25 - INFO - No new data to append.
+2025-01-24 03:55:25 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:55:25 - INFO - CSV length before appending: 679
+2025-01-24 03:55:25 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:55:25 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:55:25 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:55:25 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:55:25 - INFO - before dropping :1
+2025-01-24 03:55:25 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:55:25 - INFO - No new data to append.
+2025-01-24 03:56:25 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:56:25 - INFO - CSV length before appending: 679
+2025-01-24 03:56:25 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:56:25 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:56:26 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:56:26 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:56:26 - INFO - before dropping :1
+2025-01-24 03:56:26 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:56:26 - INFO - No new data to append.
+2025-01-24 03:57:26 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:57:26 - INFO - CSV length before appending: 679
+2025-01-24 03:57:26 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:57:26 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:57:26 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:57:26 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:57:26 - INFO - before dropping :1
+2025-01-24 03:57:26 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:57:26 - INFO - No new data to append.
+2025-01-24 03:58:26 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:58:26 - INFO - CSV length before appending: 679
+2025-01-24 03:58:26 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:58:26 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:58:26 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:58:26 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:58:26 - INFO - before dropping :1
+2025-01-24 03:58:26 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:58:26 - INFO - No new data to append.
+2025-01-24 03:59:26 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:59:26 - INFO - CSV length before appending: 679
+2025-01-24 03:59:26 - INFO - Rounded timestamp: 2025-01-24 03:30:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 03:59:27 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 1
+2025-01-24 03:59:27 - INFO - 2025-01-24 03:31:00 status: True, time: 1737689460000, calls: 2
+2025-01-24 03:59:27 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 03:59:27 - INFO - before dropping :1
+2025-01-24 03:59:27 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 03:59:27 - INFO - No new data to append.
+2025-01-24 04:00:27 - INFO - Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 04:00:27 - INFO - CSV length before appending: 679
+2025-01-24 04:00:27 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:00:00
+2025-01-24 04:00:27 - INFO - Reached endtime at 2025-01-24 04:01:00. Stopping fetch.
+2025-01-24 04:00:27 - INFO - before dropping :2
+2025-01-24 04:00:27 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1737689400000     4.2237     4.2588    4.2237      4.2394
+2025-01-24 04:00:27 - INFO - 1 new rows fetched and appended successfully.
+2025-01-24 04:00:27 - INFO - New CSV length after appending: 680
+2025-01-24 04:00:27 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+679  1737689400000     4.2237     4.2588    4.2237      4.2394
+2025-01-24 04:00:27 - INFO - New data fetched, processing now.
+2025-01-24 04:00:27 - INFO - Last row:           opentime  openprice  ...  SUPERTl_10_3.0  SUPERTs_10_3.0
+679  1737689400000     4.2237  ...             NaN        4.388878
+
+[1 rows x 7 columns]
+2025-01-24 04:00:27 - INFO - Supertrend indicator applied.
+2025-01-24 04:00:27 - INFO - Last row:           opentime  openprice  ...  leading_span_a  leading_span_b
+679  1737689400000     4.2237  ...          4.3675             NaN
+
+[1 rows x 9 columns]
+2025-01-24 04:00:27 - INFO - Ichimoku cloud indicator applied.
+2025-01-24 04:00:27 - INFO - Previous up trend: nan
+2025-01-24 04:00:27 - INFO - Current up trend: nan
+2025-01-24 04:00:27 - INFO - Trend: unchange
+2025-01-24 04:00:27 - INFO - Suggested Action: Short
+2025-01-24 04:00:27 - INFO - Previous Action: Short
+2025-01-24 04:00:27 - INFO - Suggested Action: Short
+2025-01-24 04:00:27 - INFO - No action needed as previous and suggested actions are the same.
+2025-01-24 04:01:27 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:01:27 - INFO - CSV length before appending: 680
+2025-01-24 04:01:27 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:01:27 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:01:27 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:01:27 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:01:27 - INFO - before dropping :1
+2025-01-24 04:01:27 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:01:27 - INFO - No new data to append.
+2025-01-24 04:02:27 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:02:27 - INFO - CSV length before appending: 680
+2025-01-24 04:02:27 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:02:27 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:02:27 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:02:27 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:02:27 - INFO - before dropping :1
+2025-01-24 04:02:27 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:02:27 - INFO - No new data to append.
+2025-01-24 04:03:27 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:03:27 - INFO - CSV length before appending: 680
+2025-01-24 04:03:27 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:03:27 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:03:28 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:03:28 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:03:28 - INFO - before dropping :1
+2025-01-24 04:03:28 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:03:28 - INFO - No new data to append.
+2025-01-24 04:04:28 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:04:28 - INFO - CSV length before appending: 680
+2025-01-24 04:04:28 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:04:28 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:04:28 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:04:28 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:04:28 - INFO - before dropping :1
+2025-01-24 04:04:28 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:04:28 - INFO - No new data to append.
+2025-01-24 04:05:28 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:05:28 - INFO - CSV length before appending: 680
+2025-01-24 04:05:28 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:05:28 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:05:28 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:05:28 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:05:28 - INFO - before dropping :1
+2025-01-24 04:05:28 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:05:28 - INFO - No new data to append.
+2025-01-24 04:06:28 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:06:28 - INFO - CSV length before appending: 680
+2025-01-24 04:06:28 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:06:28 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:06:28 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:06:28 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:06:28 - INFO - before dropping :1
+2025-01-24 04:06:28 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:06:28 - INFO - No new data to append.
+2025-01-24 04:07:28 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:07:28 - INFO - CSV length before appending: 680
+2025-01-24 04:07:28 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:07:29 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:07:29 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:07:29 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:07:29 - INFO - before dropping :1
+2025-01-24 04:07:29 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:07:29 - INFO - No new data to append.
+2025-01-24 04:08:29 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:08:29 - INFO - CSV length before appending: 680
+2025-01-24 04:08:29 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:08:29 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:08:29 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:08:29 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:08:29 - INFO - before dropping :1
+2025-01-24 04:08:29 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:08:29 - INFO - No new data to append.
+2025-01-24 04:09:29 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:09:29 - INFO - CSV length before appending: 680
+2025-01-24 04:09:29 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:09:29 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:09:29 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:09:29 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:09:29 - INFO - before dropping :1
+2025-01-24 04:09:29 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:09:29 - INFO - No new data to append.
+2025-01-24 04:10:29 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:10:29 - INFO - CSV length before appending: 680
+2025-01-24 04:10:29 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:10:29 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:10:30 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:10:30 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:10:30 - INFO - before dropping :1
+2025-01-24 04:10:30 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:10:30 - INFO - No new data to append.
+2025-01-24 04:11:30 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:11:30 - INFO - CSV length before appending: 680
+2025-01-24 04:11:30 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:11:30 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:11:30 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:11:30 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:11:30 - INFO - before dropping :1
+2025-01-24 04:11:30 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:11:30 - INFO - No new data to append.
+2025-01-24 04:12:30 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:12:30 - INFO - CSV length before appending: 680
+2025-01-24 04:12:30 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:12:30 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:12:30 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:12:30 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:12:30 - INFO - before dropping :1
+2025-01-24 04:12:30 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:12:30 - INFO - No new data to append.
+2025-01-24 04:13:30 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:13:30 - INFO - CSV length before appending: 680
+2025-01-24 04:13:30 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:13:30 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:13:30 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:13:30 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:13:30 - INFO - before dropping :1
+2025-01-24 04:13:30 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:13:30 - INFO - No new data to append.
+2025-01-24 04:14:30 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:14:30 - INFO - CSV length before appending: 680
+2025-01-24 04:14:30 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:14:30 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:14:31 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:14:31 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:14:31 - INFO - before dropping :1
+2025-01-24 04:14:31 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:14:31 - INFO - No new data to append.
+2025-01-24 04:15:31 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:15:31 - INFO - CSV length before appending: 680
+2025-01-24 04:15:31 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:15:31 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:15:31 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:15:31 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:15:31 - INFO - before dropping :1
+2025-01-24 04:15:31 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:15:31 - INFO - No new data to append.
+2025-01-24 04:16:31 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:16:31 - INFO - CSV length before appending: 680
+2025-01-24 04:16:31 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:16:31 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:16:31 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:16:31 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:16:31 - INFO - before dropping :1
+2025-01-24 04:16:31 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:16:31 - INFO - No new data to append.
+2025-01-24 04:17:31 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:17:31 - INFO - CSV length before appending: 680
+2025-01-24 04:17:31 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:17:31 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:17:31 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:17:31 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:17:31 - INFO - before dropping :1
+2025-01-24 04:17:31 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:17:31 - INFO - No new data to append.
+2025-01-24 04:18:31 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:18:31 - INFO - CSV length before appending: 680
+2025-01-24 04:18:31 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:18:32 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:18:32 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:18:32 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:18:32 - INFO - before dropping :1
+2025-01-24 04:18:32 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:18:32 - INFO - No new data to append.
+2025-01-24 04:19:32 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:19:32 - INFO - CSV length before appending: 680
+2025-01-24 04:19:32 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:19:32 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:19:32 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:19:32 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:19:32 - INFO - before dropping :1
+2025-01-24 04:19:32 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:19:32 - INFO - No new data to append.
+2025-01-24 04:20:32 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:20:32 - INFO - CSV length before appending: 680
+2025-01-24 04:20:32 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:20:32 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:20:32 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:20:32 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:20:32 - INFO - before dropping :1
+2025-01-24 04:20:32 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:20:32 - INFO - No new data to append.
+2025-01-24 04:21:32 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:21:32 - INFO - CSV length before appending: 680
+2025-01-24 04:21:32 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:21:32 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:21:33 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:21:33 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:21:33 - INFO - before dropping :1
+2025-01-24 04:21:33 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:21:33 - INFO - No new data to append.
+2025-01-24 04:22:33 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:22:33 - INFO - CSV length before appending: 680
+2025-01-24 04:22:33 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:22:33 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:22:33 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:22:33 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:22:33 - INFO - before dropping :1
+2025-01-24 04:22:33 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:22:33 - INFO - No new data to append.
+2025-01-24 04:23:33 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:23:33 - INFO - CSV length before appending: 680
+2025-01-24 04:23:33 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:23:33 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:23:33 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:23:33 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:23:33 - INFO - before dropping :1
+2025-01-24 04:23:33 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:23:33 - INFO - No new data to append.
+2025-01-24 04:24:33 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:24:33 - INFO - CSV length before appending: 680
+2025-01-24 04:24:33 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:24:33 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:24:33 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:24:33 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:24:33 - INFO - before dropping :1
+2025-01-24 04:24:33 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:24:33 - INFO - No new data to append.
+2025-01-24 04:25:33 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:25:33 - INFO - CSV length before appending: 680
+2025-01-24 04:25:33 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:25:34 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:25:34 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:25:34 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:25:34 - INFO - before dropping :1
+2025-01-24 04:25:34 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:25:34 - INFO - No new data to append.
+2025-01-24 04:26:34 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:26:34 - INFO - CSV length before appending: 680
+2025-01-24 04:26:34 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:26:34 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:26:34 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:26:34 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:26:34 - INFO - before dropping :1
+2025-01-24 04:26:34 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:26:34 - INFO - No new data to append.
+2025-01-24 04:27:34 - INFO - Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:27:34 - INFO - CSV length before appending: 680
+2025-01-24 04:27:34 - INFO - Rounded timestamp: 2025-01-24 04:00:00, Last opentime in CSV: 2025-01-24 03:30:00
+2025-01-24 04:27:34 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 1
+2025-01-24 04:27:34 - INFO - 2025-01-24 04:01:00 status: True, time: 1737691260000, calls: 2
+2025-01-24 04:27:34 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 04:27:34 - INFO - before dropping :1
+2025-01-24 04:27:34 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 04:27:34 - INFO - No new data to append.
