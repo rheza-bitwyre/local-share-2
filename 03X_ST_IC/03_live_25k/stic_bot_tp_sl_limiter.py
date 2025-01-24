@@ -21,20 +21,20 @@ import math
 import json
 
 # Load the configuration from the JSON file
-with open("/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k/stic_binance_SUI_config.json", "r") as file:
+with open("/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k/stic_binance_limiter_config.json", "r") as file:
     config = json.load(file)
 
 # Access configuration values
 API_KEY = config["API_KEY"]
 API_SECRET = config["API_SECRET"]
-proportion = config["proportion"]
-life = config["life"]
-safe_fac = config["safe_fac"]
-symbol = config["symbol"]
-position = config["position"]
 path = config["path"]
 log_filename = config["log_filename"]
-csv_filename = config["csv_filename"]
+symbol = config["symbol"]
+position = config["position"]
+long_tp = config["long_tp"]
+long_sl = config["long_sl"]
+short_tp = config["short_tp"]
+short_sl = config["short_sl"]
 f_symbol = symbol.replace('USDT', '')
 
 # Get today's date and time in 'yyyymmddhhmmss' format
