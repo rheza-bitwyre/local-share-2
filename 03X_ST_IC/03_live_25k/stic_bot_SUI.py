@@ -363,6 +363,13 @@ def determine_suggested_action(df,postion_option = 2):
 
     return suggested_action, active_pos
 
+import requests
+import hashlib
+import urllib.parse
+import hmac
+import time
+import logging
+
 class BinanceAPI:
     def __init__(self, api_key: str, api_secret: str, testnet: bool = False):
         self.api_key = api_key  
@@ -424,6 +431,66 @@ class BinanceAPI:
             params["symbol"] = symbol
         return self._send_request("GET", "/fapi/v3/positionRisk", params, signed=True)
 
+    def get_symbol_info(self, symbol: str) -> dict:
+        """Fetch symbol information (e.g., tick size, lot size)."""
+        endpoint = "/fapi/v1/exchangeInfo"
+        response = self._send_request("GET", endpoint)
+        if response and "symbols" in response:
+            for s in response["symbols"]:
+                if s["symbol"] == symbol:
+                    return s
+        return None
+
+    def create_take_profit_order(self, symbol: str, side: str, take_profit_price: float) -> dict:
+        """Create a take-profit order."""
+        symbol_info = self.get_symbol_info(symbol)
+        if not symbol_info:
+            logging.error(f"Failed to fetch symbol info for {symbol}.")
+            return None
+
+        # Get tick size for stopPrice
+        tick_size = float(next(filter(lambda f: f["filterType"] == "PRICE_FILTER", symbol_info["filters"]))["tickSize"])
+
+        # Format stopPrice to adhere to tick size
+        formatted_take_profit_price = round(take_profit_price / tick_size) * tick_size
+
+        order_type = "TAKE_PROFIT_MARKET"
+        params = {
+            "symbol": symbol,
+            "side": "SELL" if side == "BUY" else "BUY",  # Opposite side for TP
+            "type": order_type,
+            "stopPrice": formatted_take_profit_price,  # Formatted stop price
+            "closePosition": True,  # Close the entire position
+            "workingType": "MARK_PRICE",  # Use mark price for stopPrice
+            "priceProtect": True  # Enable price protection
+        }
+        return self._send_request("POST", "/fapi/v1/order", params, signed=True)
+
+    def create_stop_loss_order(self, symbol: str, side: str, stop_loss_price: float) -> dict:
+        """Create a stop-loss order."""
+        symbol_info = self.get_symbol_info(symbol)
+        if not symbol_info:
+            logging.error(f"Failed to fetch symbol info for {symbol}.")
+            return None
+
+        # Get tick size for stopPrice
+        tick_size = float(next(filter(lambda f: f["filterType"] == "PRICE_FILTER", symbol_info["filters"]))["tickSize"])
+
+        # Format stopPrice to adhere to tick size
+        formatted_stop_loss_price = round(stop_loss_price / tick_size) * tick_size
+
+        order_type = "STOP_MARKET"
+        params = {
+            "symbol": symbol,
+            "side": "SELL" if side == "BUY" else "BUY",  # Opposite side for SL
+            "type": order_type,
+            "stopPrice": formatted_stop_loss_price,  # Formatted stop price
+            "closePosition": True,  # Close the entire position
+            "workingType": "MARK_PRICE",  # Use mark price for stopPrice
+            "priceProtect": True  # Enable price protection
+        }
+        return self._send_request("POST", "/fapi/v1/order", params, signed=True)
+
     def create_order(
         self,
         symbol: str,
@@ -432,8 +499,13 @@ class BinanceAPI:
         quantity: float,
         price: float = None,
         reduce_only: bool = False,
+        time_in_force: str = None,
+        stop_price: float = None,
+        take_profit_percentage: float = None,  # New parameter for take-profit percentage
+        stop_loss_percentage: float = None    # New parameter for stop-loss percentage
     ) -> dict:
-        """Create a new order"""
+        """Create a new order with optional take-profit and stop-loss orders."""
+        # Create the initial order
         params = {
             "symbol": symbol,
             "side": side,
@@ -445,17 +517,58 @@ class BinanceAPI:
         if price:
             params["price"] = price
 
-        return self._send_request("POST", "/fapi/v1/order", params, signed=True)
-    
+        if stop_price:
+            params["stopPrice"] = stop_price
+
+        if order_type == "LIMIT" and time_in_force:
+            params["timeInForce"] = time_in_force
+
+        if order_type in ['STOP_MARKET', 'TAKE_PROFIT_MARKET']:
+            params["stopPrice"] = stop_price
+
+        # Send the initial order
+        response = self._send_request("POST", "/fapi/v1/order", params, signed=True)
+
+        if response is None:
+            logging.error("Failed to create the initial order.")
+            return None
+
+        # If the initial order is successful, create TP and SL orders
+        if take_profit_percentage or stop_loss_percentage:
+            # Get the current mark price to calculate TP and SL prices
+            mark_price_response = self.get_mark_price(symbol)
+            if mark_price_response is None:
+                logging.error("Failed to fetch mark price for TP/SL calculation.")
+                return response
+
+            mark_price = float(mark_price_response['markPrice'])
+
+            # Calculate TP and SL prices based on the percentage
+            if take_profit_percentage:
+                take_profit_price = mark_price * (1 + take_profit_percentage / 100) if side == "BUY" else mark_price * (1 - take_profit_percentage / 100)
+                tp_response = self.create_take_profit_order(symbol, side, take_profit_price)
+                if tp_response:
+                    logging.info(f"Take-profit order created: {tp_response}")
+                else:
+                    logging.error("Failed to create take-profit order.")
+
+            if stop_loss_percentage:
+                stop_loss_price = mark_price * (1 - stop_loss_percentage / 100) if side == "BUY" else mark_price * (1 + stop_loss_percentage / 100)
+                sl_response = self.create_stop_loss_order(symbol, side, stop_loss_price)
+                if sl_response:
+                    logging.info(f"Stop-loss order created: {sl_response}")
+                else:
+                    logging.error("Failed to create stop-loss order.")
+
+        return response
+
     def close_all_position(self):
         """Close all active positions on the account"""
-        # Get all active positions
         positions = self.get_position_risk()
         if positions is None:
             logging.error("Failed to retrieve position information.")
             return
 
-        # Iterate through each position and close it
         for position in positions:
             symbol = position['symbol']
             position_amt = float(position['positionAmt'])
@@ -464,7 +577,6 @@ class BinanceAPI:
                 side = 'SELL' if position_amt > 0 else 'BUY'
                 quantity = abs(position_amt)
 
-                # Create a market order to close the position
                 response = self.create_order(
                     symbol=symbol,
                     side=side,
@@ -478,60 +590,14 @@ class BinanceAPI:
                 else:
                     logging.error(f"Failed to close position: {symbol}")
 
-    def list_open_positions(self) -> dict:
-        """List all open positions with details and trade status."""
-        positions = self.get_position_risk()
-        if positions is None:
-            logging.error("Failed to retrieve position information.")
-            return {"trade": None}
+    def ping(self) -> dict:
+        """Ping the Binance API to check connectivity."""
+        return self._send_request("GET", "/fapi/v1/ping")
 
-        active_positions = []
-        long_positions = 0
-        short_positions = 0
+    def get_server_time(self) -> dict:
+        """Get Binance server time to confirm connectivity."""
+        return self._send_request("GET", "/fapi/v1/time")
 
-        for position in positions:
-            position_amt = float(position['positionAmt'])
-            if position_amt != 0:
-                symbol = position['symbol']
-                entry_price = float(position['entryPrice'])
-                mark_price = float(position['markPrice'])
-                unrealized_pnl = float(position['unRealizedProfit'])
-                margin = float(position['isolatedMargin'])
-                margin_ratio = (margin / abs(position_amt)) * 100 if position_amt != 0 else 0
-                roi = (unrealized_pnl / margin) * 100 if margin != 0 else 0
-
-                position_type = 'Long' if position_amt > 0 else 'Short'
-                if position_amt > 0:
-                    long_positions += 1
-                else:
-                    short_positions += 1
-
-                active_positions.append({
-                    "symbol": symbol,
-                    "entry_price": entry_price,
-                    "mark_price": mark_price,
-                    "roi": roi,
-                    "margin_ratio": margin_ratio,
-                    "position_type": position_type
-                })
-
-        if not active_positions:
-            logging.info("No active positions at the moment.")
-            return {"trade": None}
-
-        # Log summary
-        logging.info(f"Number of active positions: {len(active_positions)}")
-        logging.info(f"Long positions: {long_positions}")
-        logging.info(f"Short positions: {short_positions}")
-        for pos in active_positions:
-            logging.info(
-                f"Symbol: {pos['symbol']}, Entry Price: {pos['entry_price']}, "
-                f"Mark Price: {pos['mark_price']}, ROI: {pos['roi']:.2f}%, "
-                f"Margin Ratio: {pos['margin_ratio']:.2f}%, Position Type: {pos['position_type']}"
-            )
-
-        return {"active_positions": active_positions, "trade": "active"}
-    
     def check_balance(self):
         endpoint = "/fapi/v2/balance"
         params = {
@@ -539,73 +605,6 @@ class BinanceAPI:
         }
         params["signature"] = self._generate_signature(params)
         return self._send_request("GET", endpoint, params=params)
-        
-    def create_order_with_tp_sl(
-        self,
-        symbol: str,
-        side: str,
-        order_type: str,
-        quantity: float,
-        price: float = None,
-        tp: float = None,
-        sl: float = None,
-        reduce_only: bool = False,
-    ) -> dict:
-        """
-        Create a new order with optional take profit (TP) and stop loss (SL).
-        """
-        params = {
-            "symbol": symbol,
-            "side": side,
-            "type": order_type,
-            "quantity": quantity,
-            "reduceOnly": reduce_only,
-        }
-
-        if price:
-            params["price"] = price
-
-        if tp or sl:
-            if not (order_type == "MARKET" or order_type == "LIMIT"):
-                raise ValueError("TP/SL can only be set for MARKET or LIMIT orders.")
-
-            if tp:
-                tp_side = "SELL" if side == "BUY" else "BUY"
-                tp_order = self._send_request(
-                    "POST",
-                    "/fapi/v1/order",
-                    {
-                        "symbol": symbol,
-                        "side": tp_side,
-                        "type": "TAKE_PROFIT_MARKET",
-                        "quantity": quantity,
-                        "stopPrice": tp,
-                        "reduceOnly": True,
-                        "timestamp": int(time.time() * 1000),
-                    },
-                    signed=True,
-                )
-                logging.info(f"Take Profit order placed: {tp_order}")
-
-            if sl:
-                sl_side = "SELL" if side == "BUY" else "BUY"
-                sl_order = self._send_request(
-                    "POST",
-                    "/fapi/v1/order",
-                    {
-                        "symbol": symbol,
-                        "side": sl_side,
-                        "type": "STOP_MARKET",
-                        "quantity": quantity,
-                        "stopPrice": sl,
-                        "reduceOnly": True,
-                        "timestamp": int(time.time() * 1000),
-                    },
-                    signed=True,
-                )
-                logging.info(f"Stop Loss order placed: {sl_order}")
-
-        return self._send_request("POST", "/fapi/v1/order", params, signed=True)
 
 def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='SUIUSDT',proportion = 0.01, life = 20, safe_fac = 2, API_KEY=None, API_SECRET=None, position = 2, active_pos = 1):
     # Initiate connection to Binance
