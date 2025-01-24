@@ -329,6 +329,8 @@ def determine_suggested_action(df,postion_option = 2):
     logging.info(f"Previous up trend: {up_trend_second_last}")
     logging.info(f"Current up trend: {up_trend_last}")
 
+    active_pos = None
+
     # Check if the trend has changed
     if (pd.isna(up_trend_last) and pd.isna(up_trend_second_last)):
         trend = 'unchange'
@@ -337,9 +339,10 @@ def determine_suggested_action(df,postion_option = 2):
     else:
         trend = 'change'
         active_pos = 0
+        logging.info(f"Active Position: {active_pos} - Reset!")
 
     logging.info(f"Trend: {trend}")
-    logging.info(f"Active Position: {active_pos} - Reset!")
+    logging.info(f"Active Position: {active_pos}")
 
     # Determine the suggested action
     suggested_action = None
@@ -625,7 +628,7 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
     # If previous action is the same as suggested action, no need to take any new action
     if prev_action == suggested_action:
         logging.info("No action needed as previous and suggested actions are the same.")
-        return prev_action
+        return prev_action, active_pos
     else:
         # Get balance information
         balance = binance_api.check_balance()
@@ -793,10 +796,7 @@ def main():
             suggested_action, active_pos = determine_suggested_action(df_st_ic)
 
             # Define real action and log it
-            new_prev_action, active_pos = handle_trading_action(suggested_action, prev_action, trade_amount_usdt, symbol, proportion, life, safe_fac, API_KEY, API_SECRET, position, active_pos)
-            
-            # Update previous action
-            prev_action = new_prev_action
+            prev_action, active_pos = handle_trading_action(suggested_action, prev_action, trade_amount_usdt, symbol, proportion, life, safe_fac, API_KEY, API_SECRET, position, active_pos)                                                       
 
         # Sleep for 1 minute before starting the next iteration of the inner loop
         time.sleep(60)

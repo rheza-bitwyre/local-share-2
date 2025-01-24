@@ -1,0 +1,25 @@
+2025-01-24 14:11:55 - INFO - Trading symbol: SUIUSDT, Log file: binance_stic_sui_bot_25k_20250124141155
+2025-01-24 14:11:55 - INFO - USDT Available Balance: 19853.04519737
+2025-01-24 14:11:55 - INFO - Determined Trade Amount: 30 USDT
+2025-01-24 14:11:55 - INFO - Last opentime in CSV: 2025-01-24 13:30:00
+2025-01-24 14:11:55 - INFO - CSV length before appending: 700
+2025-01-24 14:11:55 - INFO - Rounded timestamp: 2025-01-24 14:00:00, Last opentime in CSV: 2025-01-24 13:30:00
+2025-01-24 14:11:55 - INFO - 2025-01-24 14:01:00 status: True, time: 1737727260000, calls: 1
+2025-01-24 14:11:56 - INFO - 2025-01-24 14:01:00 status: True, time: 1737727260000, calls: 2
+2025-01-24 14:11:56 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 14:11:56 - INFO - before dropping :1
+2025-01-24 14:11:56 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 14:11:56 - INFO - No new data to append.
+2025-01-24 14:12:56 - INFO - Last opentime in CSV: 2025-01-24 13:30:00
+2025-01-24 14:12:56 - INFO - CSV length before appending: 700
+2025-01-24 14:12:56 - INFO - Rounded timestamp: 2025-01-24 14:00:00, Last opentime in CSV: 2025-01-24 13:30:00
+2025-01-24 14:12:56 - INFO - 2025-01-24 14:01:00 status: True, time: 1737727260000, calls: 1
+2025-01-24 14:12:56 - INFO - 2025-01-24 14:01:00 status: True, time: 1737727260000, calls: 2
+2025-01-24 14:12:56 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-24 14:12:56 - INFO - before dropping :1
+2025-01-24 14:12:56 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-24 14:12:56 - INFO - No new data to append.
