@@ -27,9 +27,7 @@ with open("/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k/stic_binance_XRP
 # Access configuration values
 API_KEY = config["API_KEY"]
 API_SECRET = config["API_SECRET"]
-proportion = config["proportion"]
-life = config["life"]
-safe_fac = config["safe_fac"]
+trade_amount_usdt = config["trade_amount_usdt"]
 symbol = config["symbol"]
 position = config["position"]
 path = config["path"]
@@ -332,9 +330,9 @@ def determine_suggested_action(df,postion_option = 2):
     active_pos = 1
 
     # Check if the trend has changed
-    if (pd.isna(up_trend_last) and pd.isna(up_trend_second_last)):
+    if pd.isna(up_trend_last) and pd.isna(up_trend_second_last):
         trend = 'unchange'
-    elif isinstance(up_trend_last, float) and isinstance(up_trend_second_last, float):
+    elif not pd.isna(up_trend_last) and not pd.isna(up_trend_second_last):
         trend = 'unchange'
     else:
         trend = 'change'
@@ -614,7 +612,7 @@ class BinanceAPI:
         params["signature"] = self._generate_signature(params)
         return self._send_request("GET", endpoint, params=params)
 
-def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='XRPUSDT',proportion = 0.01, life = 20, safe_fac = 2, API_KEY=None, API_SECRET=None, position = 2, active_pos = 1):
+def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='XRPUSDT', API_KEY=None, API_SECRET=None, position = 2, active_pos = 1):
     # Initiate connection to Binance
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
@@ -634,11 +632,7 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
         balance = binance_api.check_balance()
         usdt_balance = next((float(item['availableBalance']) for item in balance if item['asset'] == 'USDT'), None)
         logging.info(f'USDT Available Balance: {usdt_balance}')
-
-        # Determine Trade Amount
-        # trade_amount_usdt = usdt_balance * proportion / life / safe_fac
-        trade_amount_usdt = 30
-        logging.info(f'Datermined Trade Amount: {trade_amount_usdt} USDT')
+        logging.info(f'Determined Trade Amount: {trade_amount_usdt} USDT')
 
     # Get the current mark price
     mark_price = float(binance_api.get_mark_price(symbol).get('markPrice', 0))
@@ -646,7 +640,7 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
 
     # Calculate the position quantity
     coin_quantity = trade_amount_usdt / mark_price
-    position_coin_amount = math.floor(coin_quantity)
+    position_coin_amount = math.floor(coin_quantity) # round as per the coin rules
     logging.info(f'Expected {symbol} Amount: {position_coin_amount}')
 
     # Get current coin amount (position)
@@ -749,8 +743,6 @@ def main():
     logging.info(f'USDT Available Balance: {usdt_balance}')
 
     # Determine Trade Amount
-    trade_amount_usdt = usdt_balance * proportion / life / safe_fac
-    trade_amount_usdt = 30
     logging.info(f'Determined Trade Amount: {trade_amount_usdt} USDT')
 
     # Get the initial position (if any) for the first action
@@ -772,7 +764,6 @@ def main():
         logging.info(f'USDT Available Balance: {usdt_balance}')
 
         # Determine Trade Amount
-        trade_amount_usdt = usdt_balance * proportion / life / safe_fac
         logging.info(f'Determined Trade Amount: {trade_amount_usdt} USDT')
 
     while True:
@@ -797,7 +788,7 @@ def main():
             suggested_action, active_pos = determine_suggested_action(df_st_ic)
 
             # Define real action and log it
-            prev_action, active_pos = handle_trading_action(suggested_action, prev_action, trade_amount_usdt, symbol, proportion, life, safe_fac, API_KEY, API_SECRET, position, active_pos)                                                       
+            prev_action, active_pos = handle_trading_action(suggested_action, prev_action, trade_amount_usdt, symbol, API_KEY, API_SECRET, position, active_pos)                                                       
 
         # Sleep for 1 minute before starting the next iteration of the inner loop
         time.sleep(60)
