@@ -1,7 +1,7 @@
 {
     "API_KEY": "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC",
     "API_SECRET": "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl",
-    "trade_amount_usdt" : 300,
+    "trade_amount_usdt" : 1000,
     "symbol": "SOLUSDT",
     "position" : 2,
     "long_tp" : 2.6,
