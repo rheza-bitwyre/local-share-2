@@ -1,0 +1,88 @@
+2025-01-28 00:29:16 - INFO - Trading symbol: SUIUSDT, Log file: binance_stic_sui_bot_25k_20250128002916
+2025-01-28 00:29:17 - INFO - Server Time:
+2025-01-28 00:29:17 - INFO - USDT Available Balance: 18996.90954677
+2025-01-28 00:29:17 - INFO - Determined Trade Amount: 500 USDT
+2025-01-28 00:29:17 - INFO - Active Position Initiation: 1
+2025-01-28 00:29:18 - INFO - USDT Available Balance: 18996.90914564
+2025-01-28 00:29:18 - INFO - Determined Trade Amount: 500 USDT
+2025-01-28 00:29:18 - INFO - Last opentime in CSV: 2025-01-24 23:30:00
+2025-01-28 00:29:18 - INFO - CSV length before appending: 720
+2025-01-28 00:29:18 - INFO - Rounded timestamp: 2025-01-27 16:00:00, Last opentime in CSV: 2025-01-24 23:30:00
+2025-01-28 00:29:18 - INFO - 2025-01-28 00:01:00 status: True, time: 1737993660000, calls: 1
+2025-01-28 00:29:18 - INFO - 2025-01-28 00:01:00 status: True, time: 1737993660000, calls: 2
+2025-01-28 00:29:18 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-28 00:29:18 - INFO - before dropping :129
+2025-01-28 00:29:18 - INFO -           opentime  openprice  highprice  lowprice  closeprice
+0    1737763200000     4.1996     4.1996    4.1607      4.1700
+1    1737765000000     4.1699     4.1723    4.0942      4.1276
+2    1737766800000     4.1275     4.1818    4.1266      4.1681
+3    1737768600000     4.1680     4.1854    4.1672      4.1710
+4    1737770400000     4.1710     4.2190    4.1600      4.1997
+..             ...        ...        ...       ...         ...
+123  1737984600000     3.7168     3.7680    3.7007      3.7050
+124  1737986400000     3.7051     3.7143    3.6736      3.7054
+125  1737988200000     3.7054     3.8550    3.6822      3.8270
+126  1737990000000     3.8269     3.8677    3.7834      3.8524
+127  1737991800000     3.8523     3.8760    3.8078      3.8200
+
+[128 rows x 5 columns]
+2025-01-28 00:29:18 - INFO - 128 new rows fetched and appended successfully.
+2025-01-28 00:29:18 - INFO - New CSV length after appending: 848
+2025-01-28 00:29:18 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+847  1737991800000     3.8523      3.876    3.8078        3.82
+2025-01-28 00:29:18 - INFO - New data fetched, processing now.
+2025-01-28 00:29:18 - INFO - Last row:           opentime  openprice  highprice  lowprice  closeprice  SUPERTl_10_3.0  SUPERTs_10_3.0
+847  1737991800000     3.8523      3.876    3.8078        3.82         3.58703             NaN
+2025-01-28 00:29:18 - INFO - Supertrend indicator applied.
+2025-01-28 00:29:18 - INFO - Last row:           opentime  openprice  highprice  lowprice  closeprice  SUPERTl_10_3.0  SUPERTs_10_3.0  leading_span_a  leading_span_b
+847  1737991800000     3.8523      3.876    3.8078        3.82         3.58703             NaN         3.89255             NaN
+2025-01-28 00:29:18 - INFO - Ichimoku cloud indicator applied.
+2025-01-28 00:29:18 - INFO - Previous up trend: 3.5650654412886786
+2025-01-28 00:29:18 - INFO - Current up trend: 3.5870299394350242
+2025-01-28 00:29:18 - INFO - Trend: unchange
+2025-01-28 00:29:18 - INFO - Active Position: 0
+2025-01-28 00:29:18 - INFO - Suggested Action: None
+2025-01-28 00:29:18 - INFO - Suggestion : None, Previous ACtion None, Active Position: 0
+2025-01-28 00:29:18 - INFO - Previous Action: None
+2025-01-28 00:29:18 - INFO - Suggested Action: None
+2025-01-28 00:29:18 - INFO - Active Position: 0
+2025-01-28 00:29:18 - INFO - No action needed as previous and suggested actions are the same.
+2025-01-28 00:30:18 - INFO - Last opentime in CSV: 2025-01-27 15:30:00
+2025-01-28 00:30:18 - INFO - CSV length before appending: 848
+2025-01-28 00:30:18 - INFO - Rounded timestamp: 2025-01-27 16:30:00, Last opentime in CSV: 2025-01-27 15:30:00
+2025-01-28 00:30:19 - INFO - Reached endtime at 2025-01-28 00:31:00. Stopping fetch.
+2025-01-28 00:30:19 - INFO - before dropping :2
+2025-01-28 00:30:19 - INFO -         opentime  openprice  highprice  lowprice  closeprice
+0  1737993600000     3.8201     3.8303    3.7915      3.8281
+2025-01-28 00:30:19 - INFO - 1 new rows fetched and appended successfully.
+2025-01-28 00:30:19 - INFO - New CSV length after appending: 849
+2025-01-28 00:30:19 - INFO - New data:           opentime  openprice  highprice  lowprice  closeprice
+848  1737993600000     3.8201     3.8303    3.7915      3.8281
+2025-01-28 00:30:19 - INFO - New data fetched, processing now.
+2025-01-28 00:30:19 - INFO - Last row:           opentime  openprice  highprice  lowprice  closeprice  SUPERTl_10_3.0  SUPERTs_10_3.0
+848  1737993600000     3.8201     3.8303    3.7915      3.8281        3.586926             NaN
+2025-01-28 00:30:19 - INFO - Supertrend indicator applied.
+2025-01-28 00:30:19 - INFO - Last row:           opentime  openprice  highprice  lowprice  closeprice  SUPERTl_10_3.0  SUPERTs_10_3.0  leading_span_a  leading_span_b
+848  1737993600000     3.8201     3.8303    3.7915      3.8281        3.586926             NaN        3.882825             NaN
+2025-01-28 00:30:19 - INFO - Ichimoku cloud indicator applied.
+2025-01-28 00:30:19 - INFO - Previous up trend: 3.5869263454609346
+2025-01-28 00:30:19 - INFO - Current up trend: 3.5869263454609346
+2025-01-28 00:30:19 - INFO - Trend: unchange
+2025-01-28 00:30:19 - INFO - Active Position: 0
+2025-01-28 00:30:19 - INFO - Suggested Action: None
+2025-01-28 00:30:19 - INFO - Suggestion : None, Previous ACtion None, Active Position: 0
+2025-01-28 00:30:19 - INFO - Previous Action: None
+2025-01-28 00:30:19 - INFO - Suggested Action: None
+2025-01-28 00:30:19 - INFO - Active Position: 0
+2025-01-28 00:30:19 - INFO - No action needed as previous and suggested actions are the same.
+2025-01-28 00:31:19 - INFO - Last opentime in CSV: 2025-01-27 16:00:00
+2025-01-28 00:31:19 - INFO - CSV length before appending: 849
+2025-01-28 00:31:19 - INFO - Rounded timestamp: 2025-01-27 16:30:00, Last opentime in CSV: 2025-01-27 16:00:00
+2025-01-28 00:31:19 - INFO - 2025-01-28 00:31:00 status: True, time: 1737995460000, calls: 1
+2025-01-28 00:31:19 - INFO - 2025-01-28 00:31:00 status: True, time: 1737995460000, calls: 2
+2025-01-28 00:31:19 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-28 00:31:19 - INFO - before dropping :1
+2025-01-28 00:31:19 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-28 00:31:19 - INFO - No new data to append.

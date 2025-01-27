@@ -1,0 +1,14 @@
+{
+    "API_KEY": "TGZ6PvNeQc3c3ctlzm0UOdkgr1fi5oEMMPXDK9Dns51VXGKYGIirlOJ8de5TYNRC",
+    "API_SECRET": "Ng4YmUDDzq7W9l5F08qcY3Qq2OXms4xE7A9nlslDIxP2agjVWqmZbOOxCRTZEHOl",
+    "trade_amount_usdt" : 500,
+    "symbol": "SUIUSDT",
+    "position" : 2,
+    "long_tp" : 22,
+    "long_sl" : -0.7,
+    "short_tp" : 5.5,
+    "short_sl" : -1.2,
+    "path": "C:/Bitwyre/local-share-2/03X_ST_IC/04_local_run_bot",
+    "log_filename": "binance_stic_sui_bot_25k",
+    "csv_filename": "historical_OHLC_SUI.csv"
+  }  
