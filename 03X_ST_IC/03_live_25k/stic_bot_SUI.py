@@ -21,7 +21,7 @@ import math
 import json
 
 # Load the configuration from the JSON file
-with open("/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k/stic_binance_SOL_config.json", "r") as file:
+with open("/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k/stic_binance_SUI_config.json", "r") as file:
     config = json.load(file)
 
 # Access configuration values
@@ -624,7 +624,7 @@ class BinanceAPI:
         params["signature"] = self._generate_signature(params)
         return self._send_request("GET", endpoint, params=params)
 
-def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='SOLUSDT', API_KEY=None, API_SECRET=None, position = 2, active_pos = 1):
+def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='SUIUSDT', API_KEY=None, API_SECRET=None, position = 2, active_pos = 1):
     # Initiate connection to Binance
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
 
