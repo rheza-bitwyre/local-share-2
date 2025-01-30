@@ -1,0 +1,60 @@
+2025-01-30 03:43:18 - INFO - Trading symbol: SOLUSDT, Log file: binance_stic_sol_bot_25k_20250130034318
+2025-01-30 03:43:18 - INFO - Server Time:
+2025-01-30 03:43:18 - INFO - USDT Available Balance: 23327.67090829
+2025-01-30 03:43:18 - INFO - Determined Trade Amount: 1000 USDT
+2025-01-30 03:43:18 - INFO - Active Position Initiation: 1
+2025-01-30 03:43:18 - INFO - Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:43:18 - INFO - CSV length before appending: 1038
+2025-01-30 03:43:18 - INFO - Rounded timestamp: 2025-01-30 03:30:00, Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:43:18 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 1
+2025-01-30 03:43:18 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 2
+2025-01-30 03:43:18 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-30 03:43:18 - INFO - before dropping :1
+2025-01-30 03:43:18 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-30 03:43:18 - INFO - No new data to append.
+2025-01-30 03:44:18 - INFO - Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:44:18 - INFO - CSV length before appending: 1038
+2025-01-30 03:44:18 - INFO - Rounded timestamp: 2025-01-30 03:30:00, Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:44:18 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 1
+2025-01-30 03:44:19 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 2
+2025-01-30 03:44:19 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-30 03:44:19 - INFO - before dropping :1
+2025-01-30 03:44:19 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-30 03:44:19 - INFO - No new data to append.
+2025-01-30 03:45:19 - INFO - Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:45:19 - INFO - CSV length before appending: 1038
+2025-01-30 03:45:19 - INFO - Rounded timestamp: 2025-01-30 03:30:00, Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:45:19 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 1
+2025-01-30 03:45:19 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 2
+2025-01-30 03:45:19 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-30 03:45:19 - INFO - before dropping :1
+2025-01-30 03:45:19 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-30 03:45:19 - INFO - No new data to append.
+2025-01-30 03:46:19 - INFO - Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:46:19 - INFO - CSV length before appending: 1038
+2025-01-30 03:46:19 - INFO - Rounded timestamp: 2025-01-30 03:30:00, Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:46:19 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 1
+2025-01-30 03:46:19 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 2
+2025-01-30 03:46:19 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-30 03:46:19 - INFO - before dropping :1
+2025-01-30 03:46:19 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-30 03:46:19 - INFO - No new data to append.
+2025-01-30 03:47:19 - INFO - Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:47:19 - INFO - CSV length before appending: 1038
+2025-01-30 03:47:19 - INFO - Rounded timestamp: 2025-01-30 03:30:00, Last opentime in CSV: 2025-01-30 03:00:00
+2025-01-30 03:47:19 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 1
+2025-01-30 03:47:19 - INFO - 2025-01-30 03:31:00 status: True, time: 1738207860000, calls: 2
+2025-01-30 03:47:19 - INFO - Duplicate timestamp detected. Stopping fetch.
+2025-01-30 03:47:19 - INFO - before dropping :1
+2025-01-30 03:47:19 - INFO - Empty DataFrame
+Columns: [opentime, openprice, highprice, lowprice, closeprice]
+Index: []
+2025-01-30 03:47:19 - INFO - No new data to append.

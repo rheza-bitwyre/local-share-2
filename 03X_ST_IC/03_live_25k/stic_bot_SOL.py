@@ -301,7 +301,7 @@ def compute_ichimoku_with_supertrend(supertrend_df, conversion_periods=9, base_p
 
     return supertrend_df
 
-def determine_suggested_action(df,postion_option = 2, active_pos=0):
+def determine_suggested_action(df,postion_option = 2, active_pos=1):
     # Get the last 2 rows of the DataFrame
     last_two_rows = df.tail(2).copy()
 
