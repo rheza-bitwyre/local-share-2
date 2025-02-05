@@ -345,7 +345,12 @@ def determine_suggested_action(df,postion_option = 2, active_pos=1):
 
     if postion_option == 2: # will open both open and short
         if trend == 'change':
-            suggested_action = 'Close'
+            if pd.notna(up_trend_last) and closeprice_last > max(leading_span_a_last,leading_span_b_last):
+                suggested_action = 'Long'
+            elif pd.notna(down_trend_last) and closeprice_last < min(leading_span_a_last,leading_span_b_last):
+                suggested_action = 'Short'
+            else :
+                suggested_action = 'Close'
         elif trend == 'unchange' and pd.notna(up_trend_last) and closeprice_last > max(leading_span_a_last,leading_span_b_last):
             suggested_action = 'Long'
         elif trend == 'unchange' and pd.notna(down_trend_last) and closeprice_last < min(leading_span_a_last,leading_span_b_last):
@@ -366,13 +371,6 @@ def determine_suggested_action(df,postion_option = 2, active_pos=1):
     logging.info(f"Suggested Action: {suggested_action}")
 
     return suggested_action, active_pos
-
-import requests
-import hashlib
-import urllib.parse
-import hmac
-import time
-import logging
 
 import requests
 import hashlib
@@ -624,6 +622,113 @@ class BinanceAPI:
         params["signature"] = self._generate_signature(params)
         return self._send_request("GET", endpoint, params=params)
 
+    def create_trailing_stop_order(
+        self,
+        symbol: str,
+        side: str,
+        quantity: float,
+        activation_price: float,
+        callback_rate: float,
+        reduce_only: bool = True
+    ) -> dict:
+        """
+        Create a trailing stop order for Binance Futures.
+
+        :param symbol: The trading symbol (e.g., "BTCUSDT").
+        :param side: The side of the order ("BUY" or "SELL").
+        :param quantity: The quantity of the asset to trade.
+        :param activation_price: The price at which the trailing stop becomes active.
+        :param callback_rate: The callback rate for the trailing stop (e.g., 1.0 for 1%).
+        :param reduce_only: Whether the order should only reduce the position (default: True).
+        :return: The response from the Binance API.
+        """
+        order_type = "TRAILING_STOP_MARKET"
+        params = {
+            "symbol": symbol,
+            "side": side,
+            "type": order_type,
+            "quantity": quantity,
+            "activationPrice": activation_price,
+            "callbackRate": callback_rate,
+            "reduceOnly": reduce_only,
+            "workingType": "MARK_PRICE",  # Use mark price for activation
+            "priceProtect": True  # Enable price protection
+        }
+
+        logging.info(f"Creating trailing stop order with params: {params}")
+        return self._send_request("POST", "/fapi/v1/order", params, signed=True)
+
+    def create_order_with_trailing_stop(
+        self,
+        symbol: str,
+        side: str,
+        order_type: str,
+        quantity: float,
+        price: float = None,
+        reduce_only: bool = False,
+        time_in_force: str = None,
+        stop_price: float = None,
+        activation_price: float = None,
+        callback_rate: float = None
+    ) -> dict:
+        """
+        Create a new order with a trailing stop loss.
+
+        :param symbol: The trading symbol (e.g., "BTCUSDT").
+        :param side: The side of the order ("BUY" or "SELL").
+        :param order_type: The type of order (e.g., "MARKET", "LIMIT").
+        :param quantity: The quantity of the asset to trade.
+        :param price: The price for limit orders (optional).
+        :param reduce_only: Whether the order should only reduce the position (default: False).
+        :param time_in_force: Time in force for limit orders (e.g., "GTC", "IOC").
+        :param stop_price: The stop price for stop orders (optional).
+        :param activation_price: The activation price for the trailing stop.
+        :param callback_rate: The callback rate for the trailing stop (e.g., 1.0 for 1%).
+        :return: The response from the Binance API.
+        """
+        # Create the initial order
+        params = {
+            "symbol": symbol,
+            "side": side,
+            "type": order_type,
+            "quantity": quantity,
+            "reduceOnly": reduce_only,
+        }
+
+        if price:
+            params["price"] = price
+
+        if stop_price:
+            params["stopPrice"] = stop_price
+
+        if order_type == "LIMIT" and time_in_force:
+            params["timeInForce"] = time_in_force
+
+        # Send the initial order
+        response = self._send_request("POST", "/fapi/v1/order", params, signed=True)
+
+        if response is None:
+            logging.error("Failed to create the initial order.")
+            return None
+
+        # If the initial order is successful, create the trailing stop order
+        if activation_price and callback_rate:
+            trailing_stop_response = self.create_trailing_stop_order(
+                symbol=symbol,
+                side="SELL" if side == "BUY" else "BUY",  # Opposite side for trailing stop
+                quantity=quantity,
+                activation_price=activation_price,
+                callback_rate=callback_rate,
+                reduce_only=True
+            )
+
+            if trailing_stop_response:
+                logging.info(f"Trailing stop order created: {trailing_stop_response}")
+            else:
+                logging.error("Failed to create trailing stop order.")
+
+        return response
+
 def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=100, symbol='SOLUSDT', API_KEY=None, API_SECRET=None, position = 2, active_pos = 1):
     # Initiate connection to Binance
     binance_api = BinanceAPI(api_key=API_KEY, api_secret=API_SECRET, testnet=False)
@@ -655,6 +760,12 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
     position_coin_amount = math.floor(coin_quantity) # round as per the coin rules
     logging.info(f'Expected {symbol} Amount: {position_coin_amount}')
 
+    long_ts_activation_price = mark_price * 1.02
+    short_ts_activation_price = mark_price * 0.985
+
+    # long_sl = mark_price * 0.97
+    # short_sl = mark_price * 1.03
+
     # Get current coin amount (position)
     get_postition_risk = binance_api.get_position_risk(symbol)
 
@@ -666,32 +777,36 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
         if prev_action is None:
             if suggested_action == 'Long' and active_pos == 0:
                 curr_action = 'Open Long'
-                binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount, take_profit_percentage= long_tp, stop_loss_percentage= long_sl)
+                binance_api.create_order_with_trailing_stop(symbol, "BUY", "MARKET", position_coin_amount, activation_price= long_ts_activation_price, callback_rate=3.5)
+                # binance_api.create_stop_loss_order(symbol, "SELL", long_sl)
                 prev_action = 'Long'
                 active_pos = 1
             elif suggested_action == 'Short' and active_pos == 0:
                 curr_action = 'Open Short'
-                binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount, take_profit_percentage=short_tp, stop_loss_percentage=short_sl)
+                binance_api.create_order_with_trailing_stop(symbol, "SELL", "MARKET", position_coin_amount, activation_price= short_ts_activation_price, callback_rate=3.5)
+                # binance_api.create_stop_loss_order(symbol, "BUY", short_sl)
                 prev_action = 'Short'
                 active_pos = 1
-        elif prev_action == 'Long' and suggested_action == 'Close':
+        elif prev_action == 'Long' and suggested_action == 'Close' and close_position_coin_amount:
             curr_action = 'Close Long'
             binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
             prev_action = None
-        elif prev_action == 'Short' and suggested_action == 'Close':
+        elif prev_action == 'Short' and suggested_action == 'Close' and close_position_coin_amount:
             curr_action = 'Close Short'
             binance_api.create_order(symbol, "BUY", "MARKET", -close_position_coin_amount)
             prev_action = None
-        elif prev_action == 'Long' and suggested_action == 'Short':
+        elif prev_action == 'Long' and suggested_action == 'Short' and close_position_coin_amount:
             curr_action = 'Close Long & Open Short'
             binance_api.create_order(symbol, "SELL", "MARKET", close_position_coin_amount)
-            binance_api.create_order(symbol, "SELL", "MARKET", position_coin_amount, take_profit_percentage=short_tp, stop_loss_percentage=short_sl)
+            binance_api.create_order_with_trailing_stop(symbol, "SELL", "MARKET", position_coin_amount, activation_price= short_ts_activation_price, callback_rate=3.5)
+            # binance_api.create_stop_loss_order(symbol, "BUY", short_sl)
             prev_action = 'Short'
             active_pos = 1
-        elif prev_action == 'Short' and suggested_action == 'Long':
+        elif prev_action == 'Short' and suggested_action == 'Long' and close_position_coin_amount:
             curr_action = 'Close Short & Open Long'
             binance_api.create_order(symbol, "BUY", "MARKET", -close_position_coin_amount)
-            binance_api.create_order(symbol, "BUY", "MARKET", position_coin_amount,take_profit_percentage= long_tp, stop_loss_percentage= long_sl)
+            binance_api.create_order_with_trailing_stop(symbol, "BUY", "MARKET", position_coin_amount, activation_price= long_ts_activation_price, callback_rate=3.5)
+            # binance_api.create_stop_loss_order(symbol, "SELL", long_sl)
             prev_action = 'Long'
             active_pos = 1
 
@@ -809,7 +924,7 @@ def main():
             logging.info('Ichimoku cloud indicator applied.')
 
             # Define action suggestion
-            suggested_action, active_pos = determine_suggested_action(df_st_ic)
+            suggested_action, active_pos = determine_suggested_action(df_st_ic, active_pos)
             logging.info(f'Suggestion : {suggested_action}, Previous ACtion {prev_action}, Active Position: {active_pos}')
 
             # Define real action and log it

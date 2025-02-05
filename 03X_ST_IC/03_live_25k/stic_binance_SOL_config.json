@@ -5,9 +5,9 @@
     "symbol": "SOLUSDT",
     "position" : 2,
     "long_tp" : 44,
-    "long_sl" : -0.8,
+    "long_sl" : -2,
     "short_tp" : 15,
-    "short_sl" : -0.9,
+    "short_sl" : -2,
     "path": "/home/ubuntu/Rheza/local-share/03X_ST_IC/03_live_25k",
     "log_filename": "binance_stic_sol_bot_25k",
     "csv_filename": "historical_OHLC_SOL.csv"
