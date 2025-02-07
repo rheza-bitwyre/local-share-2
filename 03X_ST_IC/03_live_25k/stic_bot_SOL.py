@@ -760,8 +760,8 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
     position_coin_amount = math.floor(coin_quantity) # round as per the coin rules
     logging.info(f'Expected {symbol} Amount: {position_coin_amount}')
 
-    long_ts_activation_price = mark_price * 1.02
-    short_ts_activation_price = mark_price * 0.985
+    long_ts_activation_price = mark_price * 1.01
+    short_ts_activation_price = mark_price * 0.99
 
     # long_sl = mark_price * 0.97
     # short_sl = mark_price * 1.03
@@ -777,13 +777,13 @@ def handle_trading_action(suggested_action, prev_action=None, trade_amount_usdt=
         if prev_action is None:
             if suggested_action == 'Long' and active_pos == 0:
                 curr_action = 'Open Long'
-                binance_api.create_order_with_trailing_stop(symbol, "BUY", "MARKET", position_coin_amount, activation_price= long_ts_activation_price, callback_rate=3.5)
+                binance_api.create_order_with_trailing_stop(symbol, "BUY", "MARKET", position_coin_amount, activation_price= long_ts_activation_price, callback_rate=4)
                 # binance_api.create_stop_loss_order(symbol, "SELL", long_sl)
                 prev_action = 'Long'
                 active_pos = 1
             elif suggested_action == 'Short' and active_pos == 0:
                 curr_action = 'Open Short'
-                binance_api.create_order_with_trailing_stop(symbol, "SELL", "MARKET", position_coin_amount, activation_price= short_ts_activation_price, callback_rate=3.5)
+                binance_api.create_order_with_trailing_stop(symbol, "SELL", "MARKET", position_coin_amount, activation_price= short_ts_activation_price, callback_rate=4)
                 # binance_api.create_stop_loss_order(symbol, "BUY", short_sl)
                 prev_action = 'Short'
                 active_pos = 1
